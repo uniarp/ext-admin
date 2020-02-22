@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CadastroPage } from './cadastro.page';
+import { PalestranteCadastroPage } from './palestrante-cadastro.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: CadastroPage
+    component: PalestranteCadastroPage
   }
 ];
 
