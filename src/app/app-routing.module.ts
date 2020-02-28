@@ -22,7 +22,11 @@ const routes: Routes = [
     path: 'voluntario-pesquisa',
     loadChildren: () => import('./voluntario/voluntario-pesquisa/voluntario-pesquisa.module')
       .then(m => m.VoluntarioPesquisaPageModule)
+  },  {
+    path: 'usuario-cadastro',
+    loadChildren: () => import('./usuario/usuario-cadastro/usuario-cadastro.module').then( m => m.UsuarioCadastroPageModule)
   },
+
 
 ];
 
