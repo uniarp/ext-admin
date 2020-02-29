@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Pesquisa de Particpante</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="container">
+    <ion-item>
+      <ion-label> Buscar Particpante:</ion-label>
+      <ion-input placeholder="Ex: Carlos Zorzo"></ion-input>
+      <ion-button>
+        <ion-icon name="search-outline"></ion-icon>
+        Buscar
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col> Nome</ion-col>
+          <ion-col>E-mail</ion-col>
+          <ion-col>CPF</ion-col>
+          <ion-col>Curso</ion-col>
+    
+          
+        </ion-row>
+        <div *ngFor="let voluntario of voluntario">
+          <ion-row>
+            <ion-col>
+              <ion-checkbox slot="end" [(ngModel)]="voluntario.id"></ion-checkbox>
+            </ion-col>
+            <ion-col>
+              {{voluntario.nome}}
+            </ion-col>
+            <ion-col>
+              {{voluntario.email}}
+            </ion-col>
+            <ion-col>
+              {{voluntario.cpf}}
+            </ion-col>
+            <ion-col>
+              {{voluntario.curso}}
+            </ion-col>
+          
+          </ion-row>
+        </div>
+      </ion-grid>
+    </ion-item>
+
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-item class="opcoes">
+    <ion-button horizontal="end">Alterar voluntario</ion-button>
+    <ion-button horizontal="end">Cadastrar voluntario</ion-button>
+    <ion-button horizontal="end">Excluir voluntario</ion-button>
+    <ion-button horizontal="end">Info. voluntario</ion-button>
+  </ion-item>
+</ion-footer>
