@@ -26,6 +26,10 @@ const routes: Routes = [
     path: 'usuario-cadastro',
     loadChildren: () => import('./usuario/usuario-cadastro/usuario-cadastro.module').then( m => m.UsuarioCadastroPageModule)
   },
+  {
+    path: 'usuario-pesquisa',
+    loadChildren: () => import('./usuario/usuario-pesquisa/usuario-pesquisa.module').then( m => m.UsuarioPesquisaPageModule)
+  },
 
 
 ];
