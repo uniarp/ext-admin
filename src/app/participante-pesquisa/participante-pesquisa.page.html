@@ -20,27 +20,23 @@
           <ion-col> Nome</ion-col>
           <ion-col>E-mail</ion-col>
           <ion-col>CPF</ion-col>
-          <ion-col>Curso</ion-col>
-    
           
         </ion-row>
-        <div *ngFor="let voluntario of voluntario">
+        <div *ngFor="let participante of participante">
           <ion-row>
             <ion-col>
-              <ion-checkbox slot="end" [(ngModel)]="voluntario.id"></ion-checkbox>
+              <ion-checkbox slot="end" [(ngModel)]="participante.id"></ion-checkbox>
             </ion-col>
             <ion-col>
-              {{voluntario.nome}}
+              {{participante.nome}}
             </ion-col>
             <ion-col>
-              {{voluntario.email}}
+              {{participante.email}}
             </ion-col>
             <ion-col>
-              {{voluntario.cpf}}
+              {{participante.cpf}}
             </ion-col>
-            <ion-col>
-              {{voluntario.curso}}
-            </ion-col>
+            
           
           </ion-row>
         </div>
@@ -51,9 +47,9 @@
 </ion-content>
 <ion-footer>
   <ion-item class="opcoes">
-    <ion-button horizontal="end">Alterar voluntario</ion-button>
-    <ion-button horizontal="end">Cadastrar voluntario</ion-button>
-    <ion-button horizontal="end">Excluir voluntario</ion-button>
-    <ion-button horizontal="end">Info. voluntario</ion-button>
+    <ion-button horizontal="end">Alterar participante</ion-button>
+    <ion-button horizontal="end">Cadastrar participante</ion-button>
+    <ion-button horizontal="end">Excluir participante</ion-button>
+    <ion-button horizontal="end">Info. participante</ion-button>
   </ion-item>
 </ion-footer>
