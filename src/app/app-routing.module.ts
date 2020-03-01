@@ -22,11 +22,16 @@ const routes: Routes = [
     path: 'voluntario-pesquisa',
     loadChildren: () => import('./voluntario/voluntario-pesquisa/voluntario-pesquisa.module')
       .then(m => m.VoluntarioPesquisaPageModule)
-  },  {
-    path: 'participante-pesquisa',
-    loadChildren: () => import('./participante-pesquisa/participante-pesquisa.module').then( m => m.ParticipantePesquisaPageModule)
   },
-
+  {
+    path: 'participante-cadastro',
+    loadChildren: () => import('./participante/participante-cadastro/participante-cadastro.module').then( m => m.ParticipanteCadastroPageModule)
+  },
+  {
+    path: 'participante-pesquisa',
+    loadChildren: () => import('./participante/participante-pesquisa/participante-pesquisa.module').then( m => m.ParticipantePesquisaPageModule)
+  },
+  
 
 ];
 
