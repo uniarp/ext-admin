@@ -37,7 +37,7 @@
     <ion-item>
       <ion-input [type]="password_type" placeholder="*Confirme sua Senha:" type="password" [(ngModel)]="confirSenha"
         #senhaC="ngModel" name="senhaC" required></ion-input>
-      <div class="validaCamp" *ngIf="usuario.senha != confirSenha && senhaC.dirty">Senhas Diferentes</div>
+      <div class="validaCamp" *ngIf="usuario.senha != confirSenha && senhaC.dirty">Senhas não Coincide com a anterior</div>
     </ion-item>
     <ion-item>
       <ion-label>Exibir senha</ion-label>
