@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { UsuarioService, Usuario } from '../usuario.service';
 
 @Component({
   selector: 'app-usuario-cadastro',
@@ -8,11 +9,12 @@ import { FormControl } from '@angular/forms';
 })
 export class UsuarioCadastroPage implements OnInit {
 
-  usuario = { id: 0, nome: '', email: '', cpf: '', profissao: '', senha: '' };
+  usuario = [];
   confirSenha = '';
   password_type = 'password';
   profissao = ['Analista', 'Desenvolvedor', 'Consultor', 'Professor'];
-  constructor() { }
+
+  constructor(private usuarioServie: UsuarioService) { }
 
   ngOnInit() {
 
@@ -23,7 +25,10 @@ export class UsuarioCadastroPage implements OnInit {
   }
 
   gravar(form: FormControl) {
-    console.log(this.usuario);
+    this.usuarioServie.cadastrar()
+      .then(user => {
+        console.log(user)
+      });
   }
 
 }
