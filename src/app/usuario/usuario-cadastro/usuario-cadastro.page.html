@@ -22,10 +22,9 @@
     </ion-item>
     <ion-item>
       <ion-label>*Profissão</ion-label>
-      <ion-select placeholder="Selecione" ok-text="Ok" cancel-text="Cancelar" 
-      [(ngModel)]="usuario.profissao" name="profissao" required>
-        <ion-select-option *ngFor=" let prof of profissao" 
-        [value]="prof">{{prof}}</ion-select-option>
+      <ion-select placeholder="Selecione" ok-text="Ok" cancel-text="Cancelar" [(ngModel)]="usuario.profissao"
+        name="profissao" required>
+        <ion-select-option *ngFor=" let prof of profissao" [value]="prof">{{prof}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
@@ -33,17 +32,18 @@
         #senha="ngModel" name="senha" required minlength="6"></ion-input>
       <div class="validaCamp" *ngIf="senha.hasError('minlength')">*A senha precisa ter no minimo 6 digitos</div>
     </ion-item>
-    
+
     <ion-item>
       <ion-input [type]="password_type" placeholder="*Confirme sua Senha:" type="password" [(ngModel)]="confirSenha"
         #senhaC="ngModel" name="senhaC" required></ion-input>
-      <div class="validaCamp" *ngIf="usuario.senha != confirSenha && senhaC.dirty">Senhas não Coincide com a anterior</div>
+      <div class="validaCamp" *ngIf="usuario.senha != confirSenha && senhaC.dirty">Senhas não Coincide com a anterior
+      </div> -->
     </ion-item>
     <ion-item>
       <ion-label>Exibir senha</ion-label>
       <ion-checkbox color="dark" slot="start" (click)="exibeSenha()"></ion-checkbox>
     </ion-item>
-    
+
     <div class="validaCamp" *ngIf="userForm.invalid">Campos com * São obrigatórios</div>
     <br>
     <ion-button type="submit" [disabled]="userForm.invalid" (click)="gravar()">Gravar</ion-button>

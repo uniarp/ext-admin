@@ -9,7 +9,7 @@ import { UsuarioService, Usuario } from '../usuario.service';
 })
 export class UsuarioCadastroPage implements OnInit {
 
-  usuario = [];
+  usuario;
   confirSenha = '';
   password_type = 'password';
   profissao = ['Analista', 'Desenvolvedor', 'Consultor', 'Professor'];
@@ -17,7 +17,8 @@ export class UsuarioCadastroPage implements OnInit {
   constructor(private usuarioServie: UsuarioService) { }
 
   ngOnInit() {
-
+    this.usuario = new Usuario();
+    console.log(this.usuario);
   }
 
   exibeSenha() {
