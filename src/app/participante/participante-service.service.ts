@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
   providedIn: 'root'
 })
 export class ParticipanteServiceService {
-  usuarioUrl = "https://uniarpextensao.herokuapp.com/public";
+  participanteUrl = "https://uniarpextensao.herokuapp.com/public";
 
   constructor(private http: HttpClient) { }
 
@@ -15,6 +15,10 @@ export class ParticipanteServiceService {
     })
   }
 
+  cadastrar(): Promise<Participante>{
+    return this.http.get<Participante>(`${this.participanteUrl}/participantes/cadastrar`, this.httpOptions)
+      .toPromise();
+  }
 
 }
 

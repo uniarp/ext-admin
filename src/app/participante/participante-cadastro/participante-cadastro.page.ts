@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { ParticipanteServiceService } from '../participante-service.service';
 
 @Component({
   selector: 'app-participante-cadastro',
@@ -7,9 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ParticipanteCadastroPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private participanteService: ParticipanteServiceService
+  ) { }
 
   ngOnInit() {
+  }
+
+  cadastrar() {
+    this.participanteService.cadastrar()
+      .then(() => {
+
+      })
+      .catch(() => null);
+  }
+
+  gravar(form: FormControl) {
+    this.participanteService.cadastrar()
+      .then(user => {
+        console.log(user)
+      });
   }
 
 }

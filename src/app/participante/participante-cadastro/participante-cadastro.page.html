@@ -9,13 +9,14 @@
 
 
 <ion-content>
+  
   <ion-content fullscreen>
     <ion-avatar class="ion-margin-start" style="margin-left: 50%;">
       <img src="./avatar.svg">
     </ion-avatar>
     <br><br>
 
-    <form onsubmit="processForm(event)">
+    <form onsubmit="processForm(event)" autocomplete="off" #userForm="ngForm" (ngSubmit)="gravar(userForm)">
       <ion-list lines="full" class="ion-no-margin ion-no-padding">
 
         <ion-item>
@@ -50,4 +51,5 @@
         <ion-button expand="block" type="submit" class="ion-no-margin">Cadastrar</ion-button>
       </div>
     </form>
+ 
   </ion-content>
