@@ -5,8 +5,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PalestranteService implements OnInit {
-  private validou: Boolean;
-  private palestrantes: Palestrante[];
+  validou: Boolean;
+  palestrantes: Array<Palestrante>;
   constructor() {
     validou: true;
     this.palestrantes = [{ id: '1', nome: 'Zorzo', cpf: '111.222.333-44', telefone: '(49) 99999-9999', email: 'zorzo@uniarp.com.br', area: 'sistemaas de Informação' },
@@ -24,7 +24,7 @@ export class PalestranteService implements OnInit {
   public adicionarPalestrante(palestrante: Palestrante): Boolean {
     return this.validou;
   }
-  public listarPalestrantes(): Palestrante[] {
+  public listarPalestrantes(): Array<Palestrante> {
     return this.palestrantes;
   }
 }
