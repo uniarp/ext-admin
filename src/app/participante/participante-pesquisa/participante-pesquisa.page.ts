@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ParticipanteServiceService, Participante } from '../participante-service.service';
 
 @Component({
   selector: 'app-participante-pesquisa',
@@ -7,15 +8,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ParticipantePesquisaPage implements OnInit {
 
-  participante = [
-    { id: 1, nome: 'Zorzo', email: 'zorzo@uniarp.com.br', cpf: '111.222.333-44'},
-    { id: 2, nome: 'Conte', email: 'zorzo@uniarp.com.br', cpf: '111.222.333-44'},
-  ];
+  participante: any[];
 
-  constructor() { }
+  constructor(
+    private participanteService: ParticipanteServiceService
+  ) { }
 
   ngOnInit() {
-    console.log(this.participante);
+    this.listar();
   }
+
+  async listar() {
+    this.participante = await this.participanteService.listar();
+
+  }
+  
+  async excluir(id ){
+    await this.participanteService.excluir(id);
+    this.listar();
+  }
+
+  async alterar(){
+    this.participante = await this.participanteService.alterar();
+  }
+
 
 }
