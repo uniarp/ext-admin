@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Routes } from '@angular/router';
 
 @Component({
   selector: 'app-palestrante-pesquisa',
@@ -37,7 +38,7 @@ export class PalestrantePesquisaPage implements OnInit {
   { id: 3, nome: 'Ultimo', cpf: '111.222.333-44', telefone: '(49) 99999-9999', email: 'zorzo@uniarp.com.br', area: 'sistemaas de Informação' }
   ];
   constructor() { }
-
+  
   ngOnInit() {
     console.log(this.palestrantes);
   }
