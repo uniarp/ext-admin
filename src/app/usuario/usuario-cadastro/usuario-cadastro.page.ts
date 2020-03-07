@@ -1,6 +1,8 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { UsuarioService, Usuario } from '../usuario.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-usuario-cadastro',
@@ -9,16 +11,17 @@ import { UsuarioService, Usuario } from '../usuario.service';
 })
 export class UsuarioCadastroPage implements OnInit {
 
-  usuario;
-  confirSenha = '';
+  usuario = new Usuario();
+  confirSenha: string;
   password_type = 'password';
-  profissao = ['Analista', 'Desenvolvedor', 'Consultor', 'Professor'];
 
-  constructor(private usuarioServie: UsuarioService) { }
+  constructor(
+    public usuarioServie: UsuarioService,
+    private router: Router,
+    public toast: ToastController
+    ) { }
 
   ngOnInit() {
-    this.usuario = new Usuario();
-    console.log(this.usuario);
   }
 
   exibeSenha() {
@@ -26,10 +29,21 @@ export class UsuarioCadastroPage implements OnInit {
   }
 
   gravar(form: FormControl) {
-    this.usuarioServie.cadastrar()
+    this.usuarioServie.cadastrar(this.usuario)
       .then(user => {
         console.log(user)
-      });
+        this.alerta('Usuario Cadastrado com Sucesso', 'success');
+        this.router.navigate(['usuario-pesquisa']);
+      })
+      .catch( erro => this.alerta(`Problema ao Cadastrar ${erro}`, 'danger'));
   }
 
+  async alerta(men: string, cor: string) {
+    const toast = await this.toast.create({
+      message: men,
+      duration: 1500,
+      color: cor
+    });
+    toast.present();
+  }
 }

@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class UsuarioService {
 
-  usuarioUrl = "https://uniarpextensao.herokuapp.com/public";
+  usuarioUrl = "https://uniarpextensao.herokuapp.com/public/usuarios";
 
   constructor(private http: HttpClient) { }
 
@@ -17,8 +17,8 @@ export class UsuarioService {
     })
   }
 
-  cadastrar(): Promise<Usuario>{
-    return this.http.get<Usuario>(`${this.usuarioUrl}/testeconte`, this.httpOptions)
+  cadastrar(usuario: Usuario): Promise<Usuario>{
+    return this.http.post<Usuario>(`${this.usuarioUrl}/cadastrar`, usuario)
       .toPromise();
   }
 }
@@ -28,6 +28,5 @@ export class Usuario {
   nome: string;
   email: string;
   cpf: string;
-  profissao: string;
-  senha: number;
+  senha: string;
 }
