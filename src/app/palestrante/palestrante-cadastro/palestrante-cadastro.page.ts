@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { PalestranteService, Palestrante } from '../palestrante.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro',
@@ -9,15 +11,23 @@ import { FormControl } from '@angular/forms';
 export class PalestranteCadastroPage implements OnInit {
 
   area = ['Marketing', 'Desenvolvimento', 'Segurança de Redes']
-  palestrante = [{id:0, nome:'', email:'', cpf:'', telefone:'', area:'', informacoes:''}];
+  palestrante: Palestrante;
 
-  constructor() { }
+  constructor(
+    public palestranteService: PalestranteService,
+    private router: Router,
+  ) { }
 
   ngOnInit() {
+    this.palestrante = new Palestrante();
   }
 
-  gravar(form: FormControl){
-    console.log(this.palestrante);
+  gravar(form: FormControl, palestrante){
+    console.log(form);
+  this.palestranteService.adicionar(form.value)
+  .then(data => console.log(data));
+  this.router.navigate(['palestrante-pesquisa']);
+  alert("Palestrante Cadastrado");
   }
 
 }

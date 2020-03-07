@@ -18,7 +18,7 @@
       <div class="validaCamp" *ngIf="email.hasError('email')">*Informe um e-mail valido</div>
     </ion-item>
     <ion-item>
-      <ion-input placeholder="CPF:" type="text" [(ngModel)]="palestrante.cpf" #cpf="ngModel" name="cpf"
+      <ion-input placeholder="CPF:" type="text" [(ngModel)]="palestrante.cpf" maxlength=14 #cpf="ngModel" name="cpf"
         [brmasker]="{person: true}"></ion-input>
     </ion-item>
     <ion-item>
@@ -34,8 +34,8 @@
       <div class="validaCamp" *ngIf="">Selecione pelo menos uma Área</div>
     </ion-item>
     <ion-item>
-      <ion-textarea type="text" placeholder="Bibliografia:" [(ngModel)]="palestrante.informacoes" #informacoes="ngModel"
-        name="informacoes"></ion-textarea>
+      <ion-textarea type="text" placeholder="Bibliografia:" [(ngModel)]="palestrante.biografia" #informacoes="ngModel"
+        name="biografia"></ion-textarea>
     </ion-item>
 
 
