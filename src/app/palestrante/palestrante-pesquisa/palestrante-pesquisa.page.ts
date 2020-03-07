@@ -18,7 +18,6 @@ export class PalestrantePesquisaPage implements OnInit {
   }
 
   ngOnInit() {
-    console.log('entrou');
     this.listarPalestrantes();
   }
 
@@ -32,9 +31,7 @@ export class PalestrantePesquisaPage implements OnInit {
     console.log(this.deuCerto);
   }
   public listarPalestrantes() {
-    console.log('entrou2');
     this.palestrante = this.palestranteService.listarPalestrantes();
-    console.log(this.palestrante);
   }
 
 }
