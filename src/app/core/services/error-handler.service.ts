@@ -13,7 +13,7 @@ export class ErrorHandlerService implements ErrorHandlerService {
   async handleError(err: any) {
     const alert = await this.alertController.create({
       header: 'Ocorreu um Erro',
-      message: err['erro'],
+      message: 'Ocorreu um erro ao realizar a solicitação, aguarde um momento e tente novamente.',
       buttons: [
         {
           text: 'Ok',
