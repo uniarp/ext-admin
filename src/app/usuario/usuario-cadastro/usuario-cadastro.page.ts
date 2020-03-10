@@ -29,13 +29,14 @@ export class UsuarioCadastroPage implements OnInit {
   }
 
   gravar(form: FormControl) {
+    this.usuario.codUsuario = null;
     this.usuarioServie.cadastrar(this.usuario)
       .then(user => {
         console.log(user)
         this.alerta('Usuario Cadastrado com Sucesso', 'success');
         this.router.navigate(['usuario-pesquisa']);
       })
-      .catch( erro => this.alerta(`Problema ao Cadastrar ${erro}`, 'danger'));
+      .catch( erro => this.alerta(`Problema ao Cadastrar`, 'danger'));
   }
 
   async alerta(men: string, cor: string) {
