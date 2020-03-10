@@ -1,7 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Usuario } from '../usuario/usuario.service';
 
 @Injectable({
   providedIn: 'root'
@@ -31,28 +30,25 @@ export class PalestranteService implements OnInit {
     return this.validou;
   }
 
-  public adicionar(palestrante: Palestrante): Promise<Usuario> {
-    return this.http.get<Usuario>
-      (`${this.palestranteUrl}/cadastrar/${palestrante.nome}/${palestrante.cpf}/${palestrante.telefone}/${palestrante.email}/${palestrante.biografia}/${palestrante.area}`, this.httpOptions)
-      .toPromise()
-      .then(data =>
-        data)
-      .catch();
+  public adicionarPalestrante(palestrante: Palestrante): Promise<Palestrante> {
+    console.log(palestrante);
+    return this.http.post<Palestrante>(`${this.palestranteUrl}/cadastrar`, palestrante)
+      .toPromise();
   }
+
   public listarPalestrantes(): Palestrante[] {
     return this.palestrantes;
   }
+
 }
 
 export class Palestrante {
-  id: string;
+  codPalestrante: string;
   nome: string;
   cpf: string;
   telefone: string;
   email: string;
   biografia: string;
   area: string;
-
-  constructor() { }
 
 }
