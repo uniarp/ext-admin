@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ParticipanteServiceService {
-  participanteUrl = "https://uniarpextensao.herokuapp.com/public";
+  participanteUrl = "https://uniarpextensao.herokuapp.com/public/participantes";
 
   constructor(private http: HttpClient) { }
 
@@ -15,15 +15,14 @@ export class ParticipanteServiceService {
     })
   }
 
-<<<<<<< HEAD
-  cadastrar(): Promise<Participante>{
-    return this.http.get<Participante>(`${this.participanteUrl}/participantes/cadastrar`, this.httpOptions)
+  cadastrar(participante: Participante): Promise<Participante>{
+    return this.http.post<Participante>(`${this.participanteUrl}/cadastrar`, participante)
       .toPromise();
-=======
+  }
+
   listar(): Promise<any>{
-    return this.http.get<any>(this.usuarioUrl + `/participantes/listar`, this.httpOptions)
+    return this.http.get<any>(this.participanteUrl + `/participantes/listar`, this.httpOptions)
     .toPromise();
->>>>>>> d9c935b2615e6c7096fece114a5947d93150b9ee
   }
 
   excluir(id): Promise<any>{
