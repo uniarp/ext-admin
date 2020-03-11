@@ -21,7 +21,7 @@ export class UsuarioService {
 }
 
 export class Usuario {
-  id: string;
+  codUsuario: number;
   nome: string;
   cpf: string;
   telefone: string;
