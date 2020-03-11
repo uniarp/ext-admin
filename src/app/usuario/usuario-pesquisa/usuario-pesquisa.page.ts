@@ -38,5 +38,6 @@ export class UsuarioPesquisaPage implements OnInit {
 
   buscarCadastro() {
   
+    
   }
 }
