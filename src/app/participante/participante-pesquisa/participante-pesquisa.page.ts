@@ -29,7 +29,7 @@ export class ParticipantePesquisaPage implements OnInit {
   }
 
   async alterar(){
-    this.participante = await this.participanteService.alterar();
+    // this.participante = await this.participanteService.alterar();
   }
 
 
