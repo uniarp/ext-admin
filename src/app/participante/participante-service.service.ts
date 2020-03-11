@@ -34,8 +34,8 @@ export class ParticipanteServiceService {
 export class Participante {
   codparticipante: number;
   nome: string;
+  email: string;
   cpf: string;
   senha: string;
   telefone: string;
-  email: string;
 }
