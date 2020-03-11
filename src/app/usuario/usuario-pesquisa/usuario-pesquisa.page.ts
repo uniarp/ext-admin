@@ -7,7 +7,11 @@ import { UsuarioService, Usuario } from '../usuario.service';
   templateUrl: './usuario-pesquisa.page.html',
   styleUrls: ['./usuario-pesquisa.page.scss'],
 })
-export class UsuarioPesquisaPage implements OnInit {
+export class UsuarioPesquisaPage {
+
+  inserir() {
+    this.router.navigate(['usuario-cadastro']);
+  }
 
   usuarios: Usuario;
 
@@ -37,7 +41,6 @@ export class UsuarioPesquisaPage implements OnInit {
   }
 
   buscarCadastro() {
-  
-    
+
   }
 }
