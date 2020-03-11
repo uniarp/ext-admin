@@ -17,10 +17,8 @@
       <ion-grid>
         <ion-row>
           <ion-col> Nome</ion-col>
-          <ion-col class="ion-align-self-start">CPF</ion-col>
-          <ion-col class="ion-align-self-start">Telefone</ion-col>
           <ion-col class="ion-align-self-start">E-mail</ion-col>
-          <ion-col class="ion-align-self-start">Área</ion-col>
+          <ion-col class="ion-align-self-start">CPF</ion-col>
           <ion-col size-sm>Opções</ion-col>
         </ion-row>
         <div *ngFor="let usuario of usuarios">
@@ -30,13 +28,10 @@
                 {{usuario.nome}}
               </ion-col>
               <ion-col class="ion-align-self-start">
-                {{usuario.cpf}}
-              </ion-col>
-              <ion-col class="ion-align-self-start">
-                {{usuario.telefone}}
-              </ion-col>
-              <ion-col class="ion-align-self-start">
                 {{usuario.email}}
+              </ion-col>
+              <ion-col class="ion-align-self-start">
+                {{usuario.cpf}}
               </ion-col>
               <ion-col size="1" size-sm>
                 <ion-button>

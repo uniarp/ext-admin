@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Routes, Router } from '@angular/router';
-import { HomePage } from 'src/app/home/home.page';
-import { UsuarioCadastroPage } from '../usuario-cadastro/usuario-cadastro.page';
+import { Router } from '@angular/router';
 import { UsuarioService, Usuario } from '../usuario.service';
-import { Observable } from 'rxjs';
-
 
 @Component({
   selector: 'app-usuario-pesquisa',
@@ -12,22 +8,26 @@ import { Observable } from 'rxjs';
   styleUrls: ['./usuario-pesquisa.page.scss'],
 })
 export class UsuarioPesquisaPage implements OnInit {
-  usuarios: Observable<Usuario[]>;
 
-  constructor(public router: Router,
-    private usuarioService:UsuarioService,) { }
+  usuarios: Usuario;
+
+  constructor(
+    public router: Router,
+    private usuarioService: UsuarioService
+  ) { }
 
   ngOnInit() {
-    this.usuarioService.listarUsuario();
-    console.log("tudo certo");
-    
+    this.listarUsuario();
   }
 
-  // listarUsuario() {
-  // this.usuarios=this.usuarioService.listarUsuarios();
-  // console.log("usuarios listado com sucesso");
-  // }
-  
+  listarUsuario() {
+    this.usuarioService.pesquisar()
+      .then(data => {
+        this.usuarios = data;
+      })
+      .catch(erro => null);
+  }
+
   novoCadastro() {
     this.router.navigate(['usuario-cadastro']);
   }
