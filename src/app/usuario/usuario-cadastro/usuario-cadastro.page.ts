@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 import { UsuarioService, Usuario } from '../usuario.service';
 import { ToastController } from '@ionic/angular';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
+import { AlertsService } from 'src/app/core/services/alerts.service';
 
 @Component({
   selector: 'app-usuario-cadastro',
@@ -21,6 +22,7 @@ export class UsuarioCadastroPage implements OnInit {
     private router: Router,
     public toast: ToastController,
     public handler: ErrorHandlerService,
+    private alert: AlertsService
     ) { }
 
   ngOnInit() {
@@ -35,18 +37,10 @@ export class UsuarioCadastroPage implements OnInit {
     this.usuarioServie.cadastrar(this.usuario)
       .then(user => {
         console.log(user)
-        this.alerta('Usuario Cadastrado com Sucesso', 'success');
+        this.alert.alertaToast('Usuario Cadastrado com Sucesso', 'success');
         this.router.navigate(['usuario-pesquisa']);
       })
-      .catch(erro => this.handler.handleError(erro));
+      .catch( erro => this.handler.handleError(erro));
   }
 
-  async alerta(men: string, cor: string) {
-    const toast = await this.toast.create({
-      message: men,
-      duration: 1500,
-      color: cor
-    });
-    toast.present();
-  }
 }
