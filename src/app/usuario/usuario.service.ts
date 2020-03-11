@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UsuarioService {
+  
   usuarioUrl = "https://uniarpextensao.herokuapp.com/public/usuarios";
 
   constructor(private http: HttpClient) { }
