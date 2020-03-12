@@ -36,8 +36,12 @@ export class UsuarioPesquisaPage {
     this.router.navigate(['usuario-cadastro']);
   }
 
-  excluirCadastro() {
-
+  excluirCadastro(codUsuario) {
+    this.usuarioService.excluir(codUsuario)
+      .then(data => {
+        this.usuarios = data;
+      })
+      .catch(erro => null);
   }
 
   buscarCadastro() {

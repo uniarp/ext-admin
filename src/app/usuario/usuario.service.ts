@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class UsuarioService {
 
-  
+
   usuarioUrl = "https://uniarpextensao.herokuapp.com/public/usuarios";
 
   constructor(private http: HttpClient) { }
@@ -20,6 +20,12 @@ export class UsuarioService {
     return this.http.get<Usuario>(this.usuarioUrl + '/listar')
       .toPromise();
   }
+
+  excluir(id): Promise<Usuario> {
+    return this.http.delete<Usuario>(this.usuarioUrl + '/excluir/{codUsuario}')
+    .toPromise();
+  }
+
 }
 
 export class Usuario {
