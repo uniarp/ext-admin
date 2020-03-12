@@ -16,6 +16,7 @@ export class ParticipanteServiceService {
   }
 
   cadastrar(participante: Participante): Promise<Participante>{
+    participante.codParticipante = null;
     return this.http.post<Participante>(`${this.participanteUrl}/cadastrar`, participante)
       .toPromise();
   }
@@ -32,7 +33,7 @@ export class ParticipanteServiceService {
 }
 
 export class Participante {
-  codparticipante: number;
+  codParticipante: number;
   nome: string;
   email: string;
   cpf: string;
