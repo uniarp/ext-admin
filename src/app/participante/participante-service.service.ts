@@ -16,7 +16,6 @@ export class ParticipanteServiceService {
   }
 
   cadastrar(participante: Participante): Promise<Participante>{
-    participante.codParticipante = null;
     return this.http.post<Participante>(`${this.participanteUrl}/cadastrar`, participante)
       .toPromise();
   }

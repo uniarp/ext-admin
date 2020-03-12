@@ -29,6 +29,7 @@ export class ParticipanteCadastroPage implements OnInit {
   }
 
   gravar(form: FormControl) {
+    this.participante.codParticipante = null;
     this.participanteService.cadastrar(this.participante)
       .then(user => {
         console.log(user)
