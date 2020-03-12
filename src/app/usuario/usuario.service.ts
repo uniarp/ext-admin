@@ -18,7 +18,6 @@ export class UsuarioService {
   }
 
   cadastrar(usuario: Usuario): Promise<Usuario>{
-    console.log(usuario);
     return this.http.post<Usuario>(`${this.usuarioUrl}/cadastrar`, usuario)
       .toPromise();
   }
