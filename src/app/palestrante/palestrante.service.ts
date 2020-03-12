@@ -1,3 +1,4 @@
+import { Area } from 'src/app/area/area.service';
 import { Injectable, OnInit } from '@angular/core';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -33,7 +34,7 @@ export class PalestranteService implements OnInit {
   public adicionarPalestrante(palestrante: Palestrante): Promise<Palestrante> {
     console.log(palestrante);
     return this.http.post<Palestrante>(`${this.palestranteUrl}/cadastrar`, palestrante)
-      .toPromise();
+    .toPromise();
   }
 
   public listarPalestrantes(): Palestrante[] {
@@ -49,6 +50,7 @@ export class Palestrante {
   telefone: string;
   email: string;
   biografia: string;
-  area: string;
-
+  area: {
+    codArea: number;
+  };
 }

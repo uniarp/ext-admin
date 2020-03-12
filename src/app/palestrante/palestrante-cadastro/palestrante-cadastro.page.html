@@ -28,8 +28,8 @@
     <ion-item>
       <ion-label>*Área</ion-label>
       <ion-select multiple="true" placeholder="Selecione" ok-text="Ok" cancel-text="Cancelar"
-        [(ngModel)]="palestrante.area"  name="area" required>
-        <ion-select-option *ngFor=" let area of area" [value]="area">{{area}}</ion-select-option>
+        [(ngModel)]="palestrante.area.codArea"  name="area" required>
+        <ion-select-option *ngFor="let a of areas" [value]="a.codArea">{{a.nome}}</ion-select-option>
       </ion-select>
       <div class="validaCamp" *ngIf="">Selecione pelo menos uma Área</div>
     </ion-item>

@@ -1,8 +1,11 @@
-import { ToastController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { PalestranteService, Palestrante } from '../palestrante.service';
 import { Router } from '@angular/router';
+
+import { AreaService, Area } from './../../area/area.service';
+import { PalestranteService, Palestrante } from '../palestrante.service';
+import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
+import { AlertsService } from 'src/app/core/services/alerts.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -11,36 +14,39 @@ import { Router } from '@angular/router';
 })
 export class PalestranteCadastroPage implements OnInit {
 
-  area = ['Marketing', 'Desenvolvimento', 'Segurança de Redes'];
+  areas: Array<Area>;
   palestrante = new Palestrante();
 
   constructor(
     public palestranteService: PalestranteService,
+    public areaService: AreaService,
     private router: Router,
-    public toast: ToastController
+    private handler: ErrorHandlerService,
+    private alert: AlertsService
   ) { }
 
   ngOnInit() {
+    this.buscaArea();
+  }
 
+  buscaArea() {
+    this.areaService.listarArea()
+      .then(data => {
+        console.log(data);
+        this.areas = data;
+      })
+      .catch(erro => this.handler.handleError(`Erro ao cadastrar ${erro}`));
   }
 
   gravar(form: FormControl) {
+    this.palestrante.codPalestrante = null;
     this.palestranteService.adicionarPalestrante(this.palestrante)
-      .then(data => {
-        console.log(data);
+      .then(() => {
         this.router.navigate(['palestrante-pesquisa']);
-        this.alerta('Usuário Cadastrado com Sucesso', 'success');
+        this.alert.alertaToast('Usuário Cadastrado com Sucesso', 'success');
       })
-      .catch(erro => this.alerta(`Erro ao cadastrar ${erro}`, 'danger'));
+      .catch(erro => this.handler.handleError(`Erro ao cadastrar ${erro}`));
 
   }
 
-  async alerta(men: string, cor: string) {
-    const toast = await this.toast.create({
-      message: men,
-      duration: 1500,
-      color: cor
-    });
-    toast.present();
-  }
 }
