@@ -50,7 +50,5 @@ export class Palestrante {
   telefone: string;
   email: string;
   biografia: string;
-  area: {
-    codArea: number;
-  };
+  area = new Area();
 }
