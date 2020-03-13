@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ParticipanteServiceService, Participante } from '../participante-service.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-participante-pesquisa',
@@ -8,10 +10,15 @@ import { ParticipanteServiceService, Participante } from '../participante-servic
 })
 export class ParticipantePesquisaPage implements OnInit {
 
-  participante: any[];
+  participante: Participante;
+  
+  inserir(){
+    this.router.navigate(['participante-cadastro']);
+  }
 
   constructor(
-    private participanteService: ParticipanteServiceService
+    private participanteService: ParticipanteServiceService,
+    public router: Router
   ) { }
 
   ngOnInit() {
@@ -23,9 +30,13 @@ export class ParticipantePesquisaPage implements OnInit {
 
   }
   
-  async excluir(id ){
-    await this.participanteService.excluir(id);
+  async excluir(codParticipante){
+    this.participante = await this.participanteService.excluir(codParticipante);
     this.listar();
+  }
+  
+  novoCadastro(){
+    this.router.navigate(['participante-cadastro']);
   }
 
   async alterar(){

@@ -20,14 +20,15 @@ export class ParticipanteServiceService {
       .toPromise();
   }
 
-  listar(): Promise<any>{
-    return this.http.get<any>(this.participanteUrl + `/participantes/listar`, this.httpOptions)
+  listar(): Promise<Participante>{
+    return this.http.get<Participante>(this.participanteUrl + `/listar`, this.httpOptions)
     .toPromise();
   }
 
-  excluir(id): Promise<any>{
-    console.log(id);
-    return Promise.resolve(true);
+  excluir(codParticipante: number): Promise<Participante>{
+    console.log(codParticipante);
+    return this.http.delete<Participante>(`${this.participanteUrl}/excluir/${codParticipante}`)
+    .toPromise();
   }
 }
 
