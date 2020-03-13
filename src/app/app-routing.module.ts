@@ -24,6 +24,19 @@ const routes: Routes = [
       .then(m => m.VoluntarioPesquisaPageModule)
   },
   {
+    path: 'usuario-cadastro',
+    loadChildren: () => import('./usuario/usuario-cadastro/usuario-cadastro.module').then( m => m.UsuarioCadastroPageModule)
+  },
+  {
+    path: 'usuario-pesquisa',
+    loadChildren: () => import('./usuario/usuario-pesquisa/usuario-pesquisa.module').then( m => m.UsuarioPesquisaPageModule)
+  },
+  {
+    path: 'voluntario-pesquisa',
+    loadChildren: () => import('./voluntario/voluntario-pesquisa/voluntario-pesquisa.module')
+      .then(m => m.VoluntarioPesquisaPageModule)
+  },
+  {
     path: 'participante-cadastro',
     loadChildren: () => import('./participante/participante-cadastro/participante-cadastro.module').then( m => m.ParticipanteCadastroPageModule)
   },
@@ -32,8 +45,8 @@ const routes: Routes = [
     loadChildren: () => import('./participante/participante-pesquisa/participante-pesquisa.module').then( m => m.ParticipantePesquisaPageModule)
   },
   
-
 ];
+
 
 @NgModule({
   imports: [
