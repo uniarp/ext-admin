@@ -17,6 +17,7 @@ export class UsuarioCadastroPage implements OnInit {
   usuario = new Usuario();
   confirSenha: string;
   password_type = 'password';
+  titulo = 'Novo ';
 
   constructor(
     public usuarioServie: UsuarioService,
@@ -29,15 +30,27 @@ export class UsuarioCadastroPage implements OnInit {
 
   ngOnInit() {
     const codUsuario = this.route.snapshot.params['codUsuario'];
-    // const codUsuario = 1;
 
     if (codUsuario) {
       this.carregarUsuario(codUsuario);
     }
+
+    this.atualizarTitulo();
   }
 
-  get editando(){
-    return Boolean(this.usuario.codUsuario);
+
+get editando() {
+  console.log('TEste');
+    if (this.usuario.codUsuario) {
+      return true;
+    }
+    return false;
+  }
+
+  atualizarTitulo() {
+    if (this.editando) {
+      this.titulo = "Alterar ";
+    }
   }
 
   exibeSenha() {
@@ -47,6 +60,7 @@ export class UsuarioCadastroPage implements OnInit {
   carregarUsuario(codUsuario: number) {
     this.usuarioServie.listaUsuario(codUsuario)
       .then(data => {
+        console.log(data);
         this.usuario = data;
       })
       .catch(erro => this.handler.handleError(erro));

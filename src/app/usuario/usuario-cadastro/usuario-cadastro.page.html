@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Novo Usuário</ion-title>
+    <ion-title>{{titulo}}Usuário</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -25,7 +25,7 @@
         required minlength="6"></ion-input>
       <div class="validaCamp" *ngIf="senha.hasError('minlength')">*A senha precisa ter no minimo 6 digitos</div>
     </ion-item>
-    <ion-item *ngIf="!editando">
+    <ion-item>
       <ion-input [type]="password_type" placeholder="*Confirme sua Senha:" [(ngModel)]="confirSenha" #senhaC="ngModel"
         name="senhaC" required></ion-input>
       <div class="validaCamp" *ngIf=" usuario.senha != confirSenha  && senha.dirty">Senhas não Coincide com a anterior
