@@ -29,10 +29,15 @@ export class UsuarioCadastroPage implements OnInit {
 
   ngOnInit() {
     const codUsuario = this.route.snapshot.params['codUsuario'];
+    // const codUsuario = 1;
 
     if (codUsuario) {
       this.carregarUsuario(codUsuario);
     }
+  }
+
+  get editando(){
+    return Boolean(this.usuario.codUsuario);
   }
 
   exibeSenha() {
@@ -42,15 +47,20 @@ export class UsuarioCadastroPage implements OnInit {
   carregarUsuario(codUsuario: number) {
     this.usuarioServie.listaUsuario(codUsuario)
       .then(data => {
-        console.log(data)
         this.usuario = data;
       })
       .catch(erro => this.handler.handleError(erro));
+
   }
 
 
   gravar(form: FormControl) {
-    this.usuario.codUsuario = null;
+    if (!this.usuario.codUsuario) {
+      this.usuario.codUsuario = null;
+    }
+    if (!this.usuario.cpf) {
+      this.usuario.cpf = '000.000.000-00';
+    }
     this.usuarioServie.cadastrar(this.usuario)
       .then(user => {
         console.log(user)

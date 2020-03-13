@@ -21,14 +21,14 @@
         [brmasker]="{person: true}" maxlength="14"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input [type]="password_type" placeholder="*Senha:" [(ngModel)]="confirSenha" #senhaC="ngModel" name="senhaC"
+      <ion-input [type]="password_type" placeholder="*Senha:" [(ngModel)]="usuario.senha" #senha="ngModel" name="senha"
         required minlength="6"></ion-input>
       <div class="validaCamp" *ngIf="senha.hasError('minlength')">*A senha precisa ter no minimo 6 digitos</div>
     </ion-item>
-    <ion-item>
-      <ion-input [type]="password_type" placeholder="*Confirme sua Senha:" [(ngModel)]="usuario.senha" #senha="ngModel"
-        name="senha" required></ion-input>
-      <div class="validaCamp" *ngIf="confirSenha != usuario.senha && senha.dirty">Senhas não Coincide com a anterior
+    <ion-item *ngIf="!editando">
+      <ion-input [type]="password_type" placeholder="*Confirme sua Senha:" [(ngModel)]="confirSenha" #senhaC="ngModel"
+        name="senhaC" required></ion-input>
+      <div class="validaCamp" *ngIf=" usuario.senha != confirSenha  && senha.dirty">Senhas não Coincide com a anterior
       </div>
     </ion-item>
     <ion-item>
