@@ -1,36 +1,48 @@
-import { Injectable, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PalestranteService implements OnInit {
-  validou: Boolean;
-  palestrantes: Array<Palestrante>;
-  constructor() {
-    validou: true;
-    this.palestrantes = [{ id: '1', nome: 'Zorzo', cpf: '111.222.333-44', telefone: '(49) 99999-9999', email: 'zorzo@uniarp.com.br', area: 'sistemaas de Informação' },
-    { id: '2', nome: 'Conte', cpf: '111.222.333-44', telefone: '(49) 99999-9999', email: 'zorzo@uniarp.com.br', area: 'sistemaas de Informação' }];
+export class PalestranteService {
+  palestranteUrl = "https://uniarpextensao.herokuapp.com/public/palestrantes";
+
+  constructor(private http: HttpClient) { }
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
   }
 
-  ngOnInit() {
-
+  cadastrar(palestrante: Palestrante): Promise<Palestrante>{
+    palestrante.codPalestrante = null;
+    return this.http.post<Palestrante>(`${this.palestranteUrl}/cadastrar`, palestrante)
+      .toPromise();
   }
 
-  public removerPalestrante(idPal: string): Boolean {
-    return this.validou;
+  listar(): Promise<any>{
+    console.log('listou');
+    return this.http.get<any>(this.palestranteUrl + `/listar`, this.httpOptions)
+    .toPromise();
   }
 
-  public adicionarPalestrante(palestrante: Palestrante): Boolean {
-    return this.validou;
+  listarPalestrante(codPalestrante: number): Promise<any>{
+    console.log(this.palestranteUrl + `/listar/`+codPalestrante);
+    return this.http.get<any>(this.palestranteUrl + `/listar/`+codPalestrante, this.httpOptions)
+    .toPromise();  
   }
-  public listarPalestrantes(): Array<Palestrante> {
-    return this.palestrantes;
+
+  excluir(codPalestrante: number): Promise<any>{
+    console.log(this.palestranteUrl + `/excluir/`+codPalestrante);
+    return this.http.get<any>(this.palestranteUrl + `/excluir/`+codPalestrante, this.httpOptions)
+    .toPromise();  
   }
 }
 
 export class Palestrante {
-  id: string;
+  codPalestrante: number;
   nome: string;
   cpf: string;
   telefone: string;

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {RouterModule, Routes , Router} from '@angular/router';
 import { PalestranteService, Palestrante } from '../palestrante.service';
 
 @Component({
@@ -7,31 +8,40 @@ import { PalestranteService, Palestrante } from '../palestrante.service';
   styleUrls: ['./palestrante-pesquisa.page.scss'],
 })
 export class PalestrantePesquisaPage implements OnInit {
-
-  palestrante: Array<Palestrante>;
+  palestrante: any[];
   deuCerto: Boolean;
 
   constructor(
+    private router: Router,
     private palestranteService: PalestranteService
   ) {
-
+    
   }
 
   ngOnInit() {
-    this.listarPalestrantes();
+    this.listar();
   }
 
-  public removerPalestrante(idPal: string){
-    this.deuCerto=this.palestranteService.removerPalestrante(idPal);
-    console.log(this.deuCerto);
+  public async excluir(codPalestrante: number){
+    console.log('excluir '+codPalestrante);
+    await this.palestranteService.excluir(codPalestrante);
+    this.listar();
   }
 
-  public adicionarPalestrante(palestrante: Palestrante) {
-    this.deuCerto=this.palestranteService.adicionarPalestrante(palestrante);
-    console.log(this.deuCerto);
-  }
-  public listarPalestrantes() {
-    this.palestrante = this.palestranteService.listarPalestrantes();
+  public async listarPalestrante(codPalestrante: number){
+    console.log('listar '+codPalestrante);
+    this.palestrante = await this.palestranteService.listarPalestrante(codPalestrante);
+    
   }
 
+  public adicionar() {
+    this.router.navigate(['/palestrante-cadastro']);
+  }
+  public async listar() {
+    this.palestrante = await this.palestranteService.listar();
+  }
+
+  public async alterar(codPalestrante: number){
+    this.router.navigate(['/palestrante-cadastro']);
+  }
 }
