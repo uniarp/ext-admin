@@ -21,9 +21,9 @@ export class UsuarioService {
       .toPromise();
   }
 
-  excluir(id): Promise<Usuario> {
-    return this.http.delete<Usuario>(this.usuarioUrl + '/excluir/{codUsuario}')
-    .toPromise();
+  excluir(codUsuario: number): Promise<Usuario> {
+    return this.http.delete<Usuario>(`${this.usuarioUrl}'/excluir${codUsuario}`)
+      .toPromise();
   }
 }
 

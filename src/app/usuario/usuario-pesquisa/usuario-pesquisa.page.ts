@@ -36,10 +36,11 @@ export class UsuarioPesquisaPage {
     this.router.navigate(['usuario-cadastro']);
   }
 
-  excluirCadastro(codUsuario) {
+  excluirCadastro(codUsuario:number) {
     this.usuarioService.excluir(codUsuario)
-      .then(data => {
-        this.usuarios = data;
+      .then(user => {
+        console.log(user)
+        this.usuarios = user;
       })
       .catch(erro => null);
   }
