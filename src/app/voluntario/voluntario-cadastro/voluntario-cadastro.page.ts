@@ -16,7 +16,7 @@ export class VoluntarioCadastroPage implements OnInit {
   voluntario = new Voluntario();
 
   constructor(
-    //public voluntarioService: VoluntarioService,
+    public voluntarioService: VoluntarioService,
     private router: Router,
     public toast: ToastController,
     public handler: ErrorHandlerService,

@@ -6,7 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { VoluntarioPesquisaPageRoutingModule } from './voluntario-pesquisa-routing.module';
 
-import { VoluntarioPesquisaPage } from './voluntario-pesquisa.page';
+import { VoluntarioPesquisaPage } from './voluntario-pesquisa/voluntario-pesquisa.page';
 
 @NgModule({
   imports: [

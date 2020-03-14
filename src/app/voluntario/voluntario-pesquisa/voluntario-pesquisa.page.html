@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Pesquisa de Volunatrios</ion-title>
+    <ion-title>Pesquisa de Voluntario</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -16,44 +16,47 @@
     <ion-item>
       <ion-grid>
         <ion-row>
-          <ion-col></ion-col>
-          <ion-col> Nome</ion-col>
-          <ion-col>E-mail</ion-col>
-          <ion-col>CPF</ion-col>
-          <ion-col>Curso</ion-col>
-    
-          
+          <ion-col>Nome</ion-col>
+          <ion-col class="ion-align-self-start">Email</ion-col>
+          <ion-col class="ion-align-self-start">CPF</ion-col>
+          <ion-col class="ion-align-self-start">Curso</ion-col>
+          <ion-col size-sm>Opções</ion-col>
+
         </ion-row>
         <div *ngFor="let voluntario of voluntario">
-          <ion-row>
-            <ion-col>
-              <ion-checkbox slot="end" [(ngModel)]="voluntario.id"></ion-checkbox>
-            </ion-col>
-            <ion-col>
-              {{voluntario.nome}}
-            </ion-col>
-            <ion-col>
-              {{voluntario.email}}
-            </ion-col>
-            <ion-col>
-              {{voluntario.cpf}}
-            </ion-col>
-            <ion-col>
-              {{voluntario.curso}}
-            </ion-col>
-          
-          </ion-row>
+          <ion-radio-group>
+            <ion-row>
+              <ion-col>
+                {{voluntario.nome}}
+              </ion-col>
+              <ion-col class="ion-align-self-start">
+                {{voluntario.email}}
+              </ion-col>
+              <ion-col class="ion-align-self-start">
+                {{voluntario.cpf}}
+              </ion-col>
+              <ion-col class="ion-align-self-start">
+                {{voluntario.curso}}
+              </ion-col>
+              <ion-col size="1" size-sm>
+                <ion-button (click)='excluir(voluntario.cod)'>
+                  <ion-icon name="trash-outline"></ion-icon>
+                </ion-button>
+                <ion-button>
+                  <ion-icon name="pencil-outline"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-radio-group>
         </div>
       </ion-grid>
     </ion-item>
-
   </div>
 </ion-content>
 <ion-footer>
-  <ion-item class="opcoes">
-    <ion-button horizontal="end">Alterar voluntario</ion-button>
-    <ion-button horizontal="end">Cadastrar voluntario</ion-button>
-    <ion-button horizontal="end">Excluir voluntario</ion-button>
-    <ion-button horizontal="end">Info. voluntario</ion-button>
-  </ion-item>
+  <ion-fab (click)= "novoCadastro()" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-footer>
