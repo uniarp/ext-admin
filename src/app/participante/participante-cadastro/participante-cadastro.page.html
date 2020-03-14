@@ -10,7 +10,7 @@
 
 <ion-content>
   
-  <form autocomplete="off" #userForm="ngForm" (ngSubmit)="gravar(userForm)">
+  <form autocomplete="off" #partiForm="ngForm" (ngSubmit)="gravar(partiForm)">
     <ion-item>
       <ion-input placeholder="*Nome:" type="text" [(ngModel)]="participante.nome" #nome="ngModel" name="nome" required
         minlength="10"></ion-input>
@@ -41,15 +41,18 @@
       <ion-label>Exibir senha</ion-label>
       <ion-checkbox color="dark" slot="start" (click)="exibeSenha()"></ion-checkbox>
     </ion-item>
-
     <ion-item>
       <ion-input placeholder="Telefone:" type="text" [(ngModel)]="participante.telefone" #telefone="ngModel" name="telefone"
         [brmasker]="{phone: true}" maxlength="14"></ion-input>
     </ion-item>
+    <ion-item>
+      <ion-input placeholder="R.A:" type="text" [(ngModel)]="participante.ra" #ra="ngModel" name="ra" required
+        ra></ion-input>
+    </ion-item>
 
-    <div class="validaCamp" *ngIf="userForm.invalid">Campos com * São obrigatórios</div>
+    <div class="validaCamp" *ngIf="partiForm.invalid">Campos com * São obrigatórios</div>
     <br>
-    <ion-button type="submit" [disabled]="userForm.invalid">Gravar</ion-button>
+    <ion-button type="submit" [disabled]="partiForm.invalid">Gravar</ion-button>
   </form>
 
   </ion-content>

@@ -34,11 +34,12 @@ export class ParticipanteCadastroPage implements OnInit {
 
   gravar(form: FormControl) {
     this.participante.codParticipante = null;
+    this.participante.ra =10;
     this.participanteService.cadastrar(this.participante)
       .then(user => {
-        console.log(user)
+        console.log(this.participante)
         this.alert.alertaToast('Participante Cadastrado com Sucesso', 'success');
-        this.router.navigate(['participantes-listar']);
+        this.router.navigate(['participante-pesquisa']);
       })
       .catch(erro => this.handler.handleError(erro));
   }

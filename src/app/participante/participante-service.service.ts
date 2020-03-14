@@ -15,15 +15,17 @@ export class ParticipanteServiceService {
     })
   }
 
+
   cadastrar(participante: Participante): Promise<Participante>{
+    console.log(participante);
     return this.http.post<Participante>(`${this.participanteUrl}/cadastrar`, participante)
       .toPromise();
   }
 
-  listar(): Promise<Participante>{
+  /*listar(): Promise<Participante>{
     return this.http.get<Participante>(this.participanteUrl + `/listar`, this.httpOptions)
     .toPromise();
-  }
+  }*/
 
   excluir(codParticipante: number): Promise<Participante>{
     console.log(codParticipante);
@@ -35,8 +37,14 @@ export class ParticipanteServiceService {
 export class Participante {
   codParticipante: number;
   nome: string;
-  email: string;
   cpf: string;
+  ra: number;
   senha: string;
   telefone: string;
+  email: string;
+
+  constructor (){
+    
+  
+  }
 }
