@@ -1,6 +1,7 @@
+import { Usuario } from './../../usuario/usuario.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { AreaService, Area } from './../../area/area.service';
 import { PalestranteService, Palestrante } from '../palestrante.service';
@@ -14,32 +15,59 @@ import { AlertsService } from 'src/app/core/services/alerts.service';
 })
 export class PalestranteCadastroPage implements OnInit {
 
-  areas: Array<Area>;
+  area: Array<Area>;
   palestrante = new Palestrante();
+  areaSelec: Array<Area>;
 
   constructor(
     public palestranteService: PalestranteService,
     public areaService: AreaService,
     private router: Router,
+    private route: ActivatedRoute,
     private handler: ErrorHandlerService,
     private alert: AlertsService
   ) { }
 
   ngOnInit() {
+    const codPalestrante = this.route.snapshot.params['codPalestrante'];
+
+    if (codPalestrante) {
+      this.carregarPalestrante(codPalestrante);
+    }
     this.buscaArea();
+  }
+
+  get editando() {
+    return Boolean(this.palestrante.codPalestrante);
   }
 
   buscaArea() {
     this.areaService.listarArea()
       .then(data => {
         console.log(data);
-        this.areas = data;
+        this.area = data;
       })
       .catch(erro => this.handler.handleError(`Erro ao cadastrar ${erro}`));
   }
 
+  get areas() {
+    return true;
+  }
+
+  carregarPalestrante(codigo: number) {
+    this.palestranteService.carregarPalestrante(codigo)
+      .then(data => {
+        this.palestrante = data;
+        console.log(this.palestrante);
+      })
+      .catch(erro => this.handler.handleError(erro));
+  }
+
   gravar(form: FormControl) {
-    this.palestrante.codPalestrante = null;
+    if (!this.palestrante.codPalestrante) {
+      this.palestrante.codPalestrante = null;
+    }
+
     this.palestranteService.adicionarPalestrante(this.palestrante)
       .then(() => {
         this.router.navigate(['palestrante-pesquisa']);

@@ -34,11 +34,15 @@ export class PalestranteService implements OnInit {
   public adicionarPalestrante(palestrante: Palestrante): Promise<Palestrante> {
     console.log(palestrante);
     return this.http.post<Palestrante>(`${this.palestranteUrl}/cadastrar`, palestrante)
-    .toPromise();
+      .toPromise();
   }
 
-  public listarPalestrantes(): Palestrante[] {
-    return this.palestrantes;
+  public carregarPalestrante(codigo: number): Promise<Palestrante> {
+    return this.http.get<Palestrante>(`${this.palestranteUrl}/listar/${codigo}`)
+      .toPromise()
+      .then(data => {
+        return data[0];
+      });
   }
 
 }
@@ -50,5 +54,11 @@ export class Palestrante {
   telefone: string;
   email: string;
   biografia: string;
-  area = new Area();
+  area = new AreasPalestrante();
+}
+
+export class AreasPalestrante {
+  codAreaPalestrante: number;
+  codArea: number;
+  nome: string;
 }
