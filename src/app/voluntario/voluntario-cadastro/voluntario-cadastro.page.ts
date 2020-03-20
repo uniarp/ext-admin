@@ -27,7 +27,7 @@ export class VoluntarioCadastroPage implements OnInit {
   }
 
   gravar(form: FormControl) {
-    this.voluntario.codVoluntario =55;
+    this.voluntario.codVoluntario =null;
     this.voluntarioService.cadastrar(this.voluntario)
       .then(() => {
         this.alert.alertaToast('Voluntário Cadastrado com Sucesso', 'success');

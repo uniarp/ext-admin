@@ -17,8 +17,7 @@ export class VoluntarioService {
   }
 
   cadastrar(voluntario: Voluntario): Promise<Voluntario>{
-    console.log(voluntario); 
-    return this.http.get<Voluntario>(`${this.voluntarioUrl}/cadastrar` + '/this.nome' + '/email' + '/cpf' + '/telefone' + '/ra' + '/curso')
+    return this.http.post<Voluntario>(`${this.voluntarioUrl}/cadastrar`,voluntario)
       .toPromise();
   }
 
