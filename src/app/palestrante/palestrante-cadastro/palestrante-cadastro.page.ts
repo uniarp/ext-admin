@@ -50,9 +50,12 @@ export class PalestranteCadastroPage implements OnInit {
       .catch(erro => this.handler.handleError(`Erro ao cadastrar ${erro}`));
   }
 
-  get areas() {
+ categoriasSelect(a:{codArea:number, nome:string}, b:{codArea:number, nome:string}){
+  if (a.codArea === b.codArea){
     return true;
   }
+  return false;
+ }
 
   carregarPalestrante(codigo: number) {
     this.palestranteService.carregarPalestrante(codigo)

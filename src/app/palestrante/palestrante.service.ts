@@ -54,11 +54,5 @@ export class Palestrante {
   telefone: string;
   email: string;
   biografia: string;
-  area = new AreasPalestrante();
-}
-
-export class AreasPalestrante {
-  codAreaPalestrante: number;
-  codArea: number;
-  nome: string;
+  area: Array<Area>;
 }
