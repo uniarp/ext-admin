@@ -8,7 +8,7 @@ import { Voluntario, VoluntarioService } from '../voluntario.service';
   templateUrl: './voluntario-pesquisa.page.html',
   styleUrls: ['./voluntario-pesquisa.page.scss'],
 })
-export class VolunatrioPesquisaPage implements OnInit {
+export class VoluntarioPesquisaPage implements OnInit {
 
   voluntario: Voluntario;
 
@@ -24,13 +24,14 @@ export class VolunatrioPesquisaPage implements OnInit {
   inserir(){
     this.router.navigate(['voluntario-cadastro']);
   }
-  
+
   async listar() {
     this.voluntario = await this.voluntarioService.listar();
 
   }
   
   async excluir(codVoluntario){
+    console.log(codVoluntario);
     this.voluntario = await this.voluntarioService.excluir(codVoluntario);
     this.listar();
   }
@@ -39,8 +40,9 @@ export class VolunatrioPesquisaPage implements OnInit {
     this.router.navigate(['voluntario-cadastro']);
   }
 
-  async alterar(){
-    // this.voluntario = await this.voluntarioService.alterar();
+  async alterar(codVoluntario){
+    console.log(codVoluntario);
+    this.router.navigate(['/voluntario-cadastro']);
   }
 
 

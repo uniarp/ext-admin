@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Pesquisa de Voluntario</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -39,10 +42,10 @@
                 {{voluntario.curso}}
               </ion-col>
               <ion-col size="1" size-sm>
-                <ion-button (click)='excluir(voluntario.cod)'>
+                <ion-button (click)='excluir(voluntario.codVoluntario)'>
                   <ion-icon name="trash-outline"></ion-icon>
                 </ion-button>
-                <ion-button>
+                <ion-button (click)='alterar(voluntario.codVoluntario)'>
                   <ion-icon name="pencil-outline"></ion-icon>
                 </ion-button>
               </ion-col>

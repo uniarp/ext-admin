@@ -20,12 +20,13 @@ export class VoluntarioService {
     return this.http.post<Voluntario>(`${this.voluntarioUrl}/cadastrar`, voluntario)
       .toPromise();
   }
-   listar(): Promise<Voluntario>{
-    return this.http.get<Voluntario>(this.voluntarioUrl + `/listar`, this.httpOptions)
+
+   listar(): Promise<any>{
+    return this.http.get<any>(this.voluntarioUrl + `/listar`, this.httpOptions)
     .toPromise();
   }
+
   excluir(codVoluntario: number): Promise<Voluntario>{
-    console.log(codVoluntario);
     return this.http.delete<Voluntario>(`${this.voluntarioUrl}/excluir/${codVoluntario}`)
     .toPromise();
   }
