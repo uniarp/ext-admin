@@ -27,9 +27,6 @@ export class PalestranteService implements OnInit {
     })
   }
 
-  public removerPalestrante(idPal: string): Boolean {
-    return this.validou;
-  }
 
   public adicionarPalestrante(palestrante: Palestrante): Promise<Palestrante> {
     console.log(palestrante);
@@ -55,4 +52,11 @@ export class Palestrante {
   email: string;
   biografia: string;
   area: Array<Area>;
+
+  constructor(){
+    this.codPalestrante = null;
+    this.cpf = "";
+    this.telefone = "";
+    this.biografia = "";
+  }
 }
