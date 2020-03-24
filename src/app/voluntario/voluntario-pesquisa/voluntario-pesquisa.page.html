@@ -45,7 +45,7 @@
                 <ion-button (click)='excluir(voluntario.codVoluntario)'>
                   <ion-icon name="trash-outline"></ion-icon>
                 </ion-button>
-                <ion-button (click)='alterar(voluntario.codVoluntario)'>
+                <ion-button [routerLink]="['/voluntario-cadastro',voluntario.codVoluntario]">
                   <ion-icon name="pencil-outline"></ion-icon>
                 </ion-button>
               </ion-col>

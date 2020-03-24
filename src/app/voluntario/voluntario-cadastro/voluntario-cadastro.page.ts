@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { VoluntarioService, Voluntario } from "../voluntario.service";
@@ -14,16 +14,51 @@ import { AlertsService } from 'src/app/core/services/alerts.service';
 export class VoluntarioCadastroPage implements OnInit {
 
   voluntario = new Voluntario();
+  titulo = 'Novo ';
 
   constructor(
     public voluntarioService: VoluntarioService,
     private router: Router,
+    private route: ActivatedRoute,
     public toast: ToastController,
     public handler: ErrorHandlerService,
     private alert: AlertsService
   ) { }
 
   ngOnInit() {
+    
+    console.log(this.route.snapshot.params);
+    const codVoluntario = this.route.snapshot.params['codVoluntario'];
+
+    if (codVoluntario) {
+      this.carregarVoluntario(codVoluntario);
+    }
+
+    this.atualizarTitulo();
+  }
+
+  get editando() {
+    console.log('TEste');
+      if (this.voluntario.codVoluntario) {
+        return true;
+      }
+      return false;
+    }
+
+    atualizarTitulo() {
+      if (this.editando) {
+        this.titulo = "Alterar ";
+      }
+    }
+
+  carregarVoluntario(codVoluntario: number) {
+    this.voluntarioService.listaVoluntario(codVoluntario)
+      .then(data => {
+        console.log(data);
+        this.voluntario = data;
+      })
+      .catch(erro => this.handler.handleError(erro));
+
   }
 
   gravar(form: FormControl) {

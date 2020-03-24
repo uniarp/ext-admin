@@ -16,10 +16,19 @@ export class VoluntarioService {
     })
   }
 
+    listaVoluntario(codVoluntario: number): Promise<Voluntario>{
+    return this.http.get<Voluntario>(`${this.voluntarioUrl}/listar/${codVoluntario}`)
+    .toPromise()
+    .then( data => {
+      return data[0];
+    });
+  }
+  
   cadastrar(voluntario: Voluntario): Promise<Voluntario>{
     return this.http.post<Voluntario>(`${this.voluntarioUrl}/cadastrar`, voluntario)
       .toPromise();
-  }
+    }
+    
 
    listar(): Promise<any>{
     return this.http.get<any>(this.voluntarioUrl + `/listar`, this.httpOptions)

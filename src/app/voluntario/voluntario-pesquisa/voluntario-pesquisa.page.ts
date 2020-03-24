@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Voluntario, VoluntarioService } from '../voluntario.service';
+import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 
 
 @Component({
@@ -11,16 +12,24 @@ import { Voluntario, VoluntarioService } from '../voluntario.service';
 export class VoluntarioPesquisaPage implements OnInit {
 
   voluntario: Voluntario;
+  titulo = 'Novo ';
 
   constructor(
     private voluntarioService: VoluntarioService,
-    public router: Router
+    public router: Router,
+    private route: ActivatedRoute,
+    public handler: ErrorHandlerService
   ) { }
 
   ngOnInit() {
     this.listar();
   }
 
+
+
+
+
+  
   inserir(){
     this.router.navigate(['voluntario-cadastro']);
   }
@@ -41,8 +50,8 @@ export class VoluntarioPesquisaPage implements OnInit {
   }
 
   async alterar(codVoluntario){
-    console.log(codVoluntario);
-    this.router.navigate(['/voluntario-cadastro']);
+    console.log();
+    this.router.navigate(['/voluntario-cadastro/',codVoluntario]);
   }
 
 
