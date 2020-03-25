@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { EventEmitter } from 'protractor';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VoluntarioService {
 
-  voluntarioUrl = "https://uniarpextensao.herokuapp.com/public/voluntarios";
+  voluntarioUrl = 'https://uniarpextensao.herokuapp.com/public/voluntarios';
 
   constructor(private http: HttpClient) { }
 
@@ -14,40 +15,39 @@ export class VoluntarioService {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
+  };
+
+  async listaVoluntario(codVoluntario: number): Promise<Voluntario> {
+    return this.http.get<Voluntario>(`${this.voluntarioUrl}/listar/${codVoluntario}`)
+      .toPromise()
+      .then(data => {
+        return data[0];
+      });
   }
 
-    listaVoluntario(codVoluntario: number): Promise<Voluntario>{
-    return this.http.get<Voluntario>(`${this.voluntarioUrl}/listar/${codVoluntario}`)
-    .toPromise()
-    .then( data => {
-      return data[0];
-    });
-  }
-  
-  cadastrar(voluntario: Voluntario): Promise<Voluntario>{
+  cadastrar(voluntario: Voluntario): Promise<Voluntario> {
     return this.http.post<Voluntario>(`${this.voluntarioUrl}/cadastrar`, voluntario)
       .toPromise();
-    }
-    
+  }
 
-   listar(): Promise<any>{
+
+  listar(): Promise<any> {
     return this.http.get<any>(this.voluntarioUrl + `/listar`, this.httpOptions)
-    .toPromise();
+      .toPromise();
   }
 
-  excluir(codVoluntario: number): Promise<Voluntario>{
+  excluir(codVoluntario: number): Promise<Voluntario> {
     return this.http.delete<Voluntario>(`${this.voluntarioUrl}/excluir/${codVoluntario}`)
-    .toPromise();
+      .toPromise();
   }
-
 }
 
-  export class Voluntario {
-    codVoluntario: number;
-    nome: string;
-    email: string;
-    cpf: string;
-    telefone: string;
-    ra: number;
-    curso: string
+export class Voluntario {
+  codVoluntario: number;
+  nome: string;
+  email: string;
+  cpf: string;
+  telefone: string;
+  ra: number;
+  curso: string;
 }

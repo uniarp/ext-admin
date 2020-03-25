@@ -1,7 +1,7 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { VoluntarioService, Voluntario } from "../voluntario.service";
+import { VoluntarioService, Voluntario } from '../voluntario.service';
 import { ToastController } from '@ionic/angular';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { AlertsService } from 'src/app/core/services/alerts.service';
@@ -26,9 +26,9 @@ export class VoluntarioCadastroPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+
     console.log(this.route.snapshot.params);
-    const codVoluntario = this.route.snapshot.params['codVoluntario'];
+    const codVoluntario = this.route.snapshot.params.codVoluntario;
 
     if (codVoluntario) {
       this.carregarVoluntario(codVoluntario);
@@ -38,18 +38,18 @@ export class VoluntarioCadastroPage implements OnInit {
   }
 
   get editando() {
-    console.log('TEste');
-      if (this.voluntario.codVoluntario) {
-        return true;
-      }
-      return false;
+    console.log('Teste');
+    if (this.voluntario.codVoluntario) {
+      return true;
     }
+    return false;
+  }
 
-    atualizarTitulo() {
-      if (this.editando) {
-        this.titulo = "Alterar ";
-      }
+  atualizarTitulo() {
+    if (this.editando) {
+      this.titulo = 'Alterar ';
     }
+  }
 
   carregarVoluntario(codVoluntario: number) {
     this.voluntarioService.listaVoluntario(codVoluntario)
@@ -58,17 +58,16 @@ export class VoluntarioCadastroPage implements OnInit {
         this.voluntario = data;
       })
       .catch(erro => this.handler.handleError(erro));
-
   }
 
-  gravar(form: FormControl) {
-    this.voluntario.codVoluntario = null;
+  gravar() {
+    this.voluntario.codVoluntario = this.voluntario.codVoluntario ? this.voluntario.codVoluntario : null;
     this.voluntarioService.cadastrar(this.voluntario)
       .then(() => {
-        this.alert.alertaToast('Voluntário Cadastrado com Sucesso', 'success');
+        this.alert.alertaToast(this.voluntario.codVoluntario ? 'Voluntário Alterado com Sucesso' : 'Voluntário Cadastrado com Sucesso',
+          'success');
         this.router.navigate(['voluntario-pesquisa']);
       })
-      .catch( erro => this.handler.handleError(erro));
+      .catch(erro => this.handler.handleError(erro));
   }
-
 }

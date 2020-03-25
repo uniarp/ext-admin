@@ -3,7 +3,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Voluntario, VoluntarioService } from '../voluntario.service';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 
-
 @Component({
   selector: 'app-voluntario-pesquisa',
   templateUrl: './voluntario-pesquisa.page.html',
@@ -25,12 +24,7 @@ export class VoluntarioPesquisaPage implements OnInit {
     this.listar();
   }
 
-
-
-
-
-  
-  inserir(){
+  inserir() {
     this.router.navigate(['voluntario-cadastro']);
   }
 
@@ -38,21 +32,19 @@ export class VoluntarioPesquisaPage implements OnInit {
     this.voluntario = await this.voluntarioService.listar();
 
   }
-  
-  async excluir(codVoluntario){
+
+  async excluir(codVoluntario) {
     console.log(codVoluntario);
     this.voluntario = await this.voluntarioService.excluir(codVoluntario);
     this.listar();
   }
-  
-  novoCadastro(){
+
+  novoCadastro() {
     this.router.navigate(['voluntario-cadastro']);
   }
 
-  async alterar(codVoluntario){
+  async alterar(codVoluntario) {
     console.log();
-    this.router.navigate(['/voluntario-cadastro/',codVoluntario]);
+    this.router.navigate(['/voluntario-cadastro/', codVoluntario]);
   }
-
-
 }
