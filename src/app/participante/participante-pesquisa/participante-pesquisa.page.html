@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Pesquisa de Particpante</ion-title>
+    <ion-title>Pesquisa de Participante</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -16,11 +16,11 @@
     <ion-item>
       <ion-grid>
         <ion-row>
-          <ion-col>Nome</ion-col>
-          <ion-col class="ion-align-self-start">Email</ion-col>
+          <ion-col> Nome</ion-col>
+          <ion-col class="ion-align-self-start">E-mail</ion-col>
           <ion-col class="ion-align-self-start">CPF</ion-col>
+          <ion-col class="ion-align-self-start">Curso</ion-col>
           <ion-col size-sm>Opções</ion-col>
-
         </ion-row>
         <div *ngFor="let participante of participante">
           <ion-radio-group>
@@ -34,8 +34,11 @@
               <ion-col class="ion-align-self-start">
                 {{participante.cpf}}
               </ion-col>
+              <ion-col class="ion-align-self-start">
+                {{participante.curso}}
+              </ion-col>
               <ion-col size="1" size-sm>
-                <ion-button (click)='excluir(participante.cod)'>
+                <ion-button>
                   <ion-icon name="trash-outline"></ion-icon>
                 </ion-button>
                 <ion-button>
@@ -47,10 +50,11 @@
         </div>
       </ion-grid>
     </ion-item>
+    
   </div>
 </ion-content>
 <ion-footer>
-  <ion-fab (click)= "novoCadastro()" vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button>
       <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>

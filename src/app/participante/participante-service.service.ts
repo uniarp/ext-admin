@@ -22,10 +22,10 @@ export class ParticipanteServiceService {
       .toPromise();
   }
 
-  /*listar(): Promise<Participante>{
+  listar(): Promise<Participante>{
     return this.http.get<Participante>(this.participanteUrl + `/listar`, this.httpOptions)
     .toPromise();
-  }*/
+  }
 
   excluir(codParticipante: number): Promise<Participante>{
     console.log(codParticipante);

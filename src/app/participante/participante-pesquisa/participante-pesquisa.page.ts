@@ -22,17 +22,17 @@ export class ParticipantePesquisaPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    //this.listar();
+    this.listar();
   }
 
-  /*async listar() {
+  async listar() {
     this.participante = await this.participanteService.listar();
 
-  }*/
+  }
   
   async excluir(codParticipante){
     this.participante = await this.participanteService.excluir(codParticipante);
-    //this.listar();
+    this.listar();
   }
   
   novoCadastro(){
@@ -40,7 +40,7 @@ export class ParticipantePesquisaPage implements OnInit {
   }
 
   async alterar(){
-    // this.participante = await this.participanteService.alterar();
+     this.participante = await this.participanteService.alterar();
   }
 
 
