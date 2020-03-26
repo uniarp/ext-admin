@@ -6,14 +6,14 @@
 </ion-header>
 <ion-content>
   <div class="container">
-    <ion-item>
+    <!-- <ion-item>
       <ion-label> Buscar usuarios:</ion-label>
       <ion-input placeholder="Ex: Carlos Zorzo"></ion-input>
       <ion-button>
         <ion-icon name="search-outline"></ion-icon>
         Buscar
       </ion-button>
-    </ion-item>
+    </ion-item> -->
     <ion-item>
       <ion-grid>
         <ion-row>
@@ -35,10 +35,10 @@
                 {{usuario.cpf}}
               </ion-col>
               <ion-col size="1" size-sm>
-                <ion-button>
-                  <ion-icon (click)="excluirCadastros()" name="trash-outline"></ion-icon>
+                <ion-button (click)='excluirCadastro(usuario.codUsuario)'>
+                  <ion-icon name="trash-outline"></ion-icon>
                 </ion-button>
-                <ion-button>
+                <ion-button (click)="editarCadastro(usuario.codUsuario)">
                   <ion-icon name="pencil-outline"></ion-icon>
                 </ion-button>
               </ion-col>
