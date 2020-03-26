@@ -38,10 +38,10 @@
                 {{participante.curso}}
               </ion-col>
               <ion-col size="1" size-sm>
-                <ion-button>
+                <ion-button (click)='excluir(participante.cod)'>
                   <ion-icon name="trash-outline"></ion-icon>
                 </ion-button>
-                <ion-button>
+                <ion-button (click)='alterar(participante.codParticipante)'>
                   <ion-icon name="pencil-outline"></ion-icon>
                 </ion-button>
               </ion-col>
@@ -50,7 +50,6 @@
         </div>
       </ion-grid>
     </ion-item>
-    
   </div>
 </ion-content>
 <ion-footer>

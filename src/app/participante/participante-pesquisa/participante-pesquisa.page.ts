@@ -31,6 +31,7 @@ export class ParticipantePesquisaPage implements OnInit {
   }
   
   async excluir(codParticipante){
+    console.log(codParticipante);
     this.participante = await this.participanteService.excluir(codParticipante);
     this.listar();
   }
@@ -39,9 +40,8 @@ export class ParticipantePesquisaPage implements OnInit {
     this.router.navigate(['participante-cadastro']);
   }
 
-  async alterar(){
-     this.participante = await this.participanteService.alterar();
+  async alterar(codVoluntario){
+    console.log();
+    this.router.navigate(['/participante-cadastro/']);
   }
-
-
 }

@@ -28,7 +28,6 @@ export class ParticipanteServiceService {
   }
 
   excluir(codParticipante: number): Promise<Participante>{
-    console.log(codParticipante);
     return this.http.delete<Participante>(`${this.participanteUrl}/excluir/${codParticipante}`)
     .toPromise();
   }
