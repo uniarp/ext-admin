@@ -34,6 +34,11 @@ export class PalestrantePesquisaPage implements OnInit {
     
   }
 
+  editarCadastro(codPalestrante){
+    console.log(codPalestrante);
+    this.router.navigate(['/alterar', codPalestrante]);
+  }
+
   public adicionar() {
     this.router.navigate(['/palestrante-cadastro']);
   }

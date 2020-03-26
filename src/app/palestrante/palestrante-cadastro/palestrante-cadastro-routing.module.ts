@@ -7,11 +7,15 @@ const routes: Routes = [
   {
     path: '',
     component: PalestranteCadastroPage
-  }
+  },
+  {
+    path: ':codPalestrante',
+    component: PalestranteCadastroPage
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class CadastroPageRoutingModule {}
+export class CadastroPageRoutingModule { }

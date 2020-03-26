@@ -1,6 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Area } from 'src/app/area/area.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +16,17 @@ export class PalestranteService {
       'Content-Type': 'application/json'
     })
   }
-
-  cadastrar(palestrante: Palestrante): Promise<Palestrante>{
-    palestrante.codPalestrante = null;
+  public adicionarPalestrante(palestrante: Palestrante): Promise<Palestrante> {
+    console.log(palestrante);
     return this.http.post<Palestrante>(`${this.palestranteUrl}/cadastrar`, palestrante)
       .toPromise();
+  }
+
+
+  public async carregarPalestrante(codigo: number): Promise<Palestrante> {
+    const data = await this.http.get<Palestrante>(`${this.palestranteUrl}/listar/${codigo}`)
+      .toPromise();
+    return data[0];
   }
 
   listar(): Promise<any>{
@@ -36,9 +43,11 @@ export class PalestranteService {
 
   excluir(codPalestrante: number): Promise<any>{
     console.log(this.palestranteUrl + `/excluir/`+codPalestrante);
-    return this.http.get<any>(this.palestranteUrl + `/excluir/`+codPalestrante, this.httpOptions)
-    .toPromise();  
+    return this.http.delete<Palestrante>(`${this.palestranteUrl}/excluir/${codPalestrante}`)
+    .toPromise();
   }
+
+
 }
 
 export class Palestrante {
