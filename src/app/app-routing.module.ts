@@ -19,6 +19,11 @@ const routes: Routes = [
       .then(m => m.VoluntarioCadastroPageModule)
   },
   {
+    path: 'voluntario-cadastro/:id',
+    loadChildren: () => import('./voluntario/voluntario-cadastro/voluntario-cadastro.module')
+      .then(m => m.VoluntarioCadastroPageModule)
+  },
+  {
     path: 'voluntario-pesquisa',
     loadChildren: () => import('./voluntario/voluntario-pesquisa/voluntario-pesquisa.module')
       .then(m => m.VoluntarioPesquisaPageModule)
@@ -50,7 +55,6 @@ const routes: Routes = [
   },
   
 ];
-
 
 @NgModule({
   imports: [

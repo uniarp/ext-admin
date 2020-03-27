@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: UsuarioCadastroPage
+  },
+  {
+    path: ':codUsuario',
+    component: UsuarioCadastroPage
   }
 ];
 
