@@ -41,6 +41,10 @@ const routes: Routes = [
     loadChildren: () => import('./participante/participante-cadastro/participante-cadastro.module').then( m => m.ParticipanteCadastroPageModule)
   },
   {
+    path: 'participante-cadastro/:id',
+    loadChildren: () => import('./participante/participante-cadastro/participante-cadastro.module').then( m => m.ParticipanteCadastroPageModule)
+  },
+  {
     path: 'participante-pesquisa',
     loadChildren: () => import('./participante/participante-pesquisa/participante-pesquisa.module').then( m => m.ParticipantePesquisaPageModule)
   },

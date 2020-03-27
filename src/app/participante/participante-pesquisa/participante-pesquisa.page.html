@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Pesquisa de Participante</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -19,7 +22,7 @@
           <ion-col> Nome</ion-col>
           <ion-col class="ion-align-self-start">E-mail</ion-col>
           <ion-col class="ion-align-self-start">CPF</ion-col>
-          <ion-col class="ion-align-self-start">Curso</ion-col>
+          <ion-col class="ion-align-self-start">Telefone</ion-col>
           <ion-col size-sm>Opções</ion-col>
         </ion-row>
         <div *ngFor="let participante of participante">
@@ -35,10 +38,10 @@
                 {{participante.cpf}}
               </ion-col>
               <ion-col class="ion-align-self-start">
-                {{participante.curso}}
+                {{participante.telefone}}
               </ion-col>
               <ion-col size="1" size-sm>
-                <ion-button (click)='excluir(participante.cod)'>
+                <ion-button (click)='excluir(participante.codParticipante)'>
                   <ion-icon name="trash-outline"></ion-icon>
                 </ion-button>
                 <ion-button (click)='alterar(participante.codParticipante)'>
@@ -53,7 +56,7 @@
   </div>
 </ion-content>
 <ion-footer>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab (click)= "novoCadastro()" vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button>
       <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
