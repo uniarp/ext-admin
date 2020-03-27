@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {RouterModule, Routes , Router} from '@angular/router';
+import { PalestranteService, Palestrante } from '../palestrante.service';
 
 @Component({
   selector: 'app-palestrante-pesquisa',
@@ -6,40 +8,45 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./palestrante-pesquisa.page.scss'],
 })
 export class PalestrantePesquisaPage implements OnInit {
+  palestrante: any[];
+  deuCerto: Boolean;
 
-  palestrantes = [{ id: 1, nome: 'Zorzo', cpf: '111.222.333-44', telefone: '(49) 99999-9999', email: 'zorzo@uniarp.com.br', area: 'sistemaas de Informação' },
-  { id: 2, nome: 'Conte', cpf: '111.222.333-44', telefone: '(49) 99999-9999', email: 'zorzo@uniarp.com.br', area: 'sistemaas de Informação' },
-  { id: 2, nome: 'Conte', cpf: '111.222.333-44', telefone: '(49) 99999-9999', email: 'zorzo@uniarp.com.br', area: 'sistemaas de Informação' },
-  { id: 2, nome: 'Conte', cpf: '111.222.333-44', telefone: '(49) 99999-9999', email: 'zorzo@uniarp.com.br', area: 'sistemaas de Informação' },
-  { id: 2, nome: 'Conte', cpf: '111.222.333-44', telefone: '(49) 99999-9999', email: 'zorzo@uniarp.com.br', area: 'sistemaas de Informação' },
-  { id: 2, nome: 'Conte', cpf: '111.222.333-44', telefone: '(49) 99999-9999', email: 'zorzo@uniarp.com.br', area: 'sistemaas de Informação' },
-  { id: 2, nome: 'Conte', cpf: '111.222.333-44', telefone: '(49) 99999-9999', email: 'zorzo@uniarp.com.br', area: 'sistemaas de Informação' },
-  { id: 2, nome: 'Conte', cpf: '111.222.333-44', telefone: '(49) 99999-9999', email: 'zorzo@uniarp.com.br', area: 'sistemaas de Informação' },
-  { id: 2, nome: 'Conte', cpf: '111.222.333-44', telefone: '(49) 99999-9999', email: 'zorzo@uniarp.com.br', area: 'sistemaas de Informação' },
-  { id: 2, nome: 'Conte', cpf: '111.222.333-44', telefone: '(49) 99999-9999', email: 'zorzo@uniarp.com.br', area: 'sistemaas de Informação' },
-  { id: 2, nome: 'Conte', cpf: '111.222.333-44', telefone: '(49) 99999-9999', email: 'zorzo@uniarp.com.br', area: 'sistemaas de Informação' },
-  { id: 2, nome: 'Conte', cpf: '111.222.333-44', telefone: '(49) 99999-9999', email: 'zorzo@uniarp.com.br', area: 'sistemaas de Informação' },
-  { id: 2, nome: 'Conte', cpf: '111.222.333-44', telefone: '(49) 99999-9999', email: 'zorzo@uniarp.com.br', area: 'sistemaas de Informação' },
-  { id: 2, nome: 'Conte', cpf: '111.222.333-44', telefone: '(49) 99999-9999', email: 'zorzo@uniarp.com.br', area: 'sistemaas de Informação' },
-  { id: 2, nome: 'Conte', cpf: '111.222.333-44', telefone: '(49) 99999-9999', email: 'zorzo@uniarp.com.br', area: 'sistemaas de Informação' },
-  { id: 2, nome: 'Conte', cpf: '111.222.333-44', telefone: '(49) 99999-9999', email: 'zorzo@uniarp.com.br', area: 'sistemaas de Informação' },
-  { id: 2, nome: 'Conte', cpf: '111.222.333-44', telefone: '(49) 99999-9999', email: 'zorzo@uniarp.com.br', area: 'sistemaas de Informação' },
-  { id: 2, nome: 'Conte', cpf: '111.222.333-44', telefone: '(49) 99999-9999', email: 'zorzo@uniarp.com.br', area: 'sistemaas de Informação' },
-  { id: 2, nome: 'Conte', cpf: '111.222.333-44', telefone: '(49) 99999-9999', email: 'zorzo@uniarp.com.br', area: 'sistemaas de Informação' },
-  { id: 2, nome: 'Conte', cpf: '111.222.333-44', telefone: '(49) 99999-9999', email: 'zorzo@uniarp.com.br', area: 'sistemaas de Informação' },
-  { id: 2, nome: 'Conte', cpf: '111.222.333-44', telefone: '(49) 99999-9999', email: 'zorzo@uniarp.com.br', area: 'sistemaas de Informação' },
-  { id: 2, nome: 'Conte', cpf: '111.222.333-44', telefone: '(49) 99999-9999', email: 'zorzo@uniarp.com.br', area: 'sistemaas de Informação' },
-  { id: 2, nome: 'Conte', cpf: '111.222.333-44', telefone: '(49) 99999-9999', email: 'zorzo@uniarp.com.br', area: 'sistemaas de Informação' },
-  { id: 2, nome: 'Conte', cpf: '111.222.333-44', telefone: '(49) 99999-9999', email: 'zorzo@uniarp.com.br', area: 'sistemaas de Informação' },
-  { id: 2, nome: 'Conte', cpf: '111.222.333-44', telefone: '(49) 99999-9999', email: 'zorzo@uniarp.com.br', area: 'sistemaas de Informação' },
-  { id: 2, nome: 'Conte', cpf: '111.222.333-44', telefone: '(49) 99999-9999', email: 'zorzo@uniarp.com.br', area: 'sistemaas de Informação' },
-  { id: 2, nome: 'Conte', cpf: '111.222.333-44', telefone: '(49) 99999-9999', email: 'zorzo@uniarp.com.br', area: 'sistemaas de Informação' },
-  { id: 3, nome: 'Ultimo', cpf: '111.222.333-44', telefone: '(49) 99999-9999', email: 'zorzo@uniarp.com.br', area: 'sistemaas de Informação' }
-  ];
-  constructor() { }
-
-  ngOnInit() {
-    console.log(this.palestrantes);
+  constructor(
+    private router: Router,
+    private palestranteService: PalestranteService
+  ) {
+    
   }
 
+  ngOnInit() {
+    this.listar();
+  }
+
+  public async excluir(codPalestrante: number){
+    console.log('excluir '+codPalestrante);
+    await this.palestranteService.excluir(codPalestrante);
+    this.listar();
+  }
+
+  public async listarPalestrante(codPalestrante: number){
+    console.log('listar '+codPalestrante);
+    this.palestrante = await this.palestranteService.listarPalestrante(codPalestrante);
+    
+  }
+
+  editarCadastro(codPalestrante){
+    console.log(codPalestrante);
+    this.router.navigate(['/palestrante-cadastro', codPalestrante]);
+  }
+
+  public adicionar() {
+    this.router.navigate(['/palestrante-cadastro']);
+  }
+  public async listar() {
+    this.palestrante = await this.palestranteService.listar();
+  }
+
+  public async alterar(codPalestrante: number){
+    this.router.navigate(['/palestrante-cadastro']);
+  }
 }
