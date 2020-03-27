@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Novo Palestrante</ion-title>
+    <ion-title>{{ editando ? 'Edição de' : 'Novo' }} Palestrante</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -25,19 +25,20 @@
       <ion-input placeholder="Telefone:" type="text" [(ngModel)]="palestrante.telefone" #telefone="ngModel"
         name="telefone" [brmasker]="{phone: true}"></ion-input>
     </ion-item>
+
     <ion-item>
       <ion-label>*Área</ion-label>
-      <ion-select multiple="true" placeholder="Selecione" ok-text="Ok" cancel-text="Cancelar"
-        [(ngModel)]="palestrante.area"  name="area" required>
-        <ion-select-option *ngFor=" let area of area" [value]="area">{{area}}</ion-select-option>
+      <ion-select multiple="true" placeholder="Selecione..." ok-text="Ok" cancel-text="Cancelar" [compareWith]= "categoriasSelect"
+        [(ngModel)]="palestrante.area" name="area" required>
+        <ion-select-option *ngFor="let a of area" [value]="a">{{a.nome}}</ion-select-option>
       </ion-select>
       <div class="validaCamp" *ngIf="">Selecione pelo menos uma Área</div>
     </ion-item>
+
     <ion-item>
       <ion-textarea type="text" placeholder="Bibliografia:" [(ngModel)]="palestrante.biografia" #informacoes="ngModel"
         name="biografia"></ion-textarea>
     </ion-item>
-
 
     <div class="validaCamp" *ngIf="palesForm.invalid">Campos com * São obrigatórios</div>
     <br>

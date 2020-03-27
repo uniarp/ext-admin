@@ -1,11 +1,14 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { UsuarioService, Usuario } from '../usuario.service';
 import { ToastController } from '@ionic/angular';
+import { getLocaleDayPeriods } from '@angular/common';
+
+import { UsuarioService, Usuario } from '../usuario.service';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { AlertsService } from 'src/app/core/services/alerts.service';
-import { getLocaleDayPeriods } from '@angular/common';
+
+
 
 @Component({
   selector: 'app-usuario-cadastro',
@@ -19,6 +22,7 @@ export class UsuarioCadastroPage implements OnInit {
   password_type = 'password';
   titulo = 'Novo ';
 
+
   constructor(
     public usuarioServie: UsuarioService,
     private router: Router,
@@ -27,6 +31,7 @@ export class UsuarioCadastroPage implements OnInit {
     public handler: ErrorHandlerService,
     private alert: AlertsService
   ) { }
+
 
   ngOnInit() {
     const codUsuario = this.route.snapshot.params['codUsuario'];
