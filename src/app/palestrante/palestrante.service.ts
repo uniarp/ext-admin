@@ -1,11 +1,12 @@
-
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 import { Area } from 'src/app/area/area.service';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class PalestranteService {
   palestranteUrl = "https://uniarpextensao.herokuapp.com/public/palestrantes";
 

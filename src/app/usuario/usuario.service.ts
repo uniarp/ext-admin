@@ -17,14 +17,23 @@ export class UsuarioService {
     })
   }
 
+  listaUsuario(codUsuario: number): Promise<Usuario>{
+    return this.http.get<Usuario>(`${this.usuarioUrl}/listar/${codUsuario}`)
+    .toPromise()
+    .then( data => {
+      return data[0];
+    });
+  }
+
   cadastrar(usuario: Usuario): Promise<Usuario>{
+    console.log(usuario);
     return this.http.post<Usuario>(`${this.usuarioUrl}/cadastrar`, usuario)
       .toPromise();
   }
 }
 
 export class Usuario {
-  id: number;
+  codUsuario: number;
   nome: string;
   email: string;
   cpf: string;

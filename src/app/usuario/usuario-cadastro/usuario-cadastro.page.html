@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Novo Usuário</ion-title>
+    <ion-title>{{titulo}}Usuário</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -21,14 +21,14 @@
         [brmasker]="{person: true}" maxlength="14"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input [type]="password_type" placeholder="*Senha:" [(ngModel)]="confirSenha" #senhaC="ngModel" name="senhaC"
+      <ion-input [type]="password_type" placeholder="*Senha:" [(ngModel)]="usuario.senha" #senha="ngModel" name="senha"
         required minlength="6"></ion-input>
       <div class="validaCamp" *ngIf="senha.hasError('minlength')">*A senha precisa ter no minimo 6 digitos</div>
     </ion-item>
     <ion-item>
-      <ion-input [type]="password_type" placeholder="*Confirme sua Senha:" [(ngModel)]="usuario.senha" #senha="ngModel"
-        name="senha" required></ion-input>
-      <div class="validaCamp" *ngIf="confirSenha != usuario.senha && senha.dirty">Senhas não Coincide com a anterior
+      <ion-input [type]="password_type" placeholder="*Confirme sua Senha:" [(ngModel)]="confirSenha" #senhaC="ngModel"
+        name="senhaC" required></ion-input>
+      <div class="validaCamp" *ngIf=" usuario.senha != confirSenha  && senha.dirty">Senhas não Coincide com a anterior
       </div>
     </ion-item>
     <ion-item>
@@ -38,7 +38,7 @@
 
     <div class="validaCamp" *ngIf="userForm.invalid">Campos com * São obrigatórios</div>
     <br>
-    <ion-button type="submit" [disabled]="userForm.invalid" (click)="gravar()">Gravar</ion-button>
+    <ion-button type="submit" [disabled]="userForm.invalid">Gravar</ion-button>
   </form>
 
 </ion-content>

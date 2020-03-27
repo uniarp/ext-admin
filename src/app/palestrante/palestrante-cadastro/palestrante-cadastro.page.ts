@@ -1,4 +1,3 @@
-import { Usuario } from './../../usuario/usuario.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -7,6 +6,7 @@ import { AreaService, Area } from './../../area/area.service';
 import { PalestranteService, Palestrante } from '../palestrante.service';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { AlertsService } from 'src/app/core/services/alerts.service';
+
 
 @Component({
   selector: 'app-cadastro',
@@ -77,7 +77,6 @@ export class PalestranteCadastroPage implements OnInit {
         this.alert.alertaToast('Usuário Cadastrado com Sucesso', 'success');
       })
       .catch(erro => this.handler.handleError(`Erro ao cadastrar ${erro}`));
-
   }
 
 }
