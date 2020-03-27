@@ -29,17 +29,12 @@
           [brmasker]="{phone: true}" maxlength="15"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input placeholder="R.A:" type="text" [(ngModel)]="voluntario.ra" #ra="ngModel" name="ra" required
-          ra maxlength="6"></ion-input>
+        <ion-input placeholder="R.A:" type="text" [(ngModel)]="voluntario.ra" #ra="ngModel" name="ra" maxlength="6"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input placeholder="Selecione Curso" type="text" [(ngModel)]="voluntario.curso" #curso="ngModel" name="curso" required
-          curso></ion-input>
-          <ion-select value="Sistemas de Informação">
-            <ion-select-option value="1">Sistemas de Informação</ion-select-option>
-            <ion-select-option value="2">Administração</ion-select-option>
-          </ion-select>
+        <ion-input placeholder="Curso:" type="text" [(ngModel)]="voluntario.curso" #curso="ngModel" name="curso" ></ion-input>
       </ion-item>
+
       <div class="validaCamp" *ngIf="volunForm.invalid">Campos com * São obrigatórios</div>
       <br>
       <ion-button type="submit" [disabled]="volunForm.invalid">Gravar</ion-button>
