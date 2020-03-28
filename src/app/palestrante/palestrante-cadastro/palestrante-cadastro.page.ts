@@ -65,7 +65,6 @@ export class PalestranteCadastroPage implements OnInit {
         this.alert.alertaToast('Usuário Cadastrado com Sucesso', 'success');
       })
       .catch(erro => this.handler.handleError(`Erro ao cadastrar ${erro}`));
-
   }
 
   categoriasSelect(o1, o2) {

@@ -35,12 +35,10 @@
       <div class="validaCamp" *ngIf="">Selecione pelo menos uma Área</div>
     </ion-item>
 
-
     <ion-item>
       <ion-textarea type="text" placeholder="Bibliografia:" [(ngModel)]="palestrante.biografia" #informacoes="ngModel"
         name="biografia"></ion-textarea>
     </ion-item>
-
 
     <div class="validaCamp" *ngIf="palesForm.invalid">Campos com * São obrigatórios</div>
     <br>

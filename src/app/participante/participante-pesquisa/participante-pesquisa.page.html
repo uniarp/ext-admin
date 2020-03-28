@@ -1,14 +1,17 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Pesquisa de Palestrantes</ion-title>
+    <ion-title>Pesquisa de Participante</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
   <div class="container">
     <ion-item>
-      <ion-label> Buscar Palestrante:</ion-label>
+      <ion-label> Buscar Participante:</ion-label>
       <ion-input placeholder="Ex: Carlos Zorzo"></ion-input>
-      <ion-button (click)='listarPalestrante(42)'>
+      <ion-button>
         <ion-icon name="search-outline"></ion-icon>
         Buscar
       </ion-button>
@@ -17,35 +20,31 @@
       <ion-grid>
         <ion-row>
           <ion-col> Nome</ion-col>
+          <ion-col class="ion-align-self-start">E-mail</ion-col>
           <ion-col class="ion-align-self-start">CPF</ion-col>
           <ion-col class="ion-align-self-start">Telefone</ion-col>
-          <ion-col class="ion-align-self-start">E-mail</ion-col>
-          <ion-col class="ion-align-self-start">Área</ion-col>
           <ion-col size-sm>Opções</ion-col>
         </ion-row>
-        <div *ngFor="let palestrante of palestrante">
+        <div *ngFor="let participante of participante">
           <ion-radio-group>
             <ion-row>
               <ion-col>
-                {{palestrante.nome}}
+                {{participante.nome}}
               </ion-col>
               <ion-col class="ion-align-self-start">
-                {{palestrante.cpf}}
+                {{participante.email}}
               </ion-col>
               <ion-col class="ion-align-self-start">
-                {{palestrante.telefone}}
+                {{participante.cpf}}
               </ion-col>
               <ion-col class="ion-align-self-start">
-                {{palestrante.email}}
-              </ion-col>
-              <ion-col class="ion-align-self-start">
-                {{palestrante.area}}
+                {{participante.telefone}}
               </ion-col>
               <ion-col size="1" size-sm>
-                <ion-button (click)='excluir(palestrante.codPalestrante)'>
+                <ion-button (click)='excluir(participante.codParticipante)'>
                   <ion-icon name="trash-outline"></ion-icon>
                 </ion-button>
-                <ion-button (click)='editarCadastro(palestrante.codPalestrante)'>
+                <ion-button (click)='alterar(participante.codParticipante)'>
                   <ion-icon name="pencil-outline"></ion-icon>
                 </ion-button>
               </ion-col>
@@ -57,8 +56,8 @@
   </div>
 </ion-content>
 <ion-footer>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)='adicionar()'>
+  <ion-fab (click)= "novoCadastro()" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
       <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>

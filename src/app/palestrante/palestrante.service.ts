@@ -1,11 +1,11 @@
 import { Area } from 'src/app/area/area.service';
 import { Injectable, OnInit } from '@angular/core';
-
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class PalestranteService implements OnInit {
   private validou: Boolean;
   private palestrantes: Palestrante[];
@@ -26,7 +26,6 @@ export class PalestranteService implements OnInit {
       'Content-Type': 'application/json'
     })
   }
-
 
   public adicionarPalestrante(palestrante: Palestrante): Promise<Palestrante> {
     console.log(palestrante);
@@ -59,4 +58,5 @@ export class Palestrante {
     this.telefone = "";
     this.biografia = "";
   }
+
 }

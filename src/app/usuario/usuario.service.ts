@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -17,14 +18,33 @@ export class UsuarioService {
     })
   }
 
+  pesquisar(): Promise<Usuario> {
+    return this.http.get<Usuario>(this.usuarioUrl + '/listar')
+      .toPromise();
+  }
+
+  excluir(codUsuario: number): Promise<Usuario> {
+    return this.http.delete<Usuario>(`${this.usuarioUrl}/excluir/${codUsuario}`)
+      .toPromise();
+  }
+
+  listaUsuario(codUsuario: number): Promise<Usuario>{
+    return this.http.get<Usuario>(`${this.usuarioUrl}/listar/${codUsuario}`)
+    .toPromise()
+    .then( data => {
+      return data[0];
+    });
+  }
+
   cadastrar(usuario: Usuario): Promise<Usuario>{
+    console.log(usuario);
     return this.http.post<Usuario>(`${this.usuarioUrl}/cadastrar`, usuario)
       .toPromise();
   }
+
 }
 
 export class Usuario {
-  id: number;
   nome: string;
   email: string;
   cpf: string;
