@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
@@ -15,6 +14,16 @@ export class UsuarioService {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
+  };
+
+  pesquisar(): Promise<Usuario> {
+    return this.http.get<Usuario>(this.usuarioUrl + '/listar')
+      .toPromise();
+  }
+
+  excluir(codUsuario: number): Promise<Usuario> {
+    return this.http.delete<Usuario>(`${this.usuarioUrl}/excluir/${codUsuario}`)
+      .toPromise();
   }
 
   listaUsuario(codUsuario: number): Promise<Usuario>{
@@ -30,6 +39,7 @@ export class UsuarioService {
     return this.http.post<Usuario>(`${this.usuarioUrl}/cadastrar`, usuario)
       .toPromise();
   }
+
 }
 
 export class Usuario {

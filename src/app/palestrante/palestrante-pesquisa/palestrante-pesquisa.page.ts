@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Routes } from '@angular/router';
 import {RouterModule, Routes , Router} from '@angular/router';
 import { PalestranteService, Palestrante } from '../palestrante.service';
 
@@ -14,9 +15,7 @@ export class PalestrantePesquisaPage implements OnInit {
   constructor(
     private router: Router,
     private palestranteService: PalestranteService
-  ) {
-    
-  }
+  ) { }
 
   ngOnInit() {
     this.listar();
@@ -31,7 +30,6 @@ export class PalestrantePesquisaPage implements OnInit {
   public async listarPalestrante(codPalestrante: number){
     console.log('listar '+codPalestrante);
     this.palestrante = await this.palestranteService.listarPalestrante(codPalestrante);
-    
   }
 
   editarCadastro(codPalestrante){
@@ -42,6 +40,7 @@ export class PalestrantePesquisaPage implements OnInit {
   public adicionar() {
     this.router.navigate(['/palestrante-cadastro']);
   }
+  
   public async listar() {
     this.palestrante = await this.palestranteService.listar();
   }
