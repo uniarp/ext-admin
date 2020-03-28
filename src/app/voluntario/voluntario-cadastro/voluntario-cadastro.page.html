@@ -1,58 +1,42 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Cadastro de Voluntário</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
-  <ion-content fullscreen>
-    <ion-avatar class="ion-margin-start" style="margin-left: 50%;">
-      <img src="./avatar.svg">
-    </ion-avatar>
-    <br><br>
+    <form autocomplete="off" #volunForm="ngForm" (ngSubmit)="gravar(volunForm)">
+      <ion-item>
+        <ion-input placeholder="*Nome:" type="text" [(ngModel)]="voluntario.nome" #nome="ngModel" name="nome" required
+          minlength="10"></ion-input>
+        <div class="validaCamp" *ngIf="nome.hasError('required') && nome.touched">*Informe um nome válido</div>
+        <div class="validaCamp" *ngIf="nome.hasError('minlength')">*O nome precisa ser completo</div>
+      </ion-item>
+      <ion-item>
+        <ion-input placeholder="*E-mail:" type="email" [(ngModel)]="voluntario.email" #email="ngModel" name="email" required
+          email></ion-input>
+        <div class="validaCamp" *ngIf="email.hasError('email')">*Informe um e-mail valido</div>
+      </ion-item>
+      <ion-item>
+        <ion-input placeholder="CPF:" type="text" [(ngModel)]="voluntario.cpf" #cpf="ngModel" name="cpf"
+          [brmasker]="{person: true}" maxlength="14"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input placeholder="Telefone:" type="text" [(ngModel)]="voluntario.telefone" #telefone="ngModel" name="telefone"
+          [brmasker]="{phone: true}" maxlength="15"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input placeholder="R.A:" type="text" [(ngModel)]="voluntario.ra" #ra="ngModel" name="ra" maxlength="6"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input placeholder="Curso:" type="text" [(ngModel)]="voluntario.curso" #curso="ngModel" name="curso" ></ion-input>
+      </ion-item>
 
-    <form onsubmit="processForm(event)">
-      <ion-list lines="full" class="ion-no-margin ion-no-padding">
-
-        <ion-item>
-          <ion-label position="floating">Nome:</ion-label>
-          <ion-input></ion-input>
-        </ion-item>
-        
-        <ion-item>
-          <ion-label position="floating">E-mail:</ion-label>
-          <ion-input></ion-input>
-        </ion-item>
-
-        <ion-item>
-          <ion-label position="floating">CPF:</ion-label>
-          <ion-input></ion-input>
-        </ion-item>
-
-        <ion-item>
-          <ion-label position="floating">Telefone:</ion-label>
-          <ion-input></ion-input>
-        </ion-item>
-
-        <ion-item>
-          <ion-label position="floating">R.A:</ion-label>
-          <ion-input></ion-input>
-        </ion-item>
-
-        <ion-item>
-          <ion-label>Selecione Curso</ion-label>
-          <ion-select value="Sistemas de Informação">
-            <ion-select-option value="cat">Sistemas de Informação</ion-select-option>
-            <ion-select-option value="dog">Administração</ion-select-option>
-          </ion-select>
-        </ion-item>
-
-      </ion-list>
-      <br><br><br>
-
-      <div class="ion-padding">
-        <ion-button expand="block" type="submit" class="ion-no-margin">Cadastrar</ion-button>
-      </div>
+      <div class="validaCamp" *ngIf="volunForm.invalid">Campos com * São obrigatórios</div>
+      <br>
+      <ion-button type="submit" [disabled]="volunForm.invalid">Gravar</ion-button>
     </form>
   </ion-content>

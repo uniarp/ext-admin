@@ -1,32 +1,47 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Cadastro de Palestrante</ion-title>
+    <ion-title>{{ editando ? 'Edição de' : 'Novo' }} Palestrante</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-item>
-    <ion-input placeholder="Nome"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-input placeholder="Email"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-input placeholder="CPF"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-input placeholder="Telefone"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label>Área de Atuação</ion-label>
-    <ion-select placeholder="Selecione">
-      <ion-select-option value="T">teste</ion-select-option>
-    </ion-select>
-  </ion-item>
-  <ion-item>
-    <ion-input placeholder="Informação"></ion-input>
-  </ion-item>
+  <form autocomplete="off" #palesForm="ngForm" (ngSubmit)="gravar(palesForm)">
+    <ion-item>
+      <ion-input placeholder="*Nome:" type="text" [(ngModel)]="palestrante.nome" #nome="ngModel" name="nome" required
+        minlength="10"></ion-input>
+      <div class="validaCamp" *ngIf="nome.hasError('required') && nome.touched">*Informe um nome válido</div>
+      <div class="validaCamp" *ngIf="nome.hasError('minlength')">*O nome precisa ser completo</div>
+    </ion-item>
+    <ion-item>
+      <ion-input placeholder="*E-mail:" type="email" [(ngModel)]="palestrante.email" #email="ngModel" name="email"
+        required email></ion-input>
+      <div class="validaCamp" *ngIf="email.hasError('email')">*Informe um e-mail valido</div>
+    </ion-item>
+    <ion-item>
+      <ion-input placeholder="CPF:" type="text" [(ngModel)]="palestrante.cpf" maxlength=14 #cpf="ngModel" name="cpf"
+        [brmasker]="{person: true}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input placeholder="Telefone:" type="text" [(ngModel)]="palestrante.telefone" #telefone="ngModel"
+        name="telefone" [brmasker]="{phone: true}"></ion-input>
+    </ion-item>
 
-  <ion-button color="primary">Cadastrar</ion-button>
+    <ion-item>
+      <ion-label>*Área</ion-label>
+      <ion-select [(ngModel)]="palestrante.area" name="area" placeholder="Selecione..." multiple="true" ok-text="Ok"
+        cancel-text="Cancelar" [compareWith]="categoriasSelect" required>
+        <ion-select-option *ngFor="let a of area" [value]="a">{{a.nome}}</ion-select-option>
+      </ion-select>
+      <div class="validaCamp" *ngIf="">Selecione pelo menos uma Área</div>
+    </ion-item>
 
+    <ion-item>
+      <ion-textarea type="text" placeholder="Bibliografia:" [(ngModel)]="palestrante.biografia" #informacoes="ngModel"
+        name="biografia"></ion-textarea>
+    </ion-item>
+
+    <div class="validaCamp" *ngIf="palesForm.invalid">Campos com * São obrigatórios</div>
+    <br>
+    <ion-button type="submit" [disabled]="palesForm.invalid">Gravar</ion-button>
+  </form>
 </ion-content>
