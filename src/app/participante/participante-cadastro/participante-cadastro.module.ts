@@ -1,21 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 import { IonicModule } from '@ionic/angular';
 import { BrMaskerModule } from 'br-mask';
 
-import { VoluntarioCadastroPageRoutingModule } from './voluntario-cadastro-routing.module';
+import { ParticipanteCadastroPageRoutingModule } from './participante-cadastro-routing.module';
 
-import { VoluntarioCadastroPage } from './voluntario-cadastro.page';
+import { ParticipanteCadastroPage } from './participante-cadastro.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    VoluntarioCadastroPageRoutingModule,
+    ParticipanteCadastroPageRoutingModule,
     BrMaskerModule
   ],
-  declarations: [VoluntarioCadastroPage]
+  declarations: [ParticipanteCadastroPage]
 })
-export class VoluntarioCadastroPageModule {}
+export class ParticipanteCadastroPageModule {}

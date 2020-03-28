@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Voluntario, VoluntarioService } from '../voluntario.service';
+import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 
 @Component({
   selector: 'app-voluntario-pesquisa',
@@ -7,15 +10,41 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VoluntarioPesquisaPage implements OnInit {
 
-  voluntario = [
-    { id: 1, nome: 'Zorzo', email: 'zorzo@uniarp.com.br', cpf: '111.222.333-44', curso: 'sistemaas de Informação' },
-    { id: 2, nome: 'Conte', email: 'zorzo@uniarp.com.br', cpf: '111.222.333-44', curso: 'sistemaas de Informação' },
-  ];
+  voluntario: Voluntario;
+  titulo = 'Novo ';
 
-  constructor() { }
+  constructor(
+    private voluntarioService: VoluntarioService,
+    public router: Router,
+    private route: ActivatedRoute,
+    public handler: ErrorHandlerService
+  ) { }
 
   ngOnInit() {
-    console.log(this.voluntario);
+    this.listar();
   }
 
+  inserir() {
+    this.router.navigate(['voluntario-cadastro']);
+  }
+
+  async listar() {
+    this.voluntario = await this.voluntarioService.listar();
+
+  }
+
+  async excluir(codVoluntario) {
+    console.log(codVoluntario);
+    this.voluntario = await this.voluntarioService.excluir(codVoluntario);
+    this.listar();
+  }
+
+  novoCadastro() {
+    this.router.navigate(['voluntario-cadastro']);
+  }
+
+  async alterar(codVoluntario) {
+    console.log();
+    this.router.navigate(['/voluntario-cadastro/', codVoluntario]);
+  }
 }
