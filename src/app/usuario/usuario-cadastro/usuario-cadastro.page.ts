@@ -8,8 +8,6 @@ import { UsuarioService, Usuario } from '../usuario.service';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { AlertsService } from 'src/app/core/services/alerts.service';
 
-
-
 @Component({
   selector: 'app-usuario-cadastro',
   templateUrl: './usuario-cadastro.page.html',
@@ -31,7 +29,6 @@ export class UsuarioCadastroPage implements OnInit {
     public handler: ErrorHandlerService,
     private alert: AlertsService
   ) { }
-
 
   ngOnInit() {
     const codUsuario = this.route.snapshot.params['codUsuario'];
@@ -89,4 +86,26 @@ get editando() {
       .catch(erro => this.handler.handleError(erro));
   }
 
+  exibeSenha() {
+    this.password_type = this.password_type === 'text' ? 'password' : 'text';
+  }
+
+  gravar(form: FormControl) {
+    this.usuarioServie.cadastrar(this.usuario)
+      .then(user => {
+        console.log(user)
+        this.alerta('Usuario Cadastrado com Sucesso', 'success');
+        this.router.navigate(['usuario-pesquisa']);
+      })
+      .catch( erro => this.alerta(`Problema ao Cadastrar ${erro}`, 'danger'));
+  }
+
+  async alerta(men: string, cor: string) {
+    const toast = await this.toast.create({
+      message: men,
+      duration: 1500,
+      color: cor
+    });
+    toast.present();
+  }
 }
