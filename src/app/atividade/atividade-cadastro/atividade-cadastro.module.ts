@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { AtividadeCadastroPageRoutingModule } from './atividade-cadastro-routing.module';
 
 import { AtividadeCadastroPage } from './atividade-cadastro.page';
+import { BrMaskerModule } from 'br-mask';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AtividadeCadastroPageRoutingModule
+    AtividadeCadastroPageRoutingModule,
+    BrMaskerModule,
   ],
   declarations: [AtividadeCadastroPage]
 })

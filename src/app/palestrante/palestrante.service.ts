@@ -33,7 +33,8 @@ export class PalestranteService {
   listar(): Promise<any>{
     console.log('listou');
     return this.http.get<any>(this.palestranteUrl + `/listar`, this.httpOptions)
-    .toPromise();
+    .toPromise()
+    .then(res => res);
   }
 
   listarPalestrante(codPalestrante: number): Promise<any>{

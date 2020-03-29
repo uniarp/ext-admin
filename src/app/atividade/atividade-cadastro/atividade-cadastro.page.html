@@ -1,9 +1,80 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>atividade-cadastro</ion-title>
+    <ion-title>Cadastro de Atividade</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <form #atvCad="ngForm" autocomplete="off" (ngSubmit)="gravar(atvCad)">
 
+    <ion-item>
+      <ion-label position="floating">*Titule</ion-label>
+      <ion-input [(ngModel)]="atividade.titulo" name="titulo" #titulo="ngModel" required></ion-input>
+      <div class="validaCamp" *ngIf="titulo.hasError('required') && titulo.touched">*Informe um titulo da Atividade
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label>*Tipo de Atividade</ion-label>
+      <ion-select placeholder="Selecione..." ok-text="Ok" cancel-text="Cancelar"
+      [(ngModel)]="atividade.codTipo" name="tipoAtividade" #tpAtividade="ngModel" required>
+        <ion-select-option *ngFor="let t of tipoAtividade" [value]="t.codTipo">{{t.nome}}</ion-select-option>
+      </ion-select>
+      <div class="validaCamp" *ngIf="tpAtividade.hasError('required') && localizacao.touched">Selecione o tipo da Atividade</div>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">*Local</ion-label>
+      <ion-input [(ngModel)]="atividade.localizacao" name="localizacao" #localizacao="ngModel" required></ion-input>
+      <div class="validaCamp" *ngIf="localizacao.hasError('required') && localizacao.touched">*Informe o Local da
+        Atividade</div>
+    </ion-item>
+    <div>
+      <ion-item>
+        <ion-label>Horários</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-item>
+          <ion-label position="floating">*Data de Inicio</ion-label>
+          <ion-datetime displayFormat="DD/MM/YYYY" doneText="OK" cancelText="Cancelar" [(ngModel)]="dataInicio"
+            name="dataInicio" #dataI="ngModel" required></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">*Horário</ion-label>
+          <ion-datetime displayFormat="HH:mm:ss" doneText="OK" cancelText="Cancelar" [(ngModel)]="horaIni"
+            name="horaIni" #horaI="ngModel" required></ion-datetime>
+        </ion-item>
+      </ion-item>
+      <ion-item>
+        <ion-label>Até</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-item>
+          <ion-label position="floating">*Data de Fim</ion-label>
+          <ion-datetime displayFormat="DD/MM/YYYY" doneText="OK" cancelText="Cancelar" [(ngModel)]="dataFim"
+            name="dataFim" #dataF="ngModel" required></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">*Horário</ion-label>
+          <ion-datetime displayFormat="HH:mm:ss" doneText="OK" cancelText="Cancelar" [(ngModel)]="horaFim"
+            name="horaFim" #horaF="ngModel" required></ion-datetime>
+        </ion-item>
+      </ion-item>
+    </div>
+    <ion-item>
+      <ion-label>*Palestrantes</ion-label>
+      <ion-select multiple="true" placeholder="Selecione..." ok-text="Ok" cancel-text="Cancelar"
+      [(ngModel)]="atividade.palestrante" name="palestrante" #pales="ngModel" required>
+        <ion-select-option *ngFor="let p of palestrante" [value]="p">{{p.nome}}</ion-select-option>
+      </ion-select>
+      <div class="validaCamp" *ngIf="pales.hasError('required') && localizacao.touched">Selecione pelo menos um palestrante</div>
+    </ion-item>
+
+    <div>
+      <ion-item>
+        <div class="validaCamp" *ngIf="atvCad.invalid">Campos com * São obrigatórios</div>
+      </ion-item>
+      <ion-item>
+        <ion-button type="submit" [disabled]="atvCad.invalid">Gravar</ion-button>
+      </ion-item>
+    </div>
+  </form>
 </ion-content>
