@@ -31,7 +31,7 @@ export class UsuarioCadastroPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    const codUsuario = this.route.snapshot.params['codUsuario'];
+    const codUsuario = this.route.snapshot.params.codUsuario;
 
     if (codUsuario) {
       this.carregarUsuario(codUsuario);
@@ -41,8 +41,8 @@ export class UsuarioCadastroPage implements OnInit {
   }
 
 
-get editando() {
-  console.log('TEste');
+  get editando() {
+    console.log('TEste');
     if (this.usuario.codUsuario) {
       return true;
     }
@@ -66,38 +66,17 @@ get editando() {
         this.usuario = data;
       })
       .catch(erro => this.handler.handleError(erro));
-
   }
 
-
-  gravar(form: FormControl) {
-    if (!this.usuario.codUsuario) {
-      this.usuario.codUsuario = null;
-    }
-    if (!this.usuario.cpf) {
-      this.usuario.cpf = '000.000.000-00';
-    }
+  gravar() {
+    this.usuario.codUsuario = this.usuario.codUsuario ? this.usuario.codUsuario : null;
     this.usuarioServie.cadastrar(this.usuario)
-      .then(user => {
-        console.log(user)
-        this.alert.alertaToast('Usuario Cadastrado com Sucesso', 'success');
+      .then(() => {
+        this.alert.alertaToast(this.usuario.codUsuario ? 'Usuário Alterado com Sucesso' : 'Usuário Cadastrado com Sucesso',
+          'success');
         this.router.navigate(['usuario-pesquisa']);
       })
       .catch(erro => this.handler.handleError(erro));
-  }
-
-  exibeSenha() {
-    this.password_type = this.password_type === 'text' ? 'password' : 'text';
-  }
-
-  gravar(form: FormControl) {
-    this.usuarioServie.cadastrar(this.usuario)
-      .then(user => {
-        console.log(user)
-        this.alerta('Usuario Cadastrado com Sucesso', 'success');
-        this.router.navigate(['usuario-pesquisa']);
-      })
-      .catch( erro => this.alerta(`Problema ao Cadastrar ${erro}`, 'danger'));
   }
 
   async alerta(men: string, cor: string) {

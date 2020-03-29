@@ -33,12 +33,22 @@ export class PalestranteService implements OnInit {
       .toPromise();
   }
 
-  public carregarPalestrante(codigo: number): Promise<Palestrante> {
-    return this.http.get<Palestrante>(`${this.palestranteUrl}/listar/${codigo}`)
+  public carregarPalestrante(codPalestrante: number): Promise<Palestrante> {
+    return this.http.get<Palestrante>(`${this.palestranteUrl}/listar/${codPalestrante}`)
       .toPromise()
       .then(data => {
         return data[0];
       });
+  }
+
+  listar(): Promise<any> {
+    return this.http.get<any>(this.palestranteUrl + `/listar`, this.httpOptions)
+      .toPromise();
+  }
+  
+  excluir(codPalestrante: number): Promise<Palestrante> {
+    return this.http.delete<Palestrante>(`${this.palestranteUrl}/excluir/${codPalestrante}`)
+      .toPromise();
   }
 
 }

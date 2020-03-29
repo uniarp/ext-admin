@@ -29,7 +29,8 @@
           [brmasker]="{phone: true}" maxlength="15"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input placeholder="R.A:" type="text" [(ngModel)]="voluntario.ra" #ra="ngModel" name="ra" maxlength="6"></ion-input>
+        <ion-input placeholder="R.A:" type="text" [(ngModel)]="voluntario.ra" #ra="ngModel" name="ra" 
+        [brmasker]="{mask:'000000', type:'num'}" maxlength="6"></ion-input>
       </ion-item>
       <ion-item>
         <ion-input placeholder="Curso:" type="text" [(ngModel)]="voluntario.curso" #curso="ngModel" name="curso" ></ion-input>

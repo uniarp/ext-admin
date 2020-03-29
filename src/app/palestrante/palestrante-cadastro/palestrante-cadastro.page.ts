@@ -49,22 +49,23 @@ export class PalestranteCadastroPage implements OnInit {
       .catch(erro => this.handler.handleError(`Erro ao cadastrar ${erro}`));
   }
 
-  carregarPalestrante(codigo: number) {
-    this.palestranteService.carregarPalestrante(codigo)
+  carregarPalestrante(codPalestrante: number) {
+    this.palestranteService.carregarPalestrante(codPalestrante)
       .then(data => {
         this.palestrante = data;
-        console.log(this.palestrante);
       })
       .catch(erro => this.handler.handleError(erro));
   }
 
-  gravar(form: FormControl) {
+  gravar() {
+    this.palestrante.codPalestrante = this.palestrante.codPalestrante ? this.palestrante.codPalestrante : null;
     this.palestranteService.adicionarPalestrante(this.palestrante)
       .then(() => {
+        this.alert.alertaToast(this.palestrante.codPalestrante ? 'Palestrante Alterado com Sucesso' : 'Palestrante Cadastrado com Sucesso',
+          'success');
         this.router.navigate(['palestrante-pesquisa']);
-        this.alert.alertaToast('Usuário Cadastrado com Sucesso', 'success');
       })
-      .catch(erro => this.handler.handleError(`Erro ao cadastrar ${erro}`));
+      .catch(erro => this.handler.handleError(erro));
   }
 
   categoriasSelect(o1, o2) {
