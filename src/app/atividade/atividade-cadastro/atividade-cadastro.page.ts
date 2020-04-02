@@ -1,13 +1,15 @@
-import { Palestrante, PalestranteService } from './../../palestrante/palestrante.service';
-import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { Palestrante, PalestranteService } from './../../palestrante/palestrante.service';
+import { ActivatedRoute } from '@angular/router';
+
+import * as moment from 'moment';
 
 import { ErrorHandlerService } from './../../core/services/error-handler.service';
 import { Atividade } from './../atividade.service';
 import { TipoAtividadeService } from './../../tipoAtividade/tipo-atividade.service';
 import { AtividadeService } from '../atividade.service';
 import { AlertsService } from 'src/app/core/services/alerts.service';
-
 @Component({
   selector: 'app-atividade-cadastro',
   templateUrl: './atividade-cadastro.page.html',
@@ -18,10 +20,8 @@ export class AtividadeCadastroPage implements OnInit {
   atividade = new Atividade();
   tipoAtividade: any[];
   palestrante: any[];
-  dataInicio = "";
-  horaIni = "";
-  dataFim = "";
-  horaFim = "";
+  dataHoraInicio = "";
+  dataHoraFim = "";
 
   constructor(
     private atividadeService: AtividadeService,
@@ -29,9 +29,14 @@ export class AtividadeCadastroPage implements OnInit {
     private palestranteService: PalestranteService,
     private alert: AlertsService,
     private handler: ErrorHandlerService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    const codAtividade = this.route.snapshot.params['codAtividade'];
+    if (codAtividade) {
+      this.carregarAtividade(codAtividade);
+    }
     this.carregarTpAtividade();
     this.carregarPalestrantes();
   }
@@ -39,32 +44,41 @@ export class AtividadeCadastroPage implements OnInit {
   carregarTpAtividade() {
     this.tpAtividadeService.listaTpAtividade()
       .then(data => {
-        console.log(data);
-        this.tipoAtividade = data;
+        this.tipoAtividade = data.map(a => ({ codTipo: a.codTipoAtividade, nome: a.nome }));
+        console.log(this.tipoAtividade);
       })
       .catch(erro => this.handler.handleError(erro));
   }
-  carregarPalestrantes(){
+  carregarPalestrantes() {
     this.palestranteService.listar()
       .then(data => this.palestrante = data)
       .catch(erro => this.handler.handleError(erro));
   }
 
+  carregarAtividade(codAtividade: number) {
+    this.atividadeService.listaAtividade(codAtividade)
+    .then(data => {
+      this.atividade = data;
+      this.carregaData();
+    })
+    .catch(erro => this.handler.handleError(erro));
+  }
+
   gravar(form: NgForm) {
+    this.pegaData();
     console.log(this.atividade);
-    console.log(this.dataInicio);
-    console.log(this.horaIni);
-    console.log(this.dataFim);
-    console.log(this.horaFim);
+    this.atividadeService.gravar(this.atividade)
+      .then(data => this.alert.alertaToast(`${data.titulo} cadastrado com sucesso`, 'success'))
+      .catch(erro => this.handler.handleError(erro));
   }
 
 
-  pegaData(){
-    let dtIn: string;
-    let hrIn: string;
-    let dtF: string;
-    let hrF: string;
-
-
+  pegaData() {
+    this.atividade.dataInicio = moment(this.dataHoraInicio).format("YYYY-MM-DD HH:mm:ss");
+    this.atividade.dataFim = moment(this.dataHoraFim).format("YYYY-MM-DD HH:mm:ss");
+  }
+  carregaData() {
+    this.dataHoraInicio = this.atividade.dataInicio;
+    this.dataHoraFim = this.atividade.dataFim;
   }
 }

@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: AtividadeCadastroPage
-  }
+  },
+  {
+    path: ':codAtividade',
+    component: AtividadeCadastroPage
+  },
 ];
 
 @NgModule({

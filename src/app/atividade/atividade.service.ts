@@ -7,7 +7,7 @@ import { Timestamp } from 'rxjs';
 })
 export class AtividadeService {
 
-  atividadeUrl = 'http://uniarpextensao.herokuapp.com/public/atividades/';
+  atividadeUrl = 'http://uniarpextensao.herokuapp.com/public/atividades';
   constructor(
     private http: HttpClient,
   ) { }
