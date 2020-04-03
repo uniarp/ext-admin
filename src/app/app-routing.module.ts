@@ -52,7 +52,11 @@ const routes: Routes = [
   {
     path: 'participante-pesquisa',
     loadChildren: () => import('./participante/participante-pesquisa/participante-pesquisa.module').then( m => m.ParticipantePesquisaPageModule)
+  },  {
+    path: 'evento-cadastro',
+    loadChildren: () => import('./evento-cadastro/evento-cadastro.module').then( m => m.EventoCadastroPageModule)
   },
+
   
 ];
 
