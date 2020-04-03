@@ -41,6 +41,10 @@ export class AtividadeCadastroPage implements OnInit {
     this.carregarPalestrantes();
   }
 
+  get editando() {
+    return Boolean(this.atividade.codAtividade);
+  }
+
   carregarTpAtividade() {
     this.tpAtividadeService.listaTpAtividade()
       .then(data => {
@@ -49,6 +53,7 @@ export class AtividadeCadastroPage implements OnInit {
       })
       .catch(erro => this.handler.handleError(erro));
   }
+
   carregarPalestrantes() {
     this.palestranteService.listar()
       .then(data => this.palestrante = data)
@@ -57,18 +62,22 @@ export class AtividadeCadastroPage implements OnInit {
 
   carregarAtividade(codAtividade: number) {
     this.atividadeService.listaAtividade(codAtividade)
-    .then(data => {
-      this.atividade = data;
-      this.carregaData();
-    })
-    .catch(erro => this.handler.handleError(erro));
+      .then(data => {
+        this.atividade = data;
+        this.carregaData();
+      })
+      .catch(erro => this.handler.handleError(erro));
   }
 
   gravar(form: NgForm) {
+    const msg = this.editando ? "alterado": "cadastrado";
     this.pegaData();
     console.log(this.atividade);
     this.atividadeService.gravar(this.atividade)
-      .then(data => this.alert.alertaToast(`${data.titulo} cadastrado com sucesso`, 'success'))
+      .then(data => {
+        this.alert.alertaToast(`${data.titulo} ${msg} com sucesso`, 'success');
+        console.log(data);
+      })
       .catch(erro => this.handler.handleError(erro));
   }
 
