@@ -43,7 +43,12 @@ export class EventosService {
 
 export class Evento {
   codEvento: number;
-  nome: string;
-  local: string;
-  cpf: string;
+  titulo: string;
+  periodoInicial: Date;
+  periodofinal: Date;
+  inscricaoInicio: Date;
+  inscricaofim: Date;
+  qtdMinInscrito: number;
+  qtdMaxInscrito: number;
+  modeloDoc: string;
 }

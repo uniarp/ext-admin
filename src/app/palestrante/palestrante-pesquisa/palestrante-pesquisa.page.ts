@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Routes } from '@angular/router';
-import {RouterModule, Routes , Router} from '@angular/router';
+import {RouterModule , Router} from '@angular/router';
 import { PalestranteService, Palestrante } from '../palestrante.service';
 
 @Component({
@@ -29,7 +29,7 @@ export class PalestrantePesquisaPage implements OnInit {
 
   public async listarPalestrante(codPalestrante: number){
     console.log('listar '+codPalestrante);
-    this.palestrante = await this.palestranteService.listarPalestrante(codPalestrante);
+    // this.palestrante = await this.palestranteService.listarPalestrante(codPalestrante);
   }
 
   editarCadastro(codPalestrante){

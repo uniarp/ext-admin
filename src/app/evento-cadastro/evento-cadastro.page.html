@@ -12,13 +12,13 @@
       <ion-item>
         <ion-input placeholder="*Nome:" type="text" [(ngModel)]="evento.nome" #nome="ngModel" name="nome" required
           minlength="10"></ion-input>
-        <div class="validaCamp" *ngIf="nome.hasError('required') && nome.touched">*Informe um nome válido</div>
-        <div class="validaCamp" *ngIf="nome.hasError('minlength')">*O nome precisa ser completo</div>
+        <!-- <div class="validaCamp" *ngIf="nome.hasError('required') && nome.touched">*Informe um nome válido</div>
+        <div class="validaCamp" *ngIf="nome.hasError('minlength')">*O nome precisa ser completo</div> -->
       </ion-item>
       <ion-item>
-        <ion-input placeholder="*Local:" type="local" [(ngModel)]="evento.local" #email="ngModel" name="local" required
+        <ion-input placeholder="*Local:" type="text" [(ngModel)]="evento.local" #email="ngModel" name="local" required
           local></ion-input>
-        <div class="validaCamp" *ngIf="local.hasError('local')">*Informe um local valido</div>
+        <!-- <div class="validaCamp" *ngIf="local.hasError('local')">*Informe um local valido</div> -->
       </ion-item>
 
 <area shape="" coords="" href="" alt="">
@@ -39,7 +39,7 @@
         <ion-input placeholder="Upload:" type="text" [(ngModel)]="evento.upload" #upload="ngModel" name="upload" ></ion-input>
       </ion-item>
 
-      <div class="validaCamp" *ngIf="volunForm.invalid">Campos com * São obrigatórios</div>
+      <!-- <div class="validaCamp" *ngIf="volunForm.invalid">Campos com * São obrigatórios</div> -->
       <br>
       <ion-button type="submit" [disabled]="volunForm.invalid">Gravar</ion-button>
     </form>
