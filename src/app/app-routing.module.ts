@@ -53,6 +53,12 @@ const routes: Routes = [
     path: 'participante-pesquisa',
     loadChildren: () => import('./participante/participante-pesquisa/participante-pesquisa.module').then( m => m.ParticipantePesquisaPageModule)
   },
+  {
+    path: 'atividade-cadastro',
+    loadChildren: () => import('./atividade/atividade-cadastro/atividade-cadastro.module').then( m => m.AtividadeCadastroPageModule)
+  },
+
+
   
 ];
 

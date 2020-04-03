@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Routes } from '@angular/router';
 import {RouterModule, Routes , Router} from '@angular/router';
 import { PalestranteService, Palestrante } from '../palestrante.service';
 
