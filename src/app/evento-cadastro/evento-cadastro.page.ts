@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ToastController } from '@ionic/angular';
+import { ErrorHandlerService } from '../core/services/error-handler.service';
+import { AlertsService } from '../core/services/alerts.service';
+import { Evento, EventosService } from '../eventos.service';
 
 @Component({
   selector: 'app-evento-cadastro',
@@ -9,17 +14,19 @@ export class EventoCadastroPage implements OnInit {
 
   evento = new Evento();
 
+
   constructor(
-    public voluntarioService: EventoService,
+    private eventoService: EventosService,
     private router: Router,
-    private route: ActivatedRoute,
     public toast: ToastController,
     public handler: ErrorHandlerService,
-    private alert: AlertsService
+    private alert: AlertsService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-      console.log(this.route.snapshot.params);
+    console.log(Evento);
+      // console.log(this.route.snapshot.params);
     const codEvento = this.route.snapshot.params.codEvento;
 
     if (codEvento) {
@@ -39,7 +46,7 @@ export class EventoCadastroPage implements OnInit {
 
   atualizarTitulo() {
     if (this.editando) {
-      this.evento = 'Alterar ';
+      // this.evento = 'Alterar ';
     }
   }
 
@@ -62,10 +69,4 @@ export class EventoCadastroPage implements OnInit {
       })
       .catch(erro => this.handler.handleError(erro));
   }
-}
-
-
-
-  }
-
 }
