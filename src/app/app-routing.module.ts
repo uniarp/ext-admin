@@ -54,12 +54,13 @@ const routes: Routes = [
     loadChildren: () => import('./participante/participante-pesquisa/participante-pesquisa.module').then( m => m.ParticipantePesquisaPageModule)
   },
   {
+    path: 'evento-cadastro',
+    loadChildren: () => import('./evento-cadastro/evento-cadastro.module').then( m => m.EventoCadastroPageModule)
+  },
+  {
     path: 'atividade-cadastro',
     loadChildren: () => import('./atividade/atividade-cadastro/atividade-cadastro.module').then( m => m.AtividadeCadastroPageModule)
   },
-
-
-  
 ];
 
 @NgModule({

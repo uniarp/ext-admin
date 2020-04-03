@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Cadastro de Evento </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form autocomplete="off" #volunForm="ngForm" (ngSubmit)="gravar(volunForm)">
+      <ion-item>
+        <ion-input placeholder="*Nome:" type="text" [(ngModel)]="evento.nome" #nome="ngModel" name="nome" required
+          minlength="10"></ion-input>
+        <!-- <div class="validaCamp" *ngIf="nome.hasError('required') && nome.touched">*Informe um nome válido</div>
+        <div class="validaCamp" *ngIf="nome.hasError('minlength')">*O nome precisa ser completo</div> -->
+      </ion-item>
+      <ion-item>
+        <ion-input placeholder="*Local:" type="text" [(ngModel)]="evento.local" #email="ngModel" name="local" required
+          local></ion-input>
+        <!-- <div class="validaCamp" *ngIf="local.hasError('local')">*Informe um local valido</div> -->
+      </ion-item>
+
+<area shape="" coords="" href="" alt="">
+
+      <ion-item>
+        <ion-input placeholder="Periodo:" type="text" [(ngModel)]="evento.periodo" #periodo="ngModel" name="periodo"
+          [brmasker]="{person: true}" maxlength="16"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input placeholder="Inscrição:" type="text" [(ngModel)]="evento.inscricao" #inscricao="ngModel" name="inscricao"
+          [brmasker]="{person: true}" maxlength="16"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input placeholder="Inscritos:" type="text" [(ngModel)]="evento.inscritos" #inscritos="ngModel" name="inscritos"
+          [brmasker]="{person: true}" maxlength="16"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input placeholder="Upload:" type="text" [(ngModel)]="evento.upload" #upload="ngModel" name="upload" ></ion-input>
+      </ion-item>
+
+      <!-- <div class="validaCamp" *ngIf="volunForm.invalid">Campos com * São obrigatórios</div> -->
+      <br>
+      <ion-button type="submit" [disabled]="volunForm.invalid">Gravar</ion-button>
+    </form>
+  </ion-content>
