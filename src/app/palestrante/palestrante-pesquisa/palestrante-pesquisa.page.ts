@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Routes } from '@angular/router';
+<<<<<<< HEAD
 import {RouterModule , Router} from '@angular/router';
+=======
+import {RouterModule, Router} from '@angular/router';
+>>>>>>> 8ed35c95c314e4ba1466359d24d5553448adce65
 import { PalestranteService, Palestrante } from '../palestrante.service';
 
 @Component({
