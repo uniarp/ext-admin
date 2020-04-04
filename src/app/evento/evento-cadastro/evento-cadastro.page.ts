@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { ErrorHandlerService } from '../core/services/error-handler.service';
-import { AlertsService } from '../core/services/alerts.service';
+
 import { Evento, EventosService } from '../eventos.service';
+import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
+import { AlertsService } from 'src/app/core/services/alerts.service';
 
 @Component({
   selector: 'app-evento-cadastro',
