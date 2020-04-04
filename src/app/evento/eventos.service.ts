@@ -23,6 +23,7 @@ export class EventosService {
         return data[0];
       });
   }
+  
 
   cadastrar(evento: Evento): Promise<Evento> {
     console.log(evento);
@@ -44,11 +45,20 @@ export class EventosService {
 export class Evento {
   codEvento: number;
   titulo: string;
-  periodoInicial: Date;
-  periodofinal: Date;
-  inscricaoInicio: Date;
-  inscricaofim: Date;
+  local:string;
+  codTipo: number;
+  inscricaoInicio: string;
+  inscricaofim: string;
   qtdMinInscrito: number;
   qtdMaxInscrito: number;
   modeloDoc: string;
+  dataInicio:string;
+  dataFim:string;
+  voluntario: any[];
+
+  constructor () {
+    this.codEvento = null;
+    this.local = '';
+    this.voluntario = [];
+  }
 }
