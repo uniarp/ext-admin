@@ -61,6 +61,7 @@ const routes: Routes = [
     path: 'atividade-cadastro',
     loadChildren: () => import('./atividade/atividade-cadastro/atividade-cadastro.module').then(m => m.AtividadeCadastroPageModule)
   },
+
 ];
 
 @NgModule({

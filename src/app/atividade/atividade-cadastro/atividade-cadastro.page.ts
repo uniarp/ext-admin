@@ -75,7 +75,7 @@ export class AtividadeCadastroPage implements OnInit {
   }
 
   gravar(form: NgForm) {
-    const msg = this.editando ? "alterado": "cadastrado";
+    const msg = this.editando ? "alterado" : "cadastrado";
     this.pegaData();
     console.log(this.atividade);
     this.atividadeService.gravar(this.atividade)

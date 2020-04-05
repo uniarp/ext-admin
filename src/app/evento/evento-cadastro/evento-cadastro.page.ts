@@ -6,6 +6,12 @@ import { AtividadeCadastroPage } from './../../atividade/atividade-cadastro/ativ
 import { Evento, EventosService } from '../eventos.service';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { AlertsService } from 'src/app/core/services/alerts.service';
+import { VoluntarioService } from 'src/app/voluntario/voluntario.service';
+import { NgForm } from '@angular/forms';
+import * as moment from 'moment';
+import { TipoAtividadeService } from 'src/app/tipoAtividade/tipo-atividade.service';
+import { AtividadeService } from 'src/app/atividade/atividade.service';
+import { AreaService } from 'src/app/area/area.service';
 
 @Component({
   selector: 'app-evento-cadastro',
@@ -16,36 +22,40 @@ export class EventoCadastroPage implements OnInit {
 
   evento = new Evento();
   atividades: any[] = [];
+  tipoAtividade: any[];
+  voluntario: any[];
+  area: any[];
+  dataHoraInicio = "";
+  dataHoraFim = "";
+
 
   constructor(
     private eventoService: EventosService,
-    private router: Router,
-    public toast: ToastController,
-    public handler: ErrorHandlerService,
+    private atividadeService: AtividadeService,
+    private tpAtividadeService: TipoAtividadeService,
+    private voluntarioService: VoluntarioService,
+    private areaService: AreaService,
     private alert: AlertsService,
     private route: ActivatedRoute,
-    public modalController: ModalController
+    public modalController: ModalController,
+    public handler: ErrorHandlerService
   ) { }
 
   ngOnInit() {
-    console.log(Evento);
-    // console.log(this.route.snapshot.params);
-    const codEvento = this.route.snapshot.params.codEvento;
+    const codEvento = this.route.snapshot.params['codEvento'];
 
     if (codEvento) {
       this.carregarEvento(codEvento);
     }
-
+    this.carregarTpAtividade();
+    this.carregarVoluntario();
+    this.carregarArea();
     this.atualizarTitulo();
   }
 
 
   get editando() {
-    console.log('Teste');
-    if (this.evento.codEvento) {
-      return true;
-    }
-    return false;
+    return Boolean(this.evento.codEvento);
   }
 
   atualizarTitulo() {
@@ -63,17 +73,38 @@ export class EventoCadastroPage implements OnInit {
       .catch(erro => this.handler.handleError(erro));
   }
 
-  gravar() {
-    this.evento.codEvento = this.evento.codEvento ? this.evento.codEvento : null;
-    this.eventoService.cadastrar(this.evento)
-      .then(() => {
-        this.alert.alertaToast(this.evento.codEvento ? 'Evento Alterado com Sucesso' : 'Evento Cadastrado com Sucesso',
-          'success');
-        this.router.navigate(['evento-pesquisa']);
+  carregarArea() {
+    this.areaService.listarArea()
+      .then(data => this.area = data)
+      .catch(erro => this.handler.handleError(erro));
+  }
+
+  carregarVoluntario() {
+    this.voluntarioService.listar()
+      .then(data => this.voluntario = data)
+      .catch(erro => this.handler.handleError(erro));
+  }
+
+  carregarTpAtividade() {
+    this.tpAtividadeService.listaTpAtividade()
+      .then(data => {
+        this.tipoAtividade = data.map(a => ({ codTipo: a.codTipoAtividade, nome: a.nome }));
+        console.log(this.tipoAtividade );
       })
       .catch(erro => this.handler.handleError(erro));
   }
 
+  gravar(form: NgForm) {
+    const msg = this.editando ? "alterado" : "cadastrado";
+    this.pegaData();
+    console.log(this.evento);
+    this.eventoService.cadastrar(this.evento)
+      .then(data => {
+        this.alert.alertaToast(`${data.titulo} ${msg} com sucesso`, 'success');
+        console.log(data);
+      })
+      .catch(erro => this.handler.handleError(erro));
+  }
 
   async novaAtividade() {
     const modal = await this.modalController.create({
@@ -107,6 +138,16 @@ export class EventoCadastroPage implements OnInit {
         a.palestrante = data.palestrante;
       }
     });
+  }
+
+  pegaData() {
+    this.evento.dataInicio = moment(this.dataHoraInicio).format("YYYY-MM-DD HH:mm:ss");
+    this.evento.dataFim = moment(this.dataHoraFim).format("YYYY-MM-DD HH:mm:ss");
+  }
+
+  carregaData() {
+    this.dataHoraInicio = this.evento.dataInicio;
+    this.dataHoraFim = this.evento.dataFim;
   }
 
 }
