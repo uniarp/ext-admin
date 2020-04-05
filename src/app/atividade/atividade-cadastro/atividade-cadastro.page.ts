@@ -1,6 +1,7 @@
+import { ModalController, NavParams } from '@ionic/angular';
 import { NgForm } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
-import { Palestrante, PalestranteService } from './../../palestrante/palestrante.service';
+import { Component, OnInit, Input  } from '@angular/core';
+import { PalestranteService } from './../../palestrante/palestrante.service';
 import { ActivatedRoute } from '@angular/router';
 
 import * as moment from 'moment';
@@ -22,6 +23,7 @@ export class AtividadeCadastroPage implements OnInit {
   palestrante: any[];
   dataHoraInicio = "";
   dataHoraFim = "";
+  @Input() codAtividade: number;
 
   constructor(
     private atividadeService: AtividadeService,
@@ -29,13 +31,16 @@ export class AtividadeCadastroPage implements OnInit {
     private palestranteService: PalestranteService,
     private alert: AlertsService,
     private handler: ErrorHandlerService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public modalCtrl: ModalController,
+    public navParams: NavParams
   ) { }
 
   ngOnInit() {
-    const codAtividade = this.route.snapshot.params['codAtividade'];
-    if (codAtividade) {
-      this.carregarAtividade(codAtividade);
+    //const codAtividade = this.route.snapshot.params['codAtividade'];
+    this.codAtividade = this.navParams.get('codAtividade');
+    if (this.codAtividade) {
+      this.carregarAtividade(this.codAtividade);
     }
     this.carregarTpAtividade();
     this.carregarPalestrantes();
@@ -76,11 +81,17 @@ export class AtividadeCadastroPage implements OnInit {
     this.atividadeService.gravar(this.atividade)
       .then(data => {
         this.alert.alertaToast(`${data.titulo} ${msg} com sucesso`, 'success');
-        console.log(data);
+        this.dismiss(data);
       })
       .catch(erro => this.handler.handleError(erro));
   }
 
+  dismiss(data) {
+    this.modalCtrl.dismiss(data);
+  }
+  cancelar(){
+    this.modalCtrl.dismiss();
+  }
 
   pegaData() {
     this.atividade.dataInicio = moment(this.dataHoraInicio).format("YYYY-MM-DD HH:mm:ss");

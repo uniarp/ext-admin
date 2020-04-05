@@ -8,39 +8,81 @@
 </ion-header>
 
 <ion-content>
-    <form autocomplete="off" #volunForm="ngForm" (ngSubmit)="gravar(volunForm)">
-      <ion-item>
-        <ion-input placeholder="*Nome:" type="text" [(ngModel)]="evento.nome" #nome="ngModel" name="nome" required
-          minlength="10"></ion-input>
-        <!-- <div class="validaCamp" *ngIf="nome.hasError('required') && nome.touched">*Informe um nome válido</div>
+  <form autocomplete="off" #volunForm="ngForm" (ngSubmit)="gravar(volunForm)">
+    <ion-item>
+      <ion-input placeholder="*Nome:" type="text" [(ngModel)]="evento.nome" #nome="ngModel" name="nome" required
+        minlength="10"></ion-input>
+      <!-- <div class="validaCamp" *ngIf="nome.hasError('required') && nome.touched">*Informe um nome válido</div>
         <div class="validaCamp" *ngIf="nome.hasError('minlength')">*O nome precisa ser completo</div> -->
-      </ion-item>
-      <ion-item>
-        <ion-input placeholder="*Local:" type="text" [(ngModel)]="evento.local" #email="ngModel" name="local" required
-          local></ion-input>
-        <!-- <div class="validaCamp" *ngIf="local.hasError('local')">*Informe um local valido</div> -->
-      </ion-item>
+    </ion-item>
+    <ion-item>
+      <ion-input placeholder="*Local:" type="text" [(ngModel)]="evento.local" #email="ngModel" name="local" required
+        local></ion-input>
+      <!-- <div class="validaCamp" *ngIf="local.hasError('local')">*Informe um local valido</div> -->
+    </ion-item>
 
-<area shape="" coords="" href="" alt="">
+    <area shape="" coords="" href="" alt="">
 
-      <ion-item>
-        <ion-input placeholder="Periodo:" type="text" [(ngModel)]="evento.periodo" #periodo="ngModel" name="periodo"
-          [brmasker]="{person: true}" maxlength="16"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input placeholder="Inscrição:" type="text" [(ngModel)]="evento.inscricao" #inscricao="ngModel" name="inscricao"
-          [brmasker]="{person: true}" maxlength="16"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input placeholder="Inscritos:" type="text" [(ngModel)]="evento.inscritos" #inscritos="ngModel" name="inscritos"
-          [brmasker]="{person: true}" maxlength="16"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input placeholder="Upload:" type="text" [(ngModel)]="evento.upload" #upload="ngModel" name="upload" ></ion-input>
-      </ion-item>
+    <ion-item>
+      <ion-input placeholder="Periodo:" type="text" [(ngModel)]="evento.periodo" #periodo="ngModel" name="periodo"
+        [brmasker]="{person: true}" maxlength="16"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input placeholder="Inscrição:" type="text" [(ngModel)]="evento.inscricao" #inscricao="ngModel"
+        name="inscricao" [brmasker]="{person: true}" maxlength="16"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input placeholder="Inscritos:" type="text" [(ngModel)]="evento.inscritos" #inscritos="ngModel"
+        name="inscritos" [brmasker]="{person: true}" maxlength="16"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input placeholder="Upload:" type="text" [(ngModel)]="evento.upload" #upload="ngModel" name="upload">
+      </ion-input>
+    </ion-item>
+    <!-- <div class="validaCamp" *ngIf="volunForm.invalid">Campos com * São obrigatórios</div> -->
 
-      <!-- <div class="validaCamp" *ngIf="volunForm.invalid">Campos com * São obrigatórios</div> -->
-      <br>
-      <ion-button type="submit" [disabled]="volunForm.invalid">Gravar</ion-button>
-    </form>
-  </ion-content>
+    <ion-item>
+      <ion-label>Atvividade</ion-label>
+      <ion-button (click)="novaAtividade()">Adicionar</ion-button>
+    </ion-item>
+
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col> Tittulo</ion-col>
+          <ion-col>Tipo</ion-col>
+          <ion-col>Data Inicio</ion-col>
+          <ion-col>Data Fim</ion-col>
+          <ion-col size-sm>Opções</ion-col>
+        </ion-row>
+        <div *ngFor="let atv of atividades">
+          <ion-row>
+            <ion-col>
+              {{atv.titulo}}
+            </ion-col>
+            <ion-col>
+              {{atv.nomeTipo}}
+            </ion-col>
+            <ion-col>
+              {{atv.dataInicio|date:"dd/MM/yyyy H:mm"}}
+            </ion-col>
+            <ion-col>
+              {{atv.datFim|date:"dd/MM/yyyy H:mm"}}
+            </ion-col>
+            <ion-col size="1" size-sm>
+              <ion-button color="danger">
+                <ion-icon name="trash-outline"></ion-icon>
+              </ion-button>
+              <ion-button (click)="alterar(atv.codAtividade)">
+                <ion-icon name="pencil-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-grid>
+    </ion-item>
+
+    <br>
+    <ion-button type="submit" [disabled]="volunForm.invalid">Gravar</ion-button>
+  </form>
+</ion-content>

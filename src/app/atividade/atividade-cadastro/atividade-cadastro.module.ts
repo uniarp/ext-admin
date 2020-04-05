@@ -17,6 +17,7 @@ import { BrMaskerModule } from 'br-mask';
     AtividadeCadastroPageRoutingModule,
     BrMaskerModule,
   ],
-  declarations: [AtividadeCadastroPage]
+  declarations: [AtividadeCadastroPage],
+  exports: [AtividadeCadastroPage],
 })
 export class AtividadeCadastroPageModule {}
