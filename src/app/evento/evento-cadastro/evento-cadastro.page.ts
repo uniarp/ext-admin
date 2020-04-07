@@ -22,11 +22,9 @@ export class EventoCadastroPage implements OnInit {
 
   evento = new Evento();
   atividades: any[] = [];
-  tipoAtividade: any[];
   voluntario: any[];
   area: any[];
-  dataHoraInicio = "";
-  dataHoraFim = "";
+
 
 
   constructor(
@@ -47,7 +45,6 @@ export class EventoCadastroPage implements OnInit {
     if (codEvento) {
       this.carregarEvento(codEvento);
     }
-    this.carregarTpAtividade();
     this.carregarVoluntario();
     this.carregarArea();
     this.atualizarTitulo();
@@ -85,16 +82,8 @@ export class EventoCadastroPage implements OnInit {
       .catch(erro => this.handler.handleError(erro));
   }
 
-  carregarTpAtividade() {
-    this.tpAtividadeService.listaTpAtividade()
-      .then(data => {
-        this.tipoAtividade = data.map(a => ({ codTipo: a.codTipoAtividade, nome: a.nome }));
-        console.log(this.tipoAtividade );
-      })
-      .catch(erro => this.handler.handleError(erro));
-  }
-
   gravar(form: NgForm) {
+    this.evento.atividades = this.atividades;
     const msg = this.editando ? "alterado" : "cadastrado";
     this.pegaData();
     console.log(this.evento);
@@ -102,6 +91,17 @@ export class EventoCadastroPage implements OnInit {
       .then(data => {
         this.alert.alertaToast(`${data.titulo} ${msg} com sucesso`, 'success');
         console.log(data);
+      })
+      .catch(erro => this.handler.handleError(erro));
+  }
+
+  excluiAtividade(codAtividade: number){
+    this.atividadeService.excluirAtividade(codAtividade)
+      .then(res => {
+        this.alert.alertaToast('Exclusão Realizada com sucesso', 'success');
+        this.atividades = this.atividades.filter(elemento => {
+            return elemento.codAtividade !== codAtividade;
+          });
       })
       .catch(erro => this.handler.handleError(erro));
   }
@@ -141,13 +141,10 @@ export class EventoCadastroPage implements OnInit {
   }
 
   pegaData() {
-    this.evento.dataInicio = moment(this.dataHoraInicio).format("YYYY-MM-DD HH:mm:ss");
-    this.evento.dataFim = moment(this.dataHoraFim).format("YYYY-MM-DD HH:mm:ss");
-  }
-
-  carregaData() {
-    this.dataHoraInicio = this.evento.dataInicio;
-    this.dataHoraFim = this.evento.dataFim;
+    this.evento.inscricaoInicio = moment(this.evento.inscricaoInicio).format("YYYY-MM-DD HH:mm:ss");
+    this.evento.inscricaoFim = moment(this.evento.inscricaoFim).format("YYYY-MM-DD HH:mm:ss");
+    this.evento.periodoFinal = moment(this.evento.periodoFinal).format("YYYY-MM-DD HH:mm:ss");
+    this.evento.periodoInicial = moment(this.evento.periodoInicial).format("YYYY-MM-DD HH:mm:ss");
   }
 
 }

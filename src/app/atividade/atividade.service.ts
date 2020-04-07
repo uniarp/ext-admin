@@ -27,6 +27,12 @@ export class AtividadeService {
     });
   }
 
+  excluirAtividade(codAtividade: number): Promise<string>{
+    return this.http.delete<string>(`${this.atividadeUrl}/excluir/${codAtividade}`)
+      .toPromise()
+      .then( res => res);
+  }
+
 }
 
 export class Atividade {

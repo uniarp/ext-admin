@@ -45,20 +45,22 @@ export class EventosService {
 export class Evento {
   codEvento: number;
   titulo: string;
-  local:string;
-  codTipo: number;
+  codArea: any[];
+  periodoInicial: string;
+  periodoFinal: string;
   inscricaoInicio: string;
-  inscricaofim: string;
+  inscricaoFim: string;
   qtdMinInscrito: number;
   qtdMaxInscrito: number;
   modeloDoc: string;
-  dataInicio:string;
-  dataFim:string;
   voluntario: any[];
+  atividades: any[];
 
   constructor () {
     this.codEvento = null;
-    this.local = '';
     this.voluntario = [];
+    this.atividades = [];
+    this.modeloDoc = '';
+
   }
 }
