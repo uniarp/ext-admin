@@ -47,7 +47,6 @@ export class EventoCadastroPage implements OnInit {
     }
     this.carregarVoluntario();
     this.carregarArea();
-    this.atualizarTitulo();
   }
 
 
@@ -55,17 +54,12 @@ export class EventoCadastroPage implements OnInit {
     return Boolean(this.evento.codEvento);
   }
 
-  atualizarTitulo() {
-    if (this.editando) {
-      // this.evento = 'Alterar ';
-    }
-  }
-
   carregarEvento(codEvento: number) {
     this.eventoService.listaEvento(codEvento)
       .then(data => {
         console.log(data);
         this.evento = data;
+        this.atividades = this.evento.atividades;
       })
       .catch(erro => this.handler.handleError(erro));
   }
@@ -95,13 +89,13 @@ export class EventoCadastroPage implements OnInit {
       .catch(erro => this.handler.handleError(erro));
   }
 
-  excluiAtividade(codAtividade: number){
+  excluiAtividade(codAtividade: number) {
     this.atividadeService.excluirAtividade(codAtividade)
       .then(res => {
         this.alert.alertaToast('Exclusão Realizada com sucesso', 'success');
         this.atividades = this.atividades.filter(elemento => {
-            return elemento.codAtividade !== codAtividade;
-          });
+          return elemento.codAtividade !== codAtividade;
+        });
       })
       .catch(erro => this.handler.handleError(erro));
   }
@@ -113,6 +107,7 @@ export class EventoCadastroPage implements OnInit {
     await modal.present();
     const { data } = await modal.onWillDismiss();
     if (data) {
+      console.log(data);
       this.atividades.push(data);
     }
   }
@@ -121,13 +116,13 @@ export class EventoCadastroPage implements OnInit {
     const modal = await this.modalController.create({
       component: AtividadeCadastroPage,
       componentProps: {
-        'codAtividade':codAtividade
+        'codAtividade': codAtividade
       }
     });
     await modal.present();
     const { data } = await modal.onWillDismiss();
     this.atividades.map(a => {
-      if (data.codAtividade === a.codAtividade){
+      if (data.codAtividade === a.codAtividade) {
         a.titulo = data.titulo;
         a.codTipo = data.codTipo;
         a.nomeTipo = data.nomeTipo;

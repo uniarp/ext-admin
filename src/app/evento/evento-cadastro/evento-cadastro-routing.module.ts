@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: EventoCadastroPage
-  }
+  },
+  {
+    path: ':codEvento',
+    component: EventoCadastroPage
+  },
 ];
 
 @NgModule({
