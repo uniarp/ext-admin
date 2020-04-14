@@ -61,8 +61,12 @@ const routes: Routes = [
     path: 'atividade-cadastro',
     loadChildren: () => import('./atividade/atividade-cadastro/atividade-cadastro.module').then(m => m.AtividadeCadastroPageModule)
   },
-
+  {
+    path: 'evento-pesquisa',
+    loadChildren: () => import('./evento/evento-pesquisa/evento.module').then( m => m.EventoPageModule)
+  }
 ];
+    
 
 @NgModule({
   imports: [
