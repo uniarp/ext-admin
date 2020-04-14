@@ -35,6 +35,7 @@ export class EventoCadastroPage implements OnInit {
     private areaService: AreaService,
     private alert: AlertsService,
     private route: ActivatedRoute,
+    private router: Router,
     public modalController: ModalController,
     public handler: ErrorHandlerService
   ) { }
@@ -85,6 +86,7 @@ export class EventoCadastroPage implements OnInit {
       .then(data => {
         this.alert.alertaToast(`${data.titulo} ${msg} com sucesso`, 'success');
         console.log(data);
+        //this.router.navigate(['/evento-pesquisa']);
       })
       .catch(erro => this.handler.handleError(erro));
   }
