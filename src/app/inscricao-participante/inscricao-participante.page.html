@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Inscricao de Participante</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <form autocomplete="off" #partiForm="ngForm" (ngSubmit)="gravar(partiForm)">
+    <ion-item>
+      <ion-item>Participante: </ion-item>
+      <ion-input placeholder="*Nome:" type="text" [(ngModel)]="participante.nome" #nome="ngModel" name="nome" required
+        minlength="10"></ion-input>
+      <div class="validaCamp" *ngIf="nome.hasError('required') && nome.touched">*Informe um nome válido</div>
+      <div class="validaCamp" *ngIf="nome.hasError('minlength')">*O nome precisa ser completo</div>
+    </ion-item>
+    <ion-item>
+      <ion-item>CPF: </ion-item>
+      <ion-input placeholder="CPF:" type="text" [(ngModel)]="participante.cpf" #cpf="ngModel" name="cpf"
+        [brmasker]="{person: true}" maxlength="14"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-item>Evento: </ion-item>
+      <ion-input placeholder="*Evento:" type="text" [(ngModel)]="evento.titulo" #titulo="ngModel" name="titulo">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-item>
+        <ion-label position="floating">Data e Hora de Inicio<ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-datetime displayFormat="DD/MM/YYYY HH:mm" doneText="OK" cancelText="Cancelar" [(ngModel)]="dataHoraInicio"
+          name="dataHoraInicio" #dataHI="ngModel" required></ion-datetime>
+      </ion-item>
+      à
+      <ion-item>
+        <ion-label position="floating">Data e Hora de Termino<ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-datetime displayFormat="DD/MM/YYYY HH:mm" doneText="OK" cancelText="Cancelar" [(ngModel)]="dataHoraInicio"
+          name="dataHoraInicio" #dataHI="ngModel" required></ion-datetime>
+      </ion-item>
+    </ion-item>
+    <ion-item>
+      <ion-item>Local: </ion-item>
+      <ion-input placeholder="*Local:" type="text" [(ngModel)]="evento.localizacao" #titulo="ngModel" name="local">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-item>
+        <b>Atividades </b>
+      </ion-item>
+    </ion-item>
+    <ion-item>
+
+      <ion-list>
+        <ion-item *ngFor="let atividade of evento.atividades">
+          {{atividade}}
+        </ion-item>
+      </ion-list>
+    </ion-item>
+  </form>
+
+</ion-content>
