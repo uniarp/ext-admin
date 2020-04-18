@@ -40,6 +40,9 @@ export class EventosService {
     return this.http.delete<Evento>(`${this.eventoUrl}/excluir/${codEvento}`)
       .toPromise();
   }
+
+  cancelar(codEvento: number) { 
+  }
 }
 
 export class Evento {

@@ -8,10 +8,10 @@
   <form #atvCad="ngForm" autocomplete="off" (ngSubmit)="gravar(atvCad)">
 
     <ion-item>
-      <ion-label position="floating">Titulo<ion-text color="danger">*</ion-text>
+      <ion-label position="floating">Título<ion-text color="danger">*</ion-text>
       </ion-label>
       <ion-input [(ngModel)]="atividade.titulo" name="titulo" #titulo="ngModel" required></ion-input>
-      <div class="validaCamp" *ngIf="titulo.hasError('required') && titulo.touched">*Informe um titulo da Atividade
+      <div class="validaCamp" *ngIf="titulo.hasError('required') && titulo.touched">*Informe um Título da Atividade
       </div>
     </ion-item>
     <ion-item>
@@ -42,7 +42,7 @@
       <ion-row>
         <ion-col>
           <ion-item>
-            <ion-label position="floating">Data e Hora de Inicio<ion-text color="danger">*</ion-text>
+            <ion-label position="floating">Data e Hora de Início<ion-text color="danger">*</ion-text>
             </ion-label>
             <ion-datetime displayFormat="DD/MM/YYYY HH:mm" doneText="OK" cancelText="Cancelar"
               [(ngModel)]="dataHoraInicio" name="dataHoraInicio" #dataHI="ngModel" required></ion-datetime>
@@ -51,7 +51,7 @@
 
         <ion-col>
           <ion-item>
-            <ion-label position="floating">Data e Hora de Termino<ion-text color="danger">*</ion-text>
+            <ion-label position="floating">Data e Hora de Término<ion-text color="danger">*</ion-text>
             </ion-label>
             <ion-datetime displayFormat="DD/MM/YYYY HH:mm" doneText="OK" cancelText="Cancelar" [(ngModel)]="dataHoraFim"
               name="dataHoraFim" #dataHF="ngModel" required></ion-datetime>

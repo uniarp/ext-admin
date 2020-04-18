@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Pesquisa de Eventos:</ion-title>
+    <ion-title>Pesquisa de Eventos</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -8,7 +11,7 @@
     <ion-item>
       <ion-label> Buscar Evento:</ion-label>
       <ion-input placeholder="Ex: Sead"></ion-input>
-      <ion-button >
+      <ion-button>
         <ion-icon name="search-outline"></ion-icon>
         Buscar
       </ion-button>
@@ -16,7 +19,7 @@
     <ion-item>
       <ion-grid>
         <ion-row>
-          <ion-col> Título</ion-col>
+          <ion-col>Evento</ion-col>
           <ion-col class="ion-align-self-start">Periodo Inicial</ion-col>
           <ion-col class="ion-align-self-start">Periodo Final</ion-col>
           <ion-col class="ion-align-self-start">Inscrições Início</ion-col>
@@ -33,7 +36,7 @@
                 {{evento.titulo}}
               </ion-col>
               <ion-col class="ion-align-self-start">
-                {{evento.periodoinicial}}
+                {{evento.periodoInicial}}
               </ion-col>
               <ion-col class="ion-align-self-start">
                 {{evento.periodoFinal}}
@@ -54,11 +57,14 @@
                 {{evento.modeloDoc}}
               </ion-col>
               <ion-col size="1" size-sm>
-                <ion-button (click)='excluir(evento.codEvento)'>
+                <ion-button [disabled]="!evento.podeExcluir" (click)='excluir(evento.codEvento)'>
                   <ion-icon name="trash-outline"></ion-icon>
                 </ion-button>
                 <ion-button (click)='editarCadastro(evento.codEvento)'>
                   <ion-icon name="pencil-outline"></ion-icon>
+                </ion-button>
+                <ion-button (click)='cancelar(evento.codEvento)'>
+                  <ion-icon name="remove-circle"></ion-icon>
                 </ion-button>
               </ion-col>
             </ion-row>

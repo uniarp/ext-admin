@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>{{editando?'Editar ': 'Cadastro de '}}Evento</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -8,10 +11,10 @@
   <form #atvCad="ngForm" autocomplete="off" (ngSubmit)="gravar(atvCad)">
 
     <ion-item>
-      <ion-label position="floating">Titulo<ion-text color="danger">*</ion-text>
+      <ion-label position="floating">Título<ion-text color="danger">*</ion-text>
       </ion-label>
       <ion-input [(ngModel)]="evento.titulo" name="titulo" #titulo="ngModel" required></ion-input>
-      <div class="validaCamp" *ngIf="titulo.hasError('required') && titulo.touched">*Informe o Titulo do Evento
+      <div class="validaCamp" *ngIf="titulo.hasError('required') && titulo.touched">*Informe o Título do Evento
       </div>
     </ion-item>
 
@@ -22,14 +25,14 @@
         name="area" #areaE="ngModel" required>
         <ion-select-option *ngFor="let a of area" [value]="a">{{a.nome}}</ion-select-option>
       </ion-select>
-      <div class="validaCamp" *ngIf="areaE.hasError('required') && areaE.touched">Selecione a area do Evento</div>
+      <div class="validaCamp" *ngIf="areaE.hasError('required') && areaE.touched">Selecione a Área do Evento</div>
     </ion-item>
 
     <ion-grid>
       <ion-row>
         <ion-col>
           <ion-item>
-            <ion-label position="floating">Data e Hora de Inicio do Evento<ion-text color="danger">*</ion-text>
+            <ion-label position="floating">Data e Hora de Início do Evento<ion-text color="danger">*</ion-text>
             </ion-label>
             <ion-datetime displayFormat="DD/MM/YYYY HH:mm" doneText="OK" cancelText="Cancelar"
               [(ngModel)]="evento.periodoInicial" name="periodoInicial" #periodoIni="ngModel" required></ion-datetime>
@@ -38,7 +41,7 @@
 
         <ion-col>
           <ion-item>
-            <ion-label position="floating">Data e Hora de Termino do Evento<ion-text color="danger">*</ion-text>
+            <ion-label position="floating">Data e Hora de Término do Evento<ion-text color="danger">*</ion-text>
             </ion-label>
             <ion-datetime displayFormat="DD/MM/YYYY HH:mm" doneText="OK" cancelText="Cancelar"
               [(ngModel)]="evento.periodoFinal" name="periodoFinal" #periodoFim="ngModel" required></ion-datetime>
@@ -50,7 +53,7 @@
       <ion-row>
         <ion-col>
           <ion-item>
-            <ion-label position="floating">Data e Hora de Inicio para Inscrição<ion-text color="danger">*</ion-text>
+            <ion-label position="floating">Data e Hora de Início para Inscrição<ion-text color="danger">*</ion-text>
             </ion-label>
             <ion-datetime displayFormat="DD/MM/YYYY HH:mm" doneText="OK" cancelText="Cancelar"
               [(ngModel)]="evento.inscricaoInicio" name="inscricaoInicio" #inscIni="ngModel" required></ion-datetime>
@@ -59,7 +62,7 @@
 
         <ion-col>
           <ion-item>
-            <ion-label position="floating">Data e Hora de Termino para Inscrição<ion-text color="danger">*</ion-text>
+            <ion-label position="floating">Data e Hora de Término para Inscrição<ion-text color="danger">*</ion-text>
             </ion-label>
             <ion-datetime displayFormat="DD/MM/YYYY HH:mm" doneText="OK" cancelText="Cancelar"
               [(ngModel)]="evento.inscricaoFim" name="inscricaofim" #inscFim="ngModel" required></ion-datetime>
@@ -72,7 +75,7 @@
       <ion-row>
         <ion-col>
           <ion-item>
-            <ion-label position="floating">Quantidade mínima de Inscritos<ion-text color="danger">*</ion-text>
+            <ion-label position="floating">Quantidade Mínima de Inscritos<ion-text color="danger">*</ion-text>
             </ion-label>
             <ion-input type="number" [(ngModel)]="evento.qtdMinInscrito" name="qtdMinInscrito" #qtdMinIns="ngModel"
               required></ion-input>
@@ -80,7 +83,7 @@
         </ion-col>
         <ion-col>
           <ion-item>
-            <ion-label position="floating">Quantidade máxina de Inscritos<ion-text color="danger">*</ion-text>
+            <ion-label position="floating">Quantidade Máxina de Inscritos<ion-text color="danger">*</ion-text>
             </ion-label>
             <ion-input type="number" [(ngModel)]="evento.qtdMaxInscrito" name="qtdMaxInscrito" #qtdMaxIns="ngModel"
               required></ion-input>
@@ -97,7 +100,7 @@
         <ion-select-option *ngFor="let v of voluntario" [value]="v">{{v.nome}}</ion-select-option>
       </ion-select>
       <div class="validaCamp" *ngIf="volun.hasError('required') && volun.touched">Selecione pelo menos um
-        voluntario</div>
+        voluntário</div>
     </ion-item>
 
     <ion-item>
@@ -108,9 +111,9 @@
     <ion-item>
       <ion-grid>
         <ion-row>
-          <ion-col> Tittulo</ion-col>
+          <ion-col>Título</ion-col>
           <ion-col>Tipo</ion-col>
-          <ion-col>Data Inicio</ion-col>
+          <ion-col>Data Início</ion-col>
           <ion-col>Data Fim</ion-col>
           <ion-col size-sm>Opções</ion-col>
         </ion-row>

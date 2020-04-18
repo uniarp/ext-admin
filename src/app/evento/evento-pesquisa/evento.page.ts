@@ -8,7 +8,9 @@ import { Evento, EventosService } from '../eventos.service';
   styleUrls: ['./evento.page.scss'],
 })
 export class EventoPage implements OnInit {
-  evento:Evento;
+
+  evento: Evento;
+
   constructor(
     private router: Router,
     private eventosService: EventosService
@@ -36,5 +38,10 @@ export class EventoPage implements OnInit {
 
   public async listar() {
     this.evento = await this.eventosService.listar();
+  }
+
+  async cancelar(codEvento) {
+    console.log();
+    this.router.navigate(['/evento-cancelar/', codEvento]);
   }
 }
