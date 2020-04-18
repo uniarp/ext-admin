@@ -69,7 +69,12 @@ const routes: Routes = [
   {
     path: 'inscricao-participante',
     loadChildren: () => import('./inscricao-participante/inscricao-participante.module').then( m => m.inscricaoParticipantePageModule)
+  },
+  {
+    path: 'evento-cancelar',
+    loadChildren: () => import('./evento/evento-cancelar/evento-cancelar.module').then( m => m.EventoCancelarPageModule)
   }
+
 
 ];
     

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {RouterModule, Routes , Router} from '@angular/router';
+import { RouterModule, Routes, Router } from '@angular/router';
 import { Evento, EventosService } from '../eventos.service';
+import { ModalController } from '@ionic/angular';
+import { EventoCancelarPage } from '../evento-cancelar/evento-cancelar.page';
 
 @Component({
   selector: 'app-evento',
@@ -13,7 +15,8 @@ export class EventoPage implements OnInit {
 
   constructor(
     private router: Router,
-    private eventosService: EventosService
+    private eventosService: EventosService,
+    public modalController: ModalController
   ) { }
 
   ngOnInit() {
@@ -24,14 +27,13 @@ export class EventoPage implements OnInit {
     this.router.navigate(['/evento-cadastro']);
   }
 
-  editarCadastro(codEvento){
+  editarCadastro(codEvento) {
     console.log(codEvento);
     this.router.navigate(['/evento-cadastro', codEvento]);
   }
 
-
-  public async excluir(codEvento: number){
-    console.log('excluir '+codEvento);
+  public async excluir(codEvento: number) {
+    console.log('excluir ' + codEvento);
     await this.eventosService.excluir(codEvento);
     this.listar();
   }
@@ -42,6 +44,13 @@ export class EventoPage implements OnInit {
 
   async cancelar(codEvento) {
     console.log();
-    this.router.navigate(['/evento-cancelar/', codEvento]);
+    const modal = await this.modalController.create({
+      component: EventoCancelarPage,
+      componentProps: {
+        'codEvento': codEvento
+      }
+    });
+    modal.present();
   }
+
 }
