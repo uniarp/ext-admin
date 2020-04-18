@@ -31,7 +31,7 @@ export class EventosService {
       .toPromise();
   }
 
-  pesquisar(): Promise<Evento> {
+  listar(): Promise<Evento> {
     return this.http.get<Evento>(this.eventoUrl + '/listar')
       .toPromise();
   }

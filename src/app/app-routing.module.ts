@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -61,8 +62,17 @@ const routes: Routes = [
     path: 'atividade-cadastro',
     loadChildren: () => import('./atividade/atividade-cadastro/atividade-cadastro.module').then(m => m.AtividadeCadastroPageModule)
   },
+  {
+    path: 'evento-pesquisa',
+    loadChildren: () => import('./evento/evento-pesquisa/evento.module').then( m => m.EventoPageModule)
+  },
+  {
+    path: 'inscricao-participante',
+    loadChildren: () => import('./inscricao-participante/inscricao-participante.module').then( m => m.inscricaoParticipantePageModule)
+  }
 
 ];
+    
 
 @NgModule({
   imports: [

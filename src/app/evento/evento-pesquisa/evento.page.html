@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Pesquisa de Eventos:</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="container">
+    <ion-item>
+      <ion-label> Buscar Evento:</ion-label>
+      <ion-input placeholder="Ex: Sead"></ion-input>
+      <ion-button >
+        <ion-icon name="search-outline"></ion-icon>
+        Buscar
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col> Título</ion-col>
+          <ion-col class="ion-align-self-start">Periodo Inicial</ion-col>
+          <ion-col class="ion-align-self-start">Periodo Final</ion-col>
+          <ion-col class="ion-align-self-start">Inscrições Início</ion-col>
+          <ion-col class="ion-align-self-start">Inscrições Fim</ion-col>
+          <ion-col class="ion-align-self-start">Mínimo de Inscritos</ion-col>
+          <ion-col class="ion-align-self-start">Máximo de Inscritos</ion-col>
+          <ion-col class="ion-align-self-start">Modelo do Documento</ion-col>
+          <ion-col size-sm>Opções</ion-col>
+        </ion-row>
+        <div *ngFor="let evento of evento">
+          <ion-radio-group>
+            <ion-row>
+              <ion-col>
+                {{evento.titulo}}
+              </ion-col>
+              <ion-col class="ion-align-self-start">
+                {{evento.periodoinicial}}
+              </ion-col>
+              <ion-col class="ion-align-self-start">
+                {{evento.periodoFinal}}
+              </ion-col>
+              <ion-col class="ion-align-self-start">
+                {{evento.inscricaoInicio}}
+              </ion-col>
+              <ion-col class="ion-align-self-start">
+                {{evento.inscricaoFim}}
+              </ion-col>
+              <ion-col class="ion-align-self-start">
+                {{evento.qtdMinInscrito}}
+              </ion-col>
+              <ion-col class="ion-align-self-start">
+                {{evento.qtdMaxInscrito}}
+              </ion-col>
+              <ion-col class="ion-align-self-start">
+                {{evento.modeloDoc}}
+              </ion-col>
+              <ion-col size="1" size-sm>
+                <ion-button (click)='excluir(evento.codEvento)'>
+                  <ion-icon name="trash-outline"></ion-icon>
+                </ion-button>
+                <ion-button (click)='editarCadastro(evento.codEvento)'>
+                  <ion-icon name="pencil-outline"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-radio-group>
+        </div>
+      </ion-grid>
+    </ion-item>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)='adicionar()'>
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-footer>
