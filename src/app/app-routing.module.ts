@@ -30,11 +30,11 @@ const routes: Routes = [
   },
   {
     path: 'usuario-cadastro',
-    loadChildren: () => import('./usuario/usuario-cadastro/usuario-cadastro.module').then( m => m.UsuarioCadastroPageModule)
+    loadChildren: () => import('./usuario/usuario-cadastro/usuario-cadastro.module').then(m => m.UsuarioCadastroPageModule)
   },
   {
     path: 'usuario-pesquisa',
-    loadChildren: () => import('./usuario/usuario-pesquisa/usuario-pesquisa.module').then( m => m.UsuarioPesquisaPageModule)
+    loadChildren: () => import('./usuario/usuario-pesquisa/usuario-pesquisa.module').then(m => m.UsuarioPesquisaPageModule)
   },
   {
     path: 'voluntario-pesquisa',
@@ -43,17 +43,25 @@ const routes: Routes = [
   },
   {
     path: 'participante-cadastro',
-    loadChildren: () => import('./participante/participante-cadastro/participante-cadastro.module').then( m => m.ParticipanteCadastroPageModule)
+    loadChildren: () => import('./participante/participante-cadastro/participante-cadastro.module').then(m => m.ParticipanteCadastroPageModule)
   },
   {
     path: 'participante-cadastro/:id',
-    loadChildren: () => import('./participante/participante-cadastro/participante-cadastro.module').then( m => m.ParticipanteCadastroPageModule)
+    loadChildren: () => import('./participante/participante-cadastro/participante-cadastro.module').then(m => m.ParticipanteCadastroPageModule)
   },
   {
     path: 'participante-pesquisa',
-    loadChildren: () => import('./participante/participante-pesquisa/participante-pesquisa.module').then( m => m.ParticipantePesquisaPageModule)
+    loadChildren: () => import('./participante/participante-pesquisa/participante-pesquisa.module').then(m => m.ParticipantePesquisaPageModule)
   },
-  
+  {
+    path: 'evento-cadastro',
+    loadChildren: () => import('./evento/evento-cadastro/evento-cadastro.module').then(m => m.EventoCadastroPageModule)
+  },
+  {
+    path: 'atividade-cadastro',
+    loadChildren: () => import('./atividade/atividade-cadastro/atividade-cadastro.module').then(m => m.AtividadeCadastroPageModule)
+  },
+
 ];
 
 @NgModule({

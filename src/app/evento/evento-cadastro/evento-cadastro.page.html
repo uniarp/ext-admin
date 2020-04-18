@@ -1,0 +1,153 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{editando?'Editar ': 'Cadastro de '}}Evento</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #atvCad="ngForm" autocomplete="off" (ngSubmit)="gravar(atvCad)">
+
+    <ion-item>
+      <ion-label position="floating">Titulo<ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input [(ngModel)]="evento.titulo" name="titulo" #titulo="ngModel" required></ion-input>
+      <div class="validaCamp" *ngIf="titulo.hasError('required') && titulo.touched">*Informe o Titulo do Evento
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Área<ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-select placeholder="Selecione..." ok-text="Ok" cancel-text="Cancelar" [(ngModel)]="evento.codArea"
+        name="area" #areaE="ngModel" required>
+        <ion-select-option *ngFor="let a of area" [value]="a">{{a.nome}}</ion-select-option>
+      </ion-select>
+      <div class="validaCamp" *ngIf="areaE.hasError('required') && areaE.touched">Selecione a area do Evento</div>
+    </ion-item>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Data e Hora de Inicio do Evento<ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-datetime displayFormat="DD/MM/YYYY HH:mm" doneText="OK" cancelText="Cancelar"
+              [(ngModel)]="evento.periodoInicial" name="periodoInicial" #periodoIni="ngModel" required></ion-datetime>
+          </ion-item>
+        </ion-col>
+
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Data e Hora de Termino do Evento<ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-datetime displayFormat="DD/MM/YYYY HH:mm" doneText="OK" cancelText="Cancelar"
+              [(ngModel)]="evento.periodoFinal" name="periodoFinal" #periodoFim="ngModel" required></ion-datetime>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Data e Hora de Inicio para Inscrição<ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-datetime displayFormat="DD/MM/YYYY HH:mm" doneText="OK" cancelText="Cancelar"
+              [(ngModel)]="evento.inscricaoInicio" name="inscricaoInicio" #inscIni="ngModel" required></ion-datetime>
+          </ion-item>
+        </ion-col>
+
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Data e Hora de Termino para Inscrição<ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-datetime displayFormat="DD/MM/YYYY HH:mm" doneText="OK" cancelText="Cancelar"
+              [(ngModel)]="evento.inscricaoFim" name="inscricaofim" #inscFim="ngModel" required></ion-datetime>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Quantidade mínima de Inscritos<ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input type="number" [(ngModel)]="evento.qtdMinInscrito" name="qtdMinInscrito" #qtdMinIns="ngModel"
+              required></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Quantidade máxina de Inscritos<ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input type="number" [(ngModel)]="evento.qtdMaxInscrito" name="qtdMaxInscrito" #qtdMaxIns="ngModel"
+              required></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-item>
+      <ion-label>Voluntário<ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-select multiple="true" placeholder="Selecione..." ok-text="Ok" cancel-text="Cancelar"
+        [(ngModel)]="evento.voluntario" name="voluntario" #volun="ngModel" required>
+        <ion-select-option *ngFor="let v of voluntario" [value]="v">{{v.nome}}</ion-select-option>
+      </ion-select>
+      <div class="validaCamp" *ngIf="volun.hasError('required') && volun.touched">Selecione pelo menos um
+        voluntario</div>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Atividade</ion-label>
+      <ion-button (click)="novaAtividade()">Adicionar</ion-button>
+    </ion-item>
+
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col> Tittulo</ion-col>
+          <ion-col>Tipo</ion-col>
+          <ion-col>Data Inicio</ion-col>
+          <ion-col>Data Fim</ion-col>
+          <ion-col size-sm>Opções</ion-col>
+        </ion-row>
+        <div *ngFor="let atv of atividades">
+          <ion-row>
+            <ion-col>
+              {{atv.titulo}}
+            </ion-col>
+            <ion-col>
+              {{atv.nomeTipo}}
+            </ion-col>
+            <ion-col>
+              {{atv.dataInicio|date:"dd/MM/yyyy H:mm"}}
+            </ion-col>
+            <ion-col>
+              {{atv.dataFim|date:"dd/MM/yyyy H:mm"}}
+            </ion-col>
+            <ion-col size="1" size-sm>
+              <ion-button (click)="excluiAtividade(atv.codAtividade)" color="danger">
+                <ion-icon name="trash-outline"></ion-icon>
+              </ion-button>
+              <ion-button (click)="alterar(atv.codAtividade)">
+                <ion-icon name="pencil-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-grid>
+    </ion-item>
+
+    <div>
+      <ion-item>
+        <div class="validaCamp" *ngIf="atvCad.invalid">Campos com * São obrigatórios</div>
+      </ion-item>
+      <ion-item>
+        <ion-button type="submit" [disabled]="atvCad.invalid">Gravar</ion-button>
+      </ion-item>
+    </div>
+  </form>
+</ion-content>

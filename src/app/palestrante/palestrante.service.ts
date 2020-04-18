@@ -43,7 +43,14 @@ export class PalestranteService implements OnInit {
 
   listar(): Promise<any> {
     return this.http.get<any>(this.palestranteUrl + `/listar`, this.httpOptions)
-      .toPromise();
+    .toPromise()
+    .then(res => res);
+  }
+
+  listarPalestrante(codPalestrante: number): Promise<any>{
+    console.log(this.palestranteUrl + `/listar/`+codPalestrante);
+    return this.http.get<any>(this.palestranteUrl + `/listar/`+codPalestrante, this.httpOptions)
+    .toPromise();  
   }
   
   excluir(codPalestrante: number): Promise<Palestrante> {
