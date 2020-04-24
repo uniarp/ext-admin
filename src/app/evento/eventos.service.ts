@@ -36,6 +36,11 @@ export class EventosService {
       .toPromise();
   }
 
+  listarInscritos(codEvento: number): Promise<any> {
+    return this.http.get<any>(`${this.eventoUrl}/listarInscritos/${codEvento}`)
+      .toPromise();
+  }
+
   excluir(codEvento: number): Promise<Evento> {
     return this.http.delete<Evento>(`${this.eventoUrl}/excluir/${codEvento}`)
       .toPromise();

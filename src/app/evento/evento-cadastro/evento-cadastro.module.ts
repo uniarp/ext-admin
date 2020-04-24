@@ -1,4 +1,3 @@
-import { AtividadeCadastroPage } from './../../atividade/atividade-cadastro/atividade-cadastro.page';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -9,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { EventoCadastroPageRoutingModule } from './evento-cadastro-routing.module';
 
 import { EventoCadastroPage } from './evento-cadastro.page';
+import { AtividadeCadastroPage } from './../../atividade/atividade-cadastro/atividade-cadastro.page';
 
 @NgModule({
   imports: [
