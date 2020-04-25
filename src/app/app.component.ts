@@ -12,7 +12,7 @@ import { Router, RouterEvent } from '@angular/router';
 })
 export class AppComponent {
 
-  pages = [
+/*  pages = [
     {
       titulo: 'Gestão de Eventos',
       url: '/evento-pesquisa'
@@ -32,7 +32,8 @@ export class AppComponent {
   ];
 
   selectedPath = '';
-
+  menu: any;
+*/
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -40,9 +41,25 @@ export class AppComponent {
     private router: Router
   ) {
     this.initializeApp();
-    this.router.events.subscribe((event: RouterEvent) => {
+  /*  this.router.events.subscribe((event: RouterEvent) => {
       this.selectedPath = event.url;
-    });
+    }); */
+  }
+
+  public eventos() {
+    this.router.navigate(['/evento-pesquisa']);
+  }
+
+  public usuarios() {
+    this.router.navigate(['/usuario-pesquisa']);
+  }
+
+  public palestrantes() {
+    this.router.navigate(['/palestrante-pesquisa']);
+  }
+
+  public voluntarios() {
+    this.router.navigate(['/voluntario-pesquisa']);
   }
 
   initializeApp() {

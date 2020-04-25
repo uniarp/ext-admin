@@ -1,3 +1,25 @@
+
+<ion-menu side="start" contentId="main">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-menu-toggle auto-hide="false">
+      <ion-button (click)='eventos()'>Gestão de Eventos</ion-button>
+      <ion-button (click)='usuarios()'>Gestão de Usuários</ion-button>
+      <ion-button (click)='palestrantes()'>Gestão de Palestrantes</ion-button>
+      <ion-button (click)='voluntarios()'>Gestão de Voluntários</ion-button>
+      </ion-menu-toggle>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-router-outlet id="main"></ion-router-outlet>
+
+<!--
 <ion-split-pane >
   <ion-menu contentId="content">
     <ion-header>
@@ -20,3 +42,4 @@
   <ion-router-outlet id="content" main ></ion-router-outlet>
 
 </ion-split-pane>
+-->
