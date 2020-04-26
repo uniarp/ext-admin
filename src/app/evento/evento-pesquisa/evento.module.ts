@@ -1,3 +1,4 @@
+import { ListaInscritosPage } from './../lista-inscritos/lista-inscritos.page';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -16,7 +17,7 @@ import { EventoCancelarPage } from '../evento-cancelar/evento-cancelar.page';
     IonicModule,
     EventoPageRoutingModule
   ],
-  declarations: [EventoPage, EventoCancelarPage],
-  entryComponents: [EventoCancelarPage]
+  declarations: [EventoPage, EventoCancelarPage, ListaInscritosPage],
+  entryComponents: [EventoCancelarPage, ListaInscritosPage]
 })
 export class EventoPageModule {}

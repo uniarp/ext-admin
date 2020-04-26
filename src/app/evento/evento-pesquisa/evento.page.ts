@@ -1,3 +1,4 @@
+import { ListaInscritosPage } from './../lista-inscritos/lista-inscritos.page';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule, Routes, Router } from '@angular/router';
 import { Evento, EventosService } from '../eventos.service';
@@ -40,6 +41,17 @@ export class EventoPage implements OnInit {
 
   public async listar() {
     this.evento = await this.eventosService.listar();
+    console.log(this.evento);
+  }
+
+  async listarInscritos(codEvento: number) {
+    const modal = await this.modalController.create({
+      component: ListaInscritosPage,
+      componentProps: {
+        'codEvento': codEvento
+      }
+    });
+    await modal.present();
   }
 
   async cancelar(codEvento) {

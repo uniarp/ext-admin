@@ -86,7 +86,7 @@ export class EventoCadastroPage implements OnInit {
       .then(data => {
         this.alert.alertaToast(`${data.titulo} ${msg} com sucesso`, 'success');
         console.log(data);
-        //this.router.navigate(['/evento-pesquisa']);
+        this.router.navigate(['/evento-pesquisa']);
       })
       .catch(erro => this.handler.handleError(erro));
   }

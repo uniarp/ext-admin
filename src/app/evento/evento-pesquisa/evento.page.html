@@ -20,14 +20,14 @@
       <ion-grid>
         <ion-row>
           <ion-col>Evento</ion-col>
-          <ion-col class="ion-align-self-start">Periodo Inicial</ion-col>
-          <ion-col class="ion-align-self-start">Periodo Final</ion-col>
-          <ion-col class="ion-align-self-start">Inscrições Início</ion-col>
-          <ion-col class="ion-align-self-start">Inscrições Fim</ion-col>
-          <ion-col class="ion-align-self-start">Mínimo de Inscritos</ion-col>
-          <ion-col class="ion-align-self-start">Máximo de Inscritos</ion-col>
-          <ion-col class="ion-align-self-start">Modelo do Documento</ion-col>
-          <ion-col size-sm>Opções</ion-col>
+          <ion-col>Periodo Inicial</ion-col>
+          <ion-col>Periodo Final</ion-col>
+          <ion-col>Inscrições Início</ion-col>
+          <ion-col>Inscrições Fim</ion-col>
+          <ion-col size="1">Mínimo de Inscritos</ion-col>
+          <ion-col size="1">Máximo de Inscritos</ion-col>
+          <ion-col size="1">Inscritos</ion-col>
+          <ion-col size="1.5">Opções</ion-col>
         </ion-row>
         <div *ngFor="let evento of evento">
           <ion-radio-group>
@@ -35,28 +35,30 @@
               <ion-col>
                 {{evento.titulo}}
               </ion-col>
-              <ion-col class="ion-align-self-start">
+              <ion-col>
                 {{evento.periodoInicial}}
               </ion-col>
-              <ion-col class="ion-align-self-start">
+              <ion-col>
                 {{evento.periodoFinal}}
               </ion-col>
-              <ion-col class="ion-align-self-start">
+              <ion-col>
                 {{evento.inscricaoInicio}}
               </ion-col>
-              <ion-col class="ion-align-self-start">
+              <ion-col>
                 {{evento.inscricaoFim}}
               </ion-col>
-              <ion-col class="ion-align-self-start">
+              <ion-col size="1">
                 {{evento.qtdMinInscrito}}
               </ion-col>
-              <ion-col class="ion-align-self-start">
+              <ion-col size="1">
                 {{evento.qtdMaxInscrito}}
               </ion-col>
-              <ion-col class="ion-align-self-start">
-                {{evento.modeloDoc}}
+              <ion-col size="1">
+                <a color="success" href="javascript:;" (click)="listarInscritos(evento.codEvento)">
+                  {{evento.qtdInscritos}}
+                </a>
               </ion-col>
-              <ion-col size="1" size-sm>
+              <ion-col size="1.5">
                 <ion-button [disabled]="!evento.podeExcluir" (click)='excluir(evento.codEvento)'>
                   <ion-icon name="trash-outline"></ion-icon>
                 </ion-button>
