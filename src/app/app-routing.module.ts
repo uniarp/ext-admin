@@ -73,9 +73,15 @@ const routes: Routes = [
   {
     path: 'evento-cancelar',
     loadChildren: () => import('./evento/evento-cancelar/evento-cancelar.module').then( m => m.EventoCancelarPageModule)
-  },  {
+  },
+  {
     path: 'lista-inscritos',
     loadChildren: () => import('./evento/lista-inscritos/lista-inscritos.module').then( m => m.ListaInscritosPageModule)
+  },
+  
+  {
+    path: 'validar-frequencia',
+    loadChildren: () => import('./evento/validar-frequencia/validar-frequencia.module').then( m => m.ValidarFrequenciaPageModule)
   }
 
 
