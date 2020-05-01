@@ -16,7 +16,6 @@ export class ListaInscritosPage implements OnInit {
   inscritos: any[] = [];
   evento: any[];
   validar: any[] = [];
-  
 
   constructor(
     private eventoService: EventosService,
@@ -33,7 +32,6 @@ export class ListaInscritosPage implements OnInit {
     let codEvento: number = this.navParams.get('codEvento');
     if (codEvento) {
       this.listarInscritos(codEvento);
-      console.log(this.inscritos);
     } else {
       this.modalCtrl.dismiss();
     }
@@ -41,18 +39,20 @@ export class ListaInscritosPage implements OnInit {
 
   listarInscritos(codEvento: number) {
     this.eventoService.listarInscritos(codEvento)
-      .then(data => this.inscritos = data)
+      .then(data => {
+        this.inscritos = data;
+        console.log(data);
+      })
       .catch(erro => this.erroHandler.handleError(erro));
   }
 
-  validarFrequencia(Participante:Evento) {
-    this.eventoService.validar(Participante)
-    .then(data => {
-      this.alert.alertaToast('Presença validada', 'success');
-      console.log("teste")
-    })
-    .catch(erro => this.handler.handleError(erro));
-}
+  validarFrequencia() {
+    this.eventoService.validar(this.inscritos)
+      .then(() => {
+        this.alert.alertaToast('Presença validada', 'success');
+      })
+      .catch(erro => this.handler.handleError(erro));
+  }
 
   voltar() {
     this.modalCtrl.dismiss();

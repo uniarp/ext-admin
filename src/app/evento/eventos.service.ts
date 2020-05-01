@@ -25,7 +25,7 @@ export class EventosService {
       });
   }
 
-  
+
   cadastrar(evento: Evento): Promise<Evento> {
     console.log(evento);
     return this.http.post<Evento>(`${this.eventoUrl}/cadastrar`, evento)
@@ -47,9 +47,8 @@ export class EventosService {
       .toPromise();
   }
 
-  validar(listaEvento:Evento): Promise<Evento>{
-    console.log("validado")
-    return this.http.post<Evento>(`${this.eventoUrl}/presenca`,Participante)
+  validar(listaEvento: any): Promise<Evento> {
+    return this.http.post<Evento>(`${this.eventoUrl}/presenca`, listaEvento)
       .toPromise();
   }
 
@@ -71,7 +70,7 @@ export class Evento {
   voluntario: any[];
   atividades: any[];
   validar: any[];
-  
+
 
   constructor() {
     this.codEvento = null;

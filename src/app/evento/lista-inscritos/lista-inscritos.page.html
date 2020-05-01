@@ -39,7 +39,7 @@
           </ion-col>
           <ion-list>
             <ion-item>
-              <ion-checkbox [(ngModel)]="ins.presenca" name="validar" #presenca="ngModel" required (click)="validarFrequencia()"></ion-checkbox>
+              <ion-checkbox [(ngModel)]="ins.presente" type="boolean" name="validar" #presenca="ngModel" (ionChange)="validarFrequencia()"></ion-checkbox>
             </ion-item>
           </ion-list>
         </ion-row>
