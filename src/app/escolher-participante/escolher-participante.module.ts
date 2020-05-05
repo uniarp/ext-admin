@@ -13,7 +13,7 @@ import { EscolherParticipantePage } from './escolher-participante.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    EscolherParticipantePageRoutingModule
+    EscolherParticipantePageRoutingModule,
   ],
   declarations: [EscolherParticipantePage]
 })

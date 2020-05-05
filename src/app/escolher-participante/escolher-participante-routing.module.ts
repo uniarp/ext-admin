@@ -5,9 +5,9 @@ import { EscolherParticipantePage } from './escolher-participante.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':codEvento',
     component: EscolherParticipantePage
-  }
+  },
 ];
 
 @NgModule({
