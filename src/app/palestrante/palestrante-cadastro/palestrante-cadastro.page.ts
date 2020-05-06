@@ -1,3 +1,4 @@
+import { AlertController } from '@ionic/angular';
 import { Usuario } from './../../usuario/usuario.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
@@ -18,6 +19,7 @@ export class PalestranteCadastroPage implements OnInit {
   area: Array<Area>;
   palestrante = new Palestrante();
   areaSelec = [];
+  areaPalestrante: any[] = [];
 
   constructor(
     public palestranteService: PalestranteService,
@@ -25,7 +27,8 @@ export class PalestranteCadastroPage implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private handler: ErrorHandlerService,
-    private alert: AlertsService
+    private alert: AlertsService,
+    private alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -45,6 +48,15 @@ export class PalestranteCadastroPage implements OnInit {
     this.areaService.listarArea()
       .then(data => {
         this.area = data;
+        for (let d of this.area) {
+          this.areaSelec.push({
+            name: d.nome,
+            type: 'checkbox',
+            label: d.nome,
+            value: d,
+            checked: d.checked
+          });
+        }
       })
       .catch(erro => this.handler.handleError(`Erro ao cadastrar ${erro}`));
   }
@@ -53,12 +65,14 @@ export class PalestranteCadastroPage implements OnInit {
     this.palestranteService.carregarPalestrante(codPalestrante)
       .then(data => {
         this.palestrante = data;
+        this.areaPalestrante = data.area;
       })
       .catch(erro => this.handler.handleError(erro));
   }
 
   gravar() {
     this.palestrante.codPalestrante = this.palestrante.codPalestrante ? this.palestrante.codPalestrante : null;
+    this.palestrante.area = this.areaPalestrante;
     this.palestranteService.adicionarPalestrante(this.palestrante)
       .then(() => {
         this.alert.alertaToast(this.palestrante.codPalestrante ? 'Palestrante Alterado com Sucesso' : 'Palestrante Cadastrado com Sucesso',
@@ -68,8 +82,31 @@ export class PalestranteCadastroPage implements OnInit {
       .catch(erro => this.handler.handleError(erro));
   }
 
-  categoriasSelect(o1, o2) {
-    return o1 && o2 ? o1.codArea = o2.codArea : o1 === o2;
+  removerArea(codArea){
+    this.areaPalestrante = this.areaPalestrante.filter(elemento => {
+      return elemento.codArea !== codArea;
+    });
   }
 
+  async mostarAreas() {
+    const alert = await this.alertController.create({
+      header: 'Áreas',
+      inputs: this.areaSelec,
+      buttons: [
+        {
+          text: 'Cancelar'
+        }, {
+          text: 'Ok',
+          handler: (data) => {
+            for(let a of data){
+              this.areaPalestrante.push(a);
+            }
+            console.log(this.areaPalestrante);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
 }
