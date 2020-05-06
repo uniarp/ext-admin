@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title>{{editando?'Editar ': 'Cadastro de '}}Evento</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-back-button defaultHref="evento-pesquisa"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -93,19 +93,48 @@
     </ion-grid>
 
     <ion-item>
-      <ion-label>Voluntário<ion-text color="danger">*</ion-text>
+      <ion-label>Voluntário(s)<ion-text color="danger">*</ion-text>
       </ion-label>
-      <ion-select multiple="true" placeholder="Selecione..." ok-text="Ok" cancel-text="Cancelar"
+      <!-- <ion-select multiple="true" placeholder="Selecione..." ok-text="Ok" cancel-text="Cancelar"
         [(ngModel)]="evento.voluntario" name="voluntario" #volun="ngModel" required>
         <ion-select-option *ngFor="let v of voluntario" [value]="v">{{v.nome}}</ion-select-option>
       </ion-select>
       <div class="validaCamp" *ngIf="volun.hasError('required') && volun.touched">Selecione pelo menos um
-        voluntário</div>
+        voluntário</div> -->
+      <ion-button (click)="mostrarVoluntario()">
+        <ion-label>Adicionar Palestrante</ion-label>
+      </ion-button>
+    </ion-item>
+
+    <ion-item *ngIf="voluntarioEvento.length > 0">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4">código Voluntario</ion-col>
+          <ion-col size="6">Nome</ion-col>
+          <ion-col size-sm>Opções</ion-col>
+        </ion-row>
+        <div *ngFor="let v of voluntarioEvento">
+          <ion-row>
+            <ion-col size="4">
+              {{v.codVoluntario}}
+            </ion-col>
+            <ion-col size="6">
+              {{v.nome}}
+            </ion-col>
+            <ion-col size-sm>
+              <ion-button (click)="removerVoluntarios(v.codVoluntario)" color="danger">
+                <ion-icon name="trash-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-grid>
+      <div class="validaCamp" *ngIf="">Selecione pelo menos um Voluntario</div>
     </ion-item>
 
     <ion-item>
       <ion-label>Atividade</ion-label>
-      <ion-button (click)="novaAtividade()">Adicionar</ion-button>
+      <ion-button (click)="novaAtividade()">Adicionar Atividade</ion-button>
     </ion-item>
 
     <ion-item>
