@@ -20,14 +20,14 @@
       <ion-grid>
         <ion-row>
           <ion-col>Evento</ion-col>
-          <ion-col>Periodo Inicial</ion-col>
-          <ion-col>Periodo Final</ion-col>
+          <ion-col>Inicio</ion-col>
+          <ion-col>Fim</ion-col>
           <ion-col>Inscrições Início</ion-col>
           <ion-col>Inscrições Fim</ion-col>
-          <ion-col size="1">Mínimo de Inscritos</ion-col>
-          <ion-col size="1">Máximo de Inscritos</ion-col>
+          <ion-col size="1">Mín. Inscritos</ion-col>
+          <ion-col size="1">Máx. Inscritos</ion-col>
           <ion-col size="1">Inscritos</ion-col>
-          <ion-col size="1.5">Opções</ion-col>
+          <ion-col size="2">Opções</ion-col>
         </ion-row>
         <div *ngFor="let evento of evento">
           <ion-radio-group>
@@ -36,16 +36,16 @@
                 {{evento.titulo}}
               </ion-col>
               <ion-col>
-                {{evento.periodoInicial}}
+                {{evento.periodoInicial|date:'dd/MM/yyyy'}}
               </ion-col>
               <ion-col>
-                {{evento.periodoFinal}}
+                {{evento.periodoFinal|date:'dd/MM/yyyy'}}
               </ion-col>
               <ion-col>
-                {{evento.inscricaoInicio}}
+                {{evento.inscricaoInicio|date:'dd/MM/yyyy'}}
               </ion-col>
               <ion-col>
-                {{evento.inscricaoFim}}
+                {{evento.inscricaoFim|date:'dd/MM/yyyy'}}
               </ion-col>
               <ion-col size="1">
                 {{evento.qtdMinInscrito}}
@@ -58,7 +58,7 @@
                   {{evento.qtdInscritos}}
                 </a>
               </ion-col>
-              <ion-col size="1.5">
+              <ion-col size="2">
                 <ion-button [disabled]="!evento.podeExcluir" (click)='excluir(evento.codEvento)'>
                   <ion-icon name="trash-outline"></ion-icon>
                 </ion-button>
@@ -66,7 +66,7 @@
                   <ion-icon name="pencil-outline"></ion-icon>
                 </ion-button>
                 <ion-button (click)='cancelar(evento.codEvento)'>
-                  <ion-icon name="remove-circle"></ion-icon>
+                  <ion-icon name="close-circle-outline"></ion-icon>
                 </ion-button>
               </ion-col>
             </ion-row>
