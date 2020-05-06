@@ -1,4 +1,4 @@
-import { ModalController, NavParams } from '@ionic/angular';
+import { ModalController, NavParams, AlertController } from '@ionic/angular';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit, Input  } from '@angular/core';
 import { PalestranteService } from './../../palestrante/palestrante.service';
@@ -20,7 +20,9 @@ export class AtividadeCadastroPage implements OnInit {
 
   atividade = new Atividade();
   tipoAtividade: any[];
-  palestrante: any[];
+  palestrante: any[] = [];
+  palestranteSel = [];
+  palestanteAtv: any[] = [];
   dataHoraInicio = "";
   dataHoraFim = "";
   @Input() codAtividade: number;
@@ -33,7 +35,8 @@ export class AtividadeCadastroPage implements OnInit {
     private handler: ErrorHandlerService,
     private route: ActivatedRoute,
     public modalCtrl: ModalController,
-    public navParams: NavParams
+    public navParams: NavParams,
+    private alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -54,14 +57,25 @@ export class AtividadeCadastroPage implements OnInit {
     this.tpAtividadeService.listaTpAtividade()
       .then(data => {
         this.tipoAtividade = data.map(a => ({ codTipo: a.codTipoAtividade, nome: a.nome }));
-        console.log(this.tipoAtividade);
       })
       .catch(erro => this.handler.handleError(erro));
   }
 
   carregarPalestrantes() {
     this.palestranteService.listar()
-      .then(data => this.palestrante = data)
+      .then(data => {
+        this.palestrante = data;
+        console.log(data);
+        for (const p of this.palestrante) {
+          this.palestranteSel.push({
+            name: p.nome,
+            type: 'checkbox',
+            label: p.nome,
+            value: p,
+            checked: false
+          });
+        }
+      })
       .catch(erro => this.handler.handleError(erro));
   }
 
@@ -70,6 +84,7 @@ export class AtividadeCadastroPage implements OnInit {
       .then(data => {
         this.atividade = data;
         this.carregaData();
+        this.palestanteAtv = data.palestrante;
       })
       .catch(erro => this.handler.handleError(erro));
   }
@@ -77,6 +92,7 @@ export class AtividadeCadastroPage implements OnInit {
   gravar(form: NgForm) {
     const msg = this.editando ? "alterado" : "cadastrado";
     this.pegaData();
+    this.atividade.palestrante = this.palestanteAtv;
     console.log(this.atividade);
     this.atividadeService.gravar(this.atividade)
       .then(data => {
@@ -100,5 +116,33 @@ export class AtividadeCadastroPage implements OnInit {
   carregaData() {
     this.dataHoraInicio = this.atividade.dataInicio;
     this.dataHoraFim = this.atividade.dataFim;
+  }
+
+  removerPalestrante(codPalestrante){
+    this.palestanteAtv = this.palestanteAtv.filter(elemento => {
+      return elemento.codPalestrante !== codPalestrante;
+    });
+  }
+
+  async mostrarPalestrante() {
+    const alert = await this.alertController.create({
+      header: 'Áreas',
+      inputs: this.palestranteSel,
+      buttons: [
+        {
+          text: 'Cancelar'
+        }, {
+          text: 'Ok',
+          handler: (data) => {
+            for(let p of data){
+              this.palestanteAtv.push(p);
+            }
+            console.log(this.palestanteAtv);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 }

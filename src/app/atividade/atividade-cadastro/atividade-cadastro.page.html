@@ -61,14 +61,44 @@
     </ion-grid>
 
     <ion-item>
-      <ion-label>Palestrantes<ion-text color="danger">*</ion-text>
+      <!-- <ion-label>Palestrantes<ion-text color="danger">*</ion-text>
       </ion-label>
       <ion-select multiple="true" placeholder="Selecione..." ok-text="Ok" cancel-text="Cancelar"
         [(ngModel)]="atividade.palestrante" name="palestrante" #pales="ngModel" required>
         <ion-select-option *ngFor="let p of palestrante" [value]="p">{{p.nome}}</ion-select-option>
       </ion-select>
       <div class="validaCamp" *ngIf="pales.hasError('required') && pales.touched">Selecione pelo menos um
-        palestrante</div>
+        palestrante</div> -->
+        <ion-label>Palestrante(s)</ion-label>
+        <ion-button (click)="mostrarPalestrante()">
+          <ion-label>Adicionar Palestrante</ion-label>
+        </ion-button>
+    </ion-item>
+
+    <ion-item *ngIf="palestanteAtv.length > 0">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4">código Palestrante</ion-col>
+          <ion-col size="6">Nome</ion-col>
+          <ion-col size-sm>Opções</ion-col>
+        </ion-row>
+        <div *ngFor="let p of palestanteAtv">
+          <ion-row>
+            <ion-col size="4">
+              {{p.codPalestrante}}
+            </ion-col>
+            <ion-col size="6">
+              {{p.nome}}
+            </ion-col>
+            <ion-col size-sm>
+              <ion-button (click)="removerPalestrante(p.codPalestrante)" color="danger">
+                <ion-icon name="trash-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-grid>
+      <div class="validaCamp" *ngIf="">Selecione pelo menos uma Área</div>
     </ion-item>
 
     <div>
