@@ -7,57 +7,41 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <div class="container">
-    <ion-item>
-      <ion-label> Buscar Palestrante:</ion-label>
-      <ion-input placeholder="Ex: Carlos Zorzo"></ion-input>
-      <ion-button (click)='listarPalestrante(42)'>
-        <ion-icon name="search-outline"></ion-icon>
-        Buscar
-      </ion-button>
-    </ion-item>
-    <ion-item>
-      <ion-grid>
+  <ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="3"> Nome</ion-col>
+        <ion-col>CPF</ion-col>
+        <ion-col>Telefone</ion-col>
+        <ion-col size="3">E-mail</ion-col>
+        <ion-col size="1.5">Opções</ion-col>
+      </ion-row>
+      <div *ngFor="let palestrante of palestrante">
         <ion-row>
-          <ion-col> Nome</ion-col>
-          <ion-col class="ion-align-self-start">CPF</ion-col>
-          <ion-col class="ion-align-self-start">Telefone</ion-col>
-          <ion-col class="ion-align-self-start">E-mail</ion-col>
-          <ion-col class="ion-align-self-start">Área</ion-col>
-          <ion-col size-sm>Opções</ion-col>
+          <ion-col size="3">
+            {{palestrante.nome}}
+          </ion-col>
+          <ion-col>
+            {{palestrante.cpf}}
+          </ion-col>
+          <ion-col>
+            {{palestrante.telefone}}
+          </ion-col>
+          <ion-col size="3">
+            {{palestrante.email}}
+          </ion-col>
+          <ion-col size="1.5">
+            <ion-button (click)='excluir(palestrante.codPalestrante)'>
+              <ion-icon name="trash-outline"></ion-icon>
+            </ion-button>
+            <ion-button (click)='editarCadastro(palestrante.codPalestrante)'>
+              <ion-icon name="pencil-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
         </ion-row>
-        <div *ngFor="let palestrante of palestrante">
-          <ion-radio-group>
-            <ion-row>
-              <ion-col>
-                {{palestrante.nome}}
-              </ion-col>
-              <ion-col class="ion-align-self-start">
-                {{palestrante.cpf}}
-              </ion-col>
-              <ion-col class="ion-align-self-start">
-                {{palestrante.telefone}}
-              </ion-col>
-              <ion-col class="ion-align-self-start">
-                {{palestrante.email}}
-              </ion-col>
-              <ion-col class="ion-align-self-start">
-                {{palestrante.area}}
-              </ion-col>
-              <ion-col size="1" size-sm>
-                <ion-button (click)='excluir(palestrante.codPalestrante)'>
-                  <ion-icon name="trash-outline"></ion-icon>
-                </ion-button>
-                <ion-button (click)='editarCadastro(palestrante.codPalestrante)'>
-                  <ion-icon name="pencil-outline"></ion-icon>
-                </ion-button>
-              </ion-col>
-            </ion-row>
-          </ion-radio-group>
-        </div>
-      </ion-grid>
-    </ion-item>
-  </div>
+      </div>
+    </ion-grid>
+  </ion-item>
 </ion-content>
 <ion-footer>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
