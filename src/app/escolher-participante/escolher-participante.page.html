@@ -1,0 +1,24 @@
+<ion-content>
+
+  <ion-item>
+    <b>Selecionar Participante: </b>
+  </ion-item>
+  <ion-item>
+    <ion-list>
+      <ion-item *ngFor="let participante of participante">
+        <ion-col>
+          <ion-item>
+            {{participante.nome}}
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-button slot="end" (click)='inscrever(participante.codParticipante)'>
+              <ion-icon name="pencil-outline"></ion-icon>
+            </ion-button>
+          </ion-item>
+        </ion-col>
+      </ion-item>
+    </ion-list>
+  </ion-item>
+</ion-content>

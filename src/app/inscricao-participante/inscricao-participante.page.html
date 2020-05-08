@@ -13,15 +13,15 @@
   <form autocomplete="off" #partiForm="ngForm" (ngSubmit)="gravar(partiForm)">
     <ion-item>
       <ion-item>Participante: </ion-item>
-      <ion-input placeholder="*Nome:" type="text" [(ngModel)]="participante.nome" #nome="ngModel" name="nome" required
-        minlength="10"></ion-input>
-      <div class="validaCamp" *ngIf="nome.hasError('required') && nome.touched">*Informe um nome válido</div>
-      <div class="validaCamp" *ngIf="nome.hasError('minlength')">*O nome precisa ser completo</div>
-    </ion-item>
+      <ion-input  type="text" [(ngModel)]="participante.nome" #nome="ngModel" name="nome" required
+        minlength="10">
+      </ion-input>
+      </ion-item>
     <ion-item>
       <ion-item>CPF: </ion-item>
-      <ion-input placeholder="CPF:" type="text" [(ngModel)]="participante.cpf" #cpf="ngModel" name="cpf"
-        [brmasker]="{person: true}" maxlength="14"></ion-input>
+      <ion-input  type="text" [(ngModel)]="participante.cpf" #cpf="ngModel" name="cpf" required
+        [brmasker]="{person: true}" maxlength="14">
+      </ion-input>
     </ion-item>
     <ion-item>
       <ion-item>Evento: </ion-item>
