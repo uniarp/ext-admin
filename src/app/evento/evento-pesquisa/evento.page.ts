@@ -69,4 +69,9 @@ export class EventoPage implements OnInit {
     modal.present();
   }
 
+  validarFrequencia(codEvento) {
+    console.log(codEvento);
+    this.router.navigate(['/evento-cadastro', codEvento]);
+  }
+
 }

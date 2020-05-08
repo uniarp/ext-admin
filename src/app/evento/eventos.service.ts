@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Participante } from '../participante/participante-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class EventosService {
         return data[0];
       });
   }
-  
+
 
   cadastrar(evento: Evento): Promise<Evento> {
     console.log(evento);
@@ -46,7 +47,12 @@ export class EventosService {
       .toPromise();
   }
 
-  cancelar(codEvento: number) { 
+  validar(listaEvento: any): Promise<Evento> {
+    return this.http.post<Evento>(`${this.eventoUrl}/presenca`, listaEvento)
+      .toPromise();
+  }
+
+  cancelar(codEvento: number) {
   }
 }
 
@@ -63,11 +69,14 @@ export class Evento {
   modeloDoc: string;
   voluntario: any[];
   atividades: any[];
+  validar: any[];
 
-  constructor () {
+
+  constructor() {
     this.codEvento = null;
     this.voluntario = [];
     this.atividades = [];
+    this.validar = [];
     this.modeloDoc = '';
 
   }
