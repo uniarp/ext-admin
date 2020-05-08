@@ -12,6 +12,7 @@ import * as moment from 'moment';
 import { TipoAtividadeService } from 'src/app/tipoAtividade/tipo-atividade.service';
 import { AtividadeService } from 'src/app/atividade/atividade.service';
 import { AreaService } from 'src/app/area/area.service';
+import { ListaInscritosPage } from '../lista-inscritos/lista-inscritos.page';
 
 @Component({
   selector: 'app-evento-cancelar',
@@ -78,11 +79,35 @@ export class EventoCancelarPage implements OnInit {
     this.evento.periodoInicial = moment(this.evento.periodoInicial).format("YYYY-MM-DD HH:mm:ss");
   }
 
-  cancelar(codEvento: number) {
+  async cancelar(codEvento: number) {
     this.eventoService.cancelar(codEvento)
-    this.alert.alertaToast('Evento cancelado com sucesso', 'success');
     console.log('Status Cancelado');
-    this.router.navigate(['/evento-pesquisa']);
+    console.log(this.evento.motivo);
+    this.dismiss();
+    const modal = await this.modalController.create({
+      component: ListaInscritosPage,
+    /*  componentProps: {
+        'codEvento': codEvento
+      } */
+    });
+    await modal.present();
+    this.alert.alertaToast('Evento cancelado com sucesso', 'success');
+  }
+  /*  
+  gravar(form: NgForm) {
+    const msg = this.editando ? "alterado" : "cadastrado";
+    this.pegaData();
+    console.log(this.atividade);
+    this.atividadeService.gravar(this.atividade)
+      .then(data => {
+        this.alert.alertaToast(`${data.titulo} ${msg} com sucesso`, 'success');
+        this.dismiss(data);
+      })
+      .catch(erro => this.handler.handleError(erro));
+  } */
+
+  dismiss() {
+    this.modalController.dismiss();
   }
 
   close() {

@@ -70,6 +70,7 @@ export class Evento {
   voluntario: any[];
   atividades: any[];
   validar: any[];
+  motivo: string;
 
 
   constructor() {
