@@ -1,17 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>lista-inscritos</ion-title>
-    <ion-item slot="start" (click)="voltar()">
-      <ion-icon name="arrow-back-outline" large></ion-icon>
-    </ion-item>
+    <ion-title>Validar frequência</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="texto" *ngIf="inscritos.length <= 0">
-    <ion-note class="texto" color="dark">Sem Inscritos até o momento</ion-note>
-  </div>
-  <ion-item *ngIf="inscritos.length > 0">
+  <!-- <ion-item *ngIf="inscritos.length > 0">
     <ion-grid>
       <ion-row>
         <ion-col>Inscrito</ion-col>
@@ -37,13 +31,9 @@
           <ion-col>
             {{ins.email}}
           </ion-col>
-          <ion-list>
-            <ion-item>
-              <ion-checkbox [(ngModel)]="ins.presente" type="boolean" name="validar" #presenca="ngModel" (ionChange)="validarFrequencia()"></ion-checkbox>
-            </ion-item>
-          </ion-list>
         </ion-row>
       </div>
     </ion-grid>
-  </ion-item>
+  </ion-item> -->
+
 </ion-content>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ToastController, ModalController } from '@ionic/angular';
+import { ToastController, ModalController, AlertController } from '@ionic/angular';
 
 import { AtividadeCadastroPage } from './../../atividade/atividade-cadastro/atividade-cadastro.page';
 import { Evento, EventosService } from '../eventos.service';
@@ -23,8 +23,9 @@ export class EventoCadastroPage implements OnInit {
   evento = new Evento();
   atividades: any[] = [];
   voluntario: any[];
-  area: any[];
-
+  voluntariosSelec = [];
+  voluntarioEvento: any[] = [];
+  area: any[] = [];
 
 
   constructor(
@@ -37,7 +38,8 @@ export class EventoCadastroPage implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public modalController: ModalController,
-    public handler: ErrorHandlerService
+    public handler: ErrorHandlerService,
+    private alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -61,19 +63,37 @@ export class EventoCadastroPage implements OnInit {
         console.log(data);
         this.evento = data;
         this.atividades = this.evento.atividades;
+        this.voluntarioEvento = data.voluntario;
       })
       .catch(erro => this.handler.handleError(erro));
   }
 
   carregarArea() {
     this.areaService.listarArea()
-      .then(data => this.area = data)
+      .then(data => {
+        console.log(data);
+        this.area = data.map(a => (
+          { codArea: a.codArea, nome: a.nome }
+        )
+        );
+      })
       .catch(erro => this.handler.handleError(erro));
   }
 
   carregarVoluntario() {
     this.voluntarioService.listar()
-      .then(data => this.voluntario = data)
+      .then(data => {
+        this.voluntario = data;
+        for (const v of this.voluntario) {
+          this.voluntariosSelec.push({
+            name: v.nome,
+            type: 'checkbox',
+            label: v.nome,
+            value: v,
+            checked: false
+          });
+        }
+      })
       .catch(erro => this.handler.handleError(erro));
   }
 
@@ -81,10 +101,11 @@ export class EventoCadastroPage implements OnInit {
     this.evento.atividades = this.atividades;
     const msg = this.editando ? "alterado" : "cadastrado";
     this.pegaData();
+    this.evento.voluntario = this.voluntarioEvento;
     console.log(this.evento);
     this.eventoService.cadastrar(this.evento)
       .then(data => {
-        this.alert.alertaToast(`${data.titulo} ${msg} com sucesso`, 'success');
+        this.alert.alertaToast(`${this.evento.titulo} ${msg} com sucesso`, 'success');
         console.log(data);
         this.router.navigate(['/evento-pesquisa']);
       })
@@ -109,7 +130,6 @@ export class EventoCadastroPage implements OnInit {
     await modal.present();
     const { data } = await modal.onWillDismiss();
     if (data) {
-      console.log(data);
       this.atividades.push(data);
     }
   }
@@ -142,6 +162,34 @@ export class EventoCadastroPage implements OnInit {
     this.evento.inscricaoFim = moment(this.evento.inscricaoFim).format("YYYY-MM-DD HH:mm:ss");
     this.evento.periodoFinal = moment(this.evento.periodoFinal).format("YYYY-MM-DD HH:mm:ss");
     this.evento.periodoInicial = moment(this.evento.periodoInicial).format("YYYY-MM-DD HH:mm:ss");
+  }
+
+  removerVoluntarios(codVoluntario) {
+    this.voluntarioEvento = this.voluntarioEvento.filter(elemento => {
+      return elemento.codVoluntario !== codVoluntario;
+    });
+  }
+
+  async mostrarVoluntario() {
+    const alert = await this.alertController.create({
+      header: 'Áreas',
+      inputs: this.voluntariosSelec,
+      buttons: [
+        {
+          text: 'Cancelar'
+        }, {
+          text: 'Ok',
+          handler: (data) => {
+            for (let p of data) {
+              this.voluntarioEvento.push(p);
+            }
+            console.log(this.voluntarioEvento);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
 }

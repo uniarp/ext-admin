@@ -1,11 +1,13 @@
-
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+
 //{ path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '', redirectTo: 'evento-pesquisa', pathMatch: 'full' },
+
   { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomePageModule) },
   {
     path: 'palestrante-cadastro',
@@ -79,15 +81,20 @@ const routes: Routes = [
   {
     path: 'lista-inscritos',
     loadChildren: () => import('./evento/lista-inscritos/lista-inscritos.module').then( m => m.ListaInscritosPageModule)
-  },  {
-    path: 'atividade-pesquisa',
-    loadChildren: () => import('./atividade/atividade-pesquisa/atividade-pesquisa.module').then( m => m.AtividadePesquisaPageModule)
-  }
-
+  },
+  {
+    path: 'validar-frequencia',
+    loadChildren: () => import('./evento/validar-frequencia/validar-frequencia.module').then( m => m.ValidarFrequenciaPageModule)
+  },
+  {
+    path: 'escolher-participante/:id',
+    loadChildren: () => import('./escolher-participante/escolher-participante.module').then( m => m.EscolherParticipantePageModule)
+  },
 
 
 ];
     
+
 
 @NgModule({
   imports: [

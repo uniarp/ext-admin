@@ -1,7 +1,10 @@
 import { ErrorHandlerService } from './../../core/services/error-handler.service';
-import { EventosService } from './../eventos.service';
+import { EventosService, Evento } from './../eventos.service';
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
+import { AlertsService } from 'src/app/core/services/alerts.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-lista-inscritos',
@@ -11,19 +14,24 @@ import { NavParams, ModalController } from '@ionic/angular';
 export class ListaInscritosPage implements OnInit {
 
   inscritos: any[] = [];
+  evento: any[];
+  validar: any[] = [];
 
   constructor(
     private eventoService: EventosService,
     private erroHandler: ErrorHandlerService,
     public navParams: NavParams,
     public modalCtrl: ModalController,
+    private alert: AlertsService,
+    private router: Router,
+    private route: ActivatedRoute,
+    public handler: ErrorHandlerService
   ) { }
 
   ngOnInit() {
     let codEvento: number = this.navParams.get('codEvento');
     if (codEvento) {
       this.listarInscritos(codEvento);
-      console.log(this.inscritos);
     } else {
       this.modalCtrl.dismiss();
     }
@@ -31,8 +39,19 @@ export class ListaInscritosPage implements OnInit {
 
   listarInscritos(codEvento: number) {
     this.eventoService.listarInscritos(codEvento)
-      .then(data => this.inscritos = data)
+      .then(data => {
+        this.inscritos = data;
+        console.log(data);
+      })
       .catch(erro => this.erroHandler.handleError(erro));
+  }
+
+  validarFrequencia() {
+    this.eventoService.validar(this.inscritos)
+      .then(() => {
+        this.alert.alertaToast('Presença validada', 'success');
+      })
+      .catch(erro => this.handler.handleError(erro));
   }
 
   voltar() {

@@ -27,4 +27,9 @@ export class AreaService {
 export class Area{
   codArea: number;
   nome: string;
+  checked: false;
+
+  constructor(){
+    this.checked = false;
+  }
 }
