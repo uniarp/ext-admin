@@ -30,11 +30,43 @@
     </ion-item>
 
     <ion-item>
+      <ion-label>Area de Atuação</ion-label>
+      <ion-button (click)="mostarAreas()">
+        Adicionar Àrea
+      </ion-button>
+    </ion-item>
+
+    <!-- <ion-item>
       <ion-label>*Área</ion-label>
       <ion-select [(ngModel)]="palestrante.area" name="area" placeholder="Selecione..." multiple="true" ok-text="Ok"
         cancel-text="Cancelar" [compareWith]="categoriasSelect" required>
         <ion-select-option *ngFor="let a of area" [value]="a">{{a.nome}}</ion-select-option>
       </ion-select>
+      <div class="validaCamp" *ngIf="">Selecione pelo menos uma Área</div>
+    </ion-item> -->
+    <ion-item *ngIf="areaPalestrante.length > 0">
+      <ion-grid>
+        <ion-row>
+          <ion-col>codígo da Area</ion-col>
+          <ion-col>Nome</ion-col>
+          <ion-col size="1" size-sm>Opções</ion-col>
+        </ion-row>
+        <div *ngFor="let area of areaPalestrante">
+          <ion-row>
+            <ion-col>
+              {{area.codArea}}
+            </ion-col>
+            <ion-col>
+              {{area.nome}}
+            </ion-col>
+            <ion-col size="1" size-sm>
+              <ion-button (click)="removerArea(area.codArea)" color="danger">
+                <ion-icon name="trash-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-grid>
       <div class="validaCamp" *ngIf="">Selecione pelo menos uma Área</div>
     </ion-item>
 
@@ -45,6 +77,6 @@
 
     <div class="validaCamp" *ngIf="palesForm.invalid">Campos com * São obrigatórios</div>
     <br>
-    <ion-button type="submit" [disabled]="palesForm.invalid">Gravar</ion-button>
+    <ion-button type="submit" [disabled]="palesForm.invalid && areaPalestrante.length <= 0">Gravar</ion-button>
   </form>
 </ion-content>

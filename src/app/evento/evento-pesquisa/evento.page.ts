@@ -28,6 +28,10 @@ export class EventoPage implements OnInit {
     this.router.navigate(['/evento-cadastro']);
   }
 
+  inscreverParticipante(codEvento) {
+    this.router.navigate(['/escolher-participante', codEvento]);
+  }
+
   editarCadastro(codEvento) {
     console.log(codEvento);
     this.router.navigate(['/evento-cadastro', codEvento]);
