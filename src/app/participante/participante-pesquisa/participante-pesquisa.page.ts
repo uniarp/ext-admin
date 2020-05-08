@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ParticipanteServiceService, Participante } from '../participante-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
+import { AtividadeService } from 'src/app/atividade/atividade.service';
 
 @Component({
   selector: 'app-participante-pesquisa',
@@ -11,9 +12,11 @@ import { ErrorHandlerService } from 'src/app/core/services/error-handler.service
 export class ParticipantePesquisaPage implements OnInit {
 
   participante: Participante;
+  // atividade: any[] = [];
 
   constructor(
     private participanteService: ParticipanteServiceService,
+    private atividadeService: AtividadeService,
     public router: Router,
     private route: ActivatedRoute,
     public handler: ErrorHandlerService
@@ -39,6 +42,15 @@ export class ParticipantePesquisaPage implements OnInit {
 
   novoCadastro() {
     this.router.navigate(['participante-cadastro']);
+  }
+
+  // async listarAtividade() {
+  //   console.log(this.listarAtividade);
+  //   this.participanteService.listaAtividade(this.participante);
+  // }
+
+  public listarAtividade() {
+    this.router.navigate(['/atividade-pesquisa']);
   }
 
   async alterar(codParticipante) {

@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter } from 'protractor';
+import { Atividade } from '../atividade/atividade.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ParticipanteServiceService {
   participanteUrl = 'https://uniarpextensao.herokuapp.com/public/participantes';
+  atividadeUrl: any;
 
   constructor(private http: HttpClient) { }
 
@@ -38,6 +40,11 @@ export class ParticipanteServiceService {
   excluir(codParticipante: number): Promise<Participante> {
     return this.http.delete<Participante>(`${this.participanteUrl}/excluir/${codParticipante}`)
       .toPromise();
+  }
+
+  listaAtividade(codAtividade: any):Promise<Atividade>{
+    return this.http.get<any>(`${this.atividadeUrl}/listar/${codAtividade}`)
+    .toPromise();
   }
 }
 

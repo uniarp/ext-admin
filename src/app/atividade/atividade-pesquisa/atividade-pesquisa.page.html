@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Pesquisa Atividade</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="container">
+    <ion-item>
+      <ion-label> Buscar Atividade:</ion-label>
+      <ion-input placeholder="Ex: Sead"></ion-input>
+      <ion-button>
+        <ion-icon name="search-outline"></ion-icon>
+        Buscar
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col>titulo</ion-col>
+          <ion-col>Tipo Atividade</ion-col>
+          <ion-col>Local</ion-col>
+          <ion-col>Descrição</ion-col>
+          <ion-col size="1">Data e Hora de Início</ion-col>
+          <ion-col size="1">Data e Hora de Término</ion-col>
+          <ion-col size="1">Palestrantes</ion-col>
+          <ion-col size="1.5">Opções</ion-col>
+        </ion-row>
+        <div *ngFor="let atividade of atividade">
+          <ion-radio-group>
+            <ion-row>
+              <ion-col>
+                {{atividade.titulo}}
+              </ion-col>
+              <ion-col>
+                {{atividade.tipoAtividade}}
+              </ion-col>
+              <ion-col>
+                {{atividade.local}}
+              </ion-col>
+              <ion-col>
+                {{atividade.descricao}}
+              </ion-col>
+              <ion-col>
+                {{atividade.dataHoraInicio}}
+              </ion-col>
+              <ion-col size="1">
+                {{atividade.dataHoraFim}}
+              </ion-col>
+              <ion-col size="1">
+                {{atividade.palestrantes}}
+              </ion-col>
+              <!-- <ion-col size="1">
+                <a color="success" href="javascript:;" (click)="listarInscritos(evento.codEvento)">
+                  {{evento.qtdInscritos}}
+                </a>
+              </ion-col> -->
+              <ion-col size="1.5">
+                <ion-button [disabled]="!evento.podeExcluir" (click)='excluir(evento.codEvento)'>
+                  <ion-icon name="trash-outline"></ion-icon>
+                </ion-button>
+                <ion-button (click)='cancelar(evento.codEvento)'>
+                  <ion-icon name="remove-circle"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-radio-group>
+        </div>
+      </ion-grid>
+    </ion-item>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)='adicionar()'>
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-footer>
