@@ -79,7 +79,11 @@ const routes: Routes = [
   {
     path: 'lista-inscritos',
     loadChildren: () => import('./evento/lista-inscritos/lista-inscritos.module').then( m => m.ListaInscritosPageModule)
+  },  {
+    path: 'atividade-pesquisa',
+    loadChildren: () => import('./atividade/atividade-pesquisa/atividade-pesquisa.module').then( m => m.AtividadePesquisaPageModule)
   }
+
 
 
 ];

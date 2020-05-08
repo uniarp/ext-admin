@@ -19,7 +19,13 @@ export class AtividadeService {
       return res[0];
     })
   }
+  listar(): Promise<Atividade> {
+    return this.http.get<Atividade>(this.atividadeUrl + '/listar')
+      .toPromise();
+  }
+
   listaAtividade(codAtividade: number): Promise<Atividade>{
+    console.log("mee")
     return this.http.get<Atividade>(`${this.atividadeUrl}/listar/${codAtividade}`)
     .toPromise()
     .then( res => {
@@ -33,6 +39,7 @@ export class AtividadeService {
       .then( res => res);
   }
 
+
 }
 
 export class Atividade {
@@ -45,6 +52,7 @@ export class Atividade {
   localizacao: string;
   descricao: string;
   palestrante: any[];
+  evento: any[];
 
   constructor () {
     this.codAtividade = null;
