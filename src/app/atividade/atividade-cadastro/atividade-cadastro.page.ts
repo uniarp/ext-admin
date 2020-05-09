@@ -126,7 +126,7 @@ export class AtividadeCadastroPage implements OnInit {
 
   async mostrarPalestrante() {
     const alert = await this.alertController.create({
-      header: 'Áreas',
+      header: 'Selecione Palestrante(s)',
       inputs: this.palestranteSel,
       buttons: [
         {

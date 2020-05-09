@@ -1,8 +1,8 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Cadastro de Voluntário</ion-title>
+    <ion-title>{{editando?'Editar ': 'Cadastro de '}}Voluntário</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-back-button defaultHref="voluntario-pesquisa"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -12,13 +12,13 @@
       <ion-item>
         <ion-input placeholder="*Nome:" type="text" [(ngModel)]="voluntario.nome" #nome="ngModel" name="nome" required
           minlength="10"></ion-input>
-        <div class="validaCamp" *ngIf="nome.hasError('required') && nome.touched">*Informe um nome válido</div>
+        <div class="validaCamp" *ngIf="nome.hasError('required') && nome.touched">*Informe um nome válido!</div>
         <div class="validaCamp" *ngIf="nome.hasError('minlength')">*O nome precisa ser completo</div>
       </ion-item>
       <ion-item>
         <ion-input placeholder="*E-mail:" type="email" [(ngModel)]="voluntario.email" #email="ngModel" name="email" required
           email></ion-input>
-        <div class="validaCamp" *ngIf="email.hasError('email')">*Informe um e-mail valido</div>
+        <div class="validaCamp" *ngIf="email.hasError('email')">*Informe um e-mail válido!</div>
       </ion-item>
       <ion-item>
         <ion-input placeholder="CPF:" type="text" [(ngModel)]="voluntario.cpf" #cpf="ngModel" name="cpf"
@@ -36,7 +36,7 @@
         <ion-input placeholder="Curso:" type="text" [(ngModel)]="voluntario.curso" #curso="ngModel" name="curso" ></ion-input>
       </ion-item>
 
-      <div class="validaCamp" *ngIf="volunForm.invalid">Campos com * São obrigatórios</div>
+      <div class="validaCamp" *ngIf="volunForm.invalid">Campos com * São obrigatórios!</div>
       <br>
       <ion-button type="submit" [disabled]="volunForm.invalid">Gravar</ion-button>
     </form>

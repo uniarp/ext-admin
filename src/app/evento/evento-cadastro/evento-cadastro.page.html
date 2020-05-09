@@ -14,7 +14,7 @@
       <ion-label position="floating">Título<ion-text color="danger">*</ion-text>
       </ion-label>
       <ion-input [(ngModel)]="evento.titulo" name="titulo" #titulo="ngModel" required></ion-input>
-      <div class="validaCamp" *ngIf="titulo.hasError('required') && titulo.touched">*Informe o Título do Evento
+      <div class="validaCamp" *ngIf="titulo.hasError('required') && titulo.touched">*Informe um Título para o Evento
       </div>
     </ion-item>
 
@@ -102,14 +102,14 @@
       <div class="validaCamp" *ngIf="volun.hasError('required') && volun.touched">Selecione pelo menos um
         voluntário</div> -->
       <ion-button (click)="mostrarVoluntario()">
-        <ion-label>Adicionar Palestrante</ion-label>
+        <ion-label>Adicionar Voluntário</ion-label>
       </ion-button>
     </ion-item>
 
     <ion-item *ngIf="voluntarioEvento.length > 0">
       <ion-grid>
         <ion-row>
-          <ion-col size="4">código Voluntario</ion-col>
+          <ion-col size="4">Código do Voluntário</ion-col>
           <ion-col size="6">Nome</ion-col>
           <ion-col size-sm>Opções</ion-col>
         </ion-row>
@@ -129,11 +129,11 @@
           </ion-row>
         </div>
       </ion-grid>
-      <div class="validaCamp" *ngIf="">Selecione pelo menos um Voluntario</div>
+      <div class="validaCamp" *ngIf="">Selecione pelo menos um Voluntário</div>
     </ion-item>
 
     <ion-item>
-      <ion-label>Atividade</ion-label>
+      <ion-label>Atividade(s)</ion-label>
       <ion-button (click)="novaAtividade()">Adicionar Atividade</ion-button>
     </ion-item>
 

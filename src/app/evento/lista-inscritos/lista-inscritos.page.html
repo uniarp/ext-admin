@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>lista-inscritos</ion-title>
+    <ion-title>Lista de Inscritos</ion-title>
     <ion-item slot="start" (click)="voltar()">
       <ion-icon name="arrow-back-outline" large></ion-icon>
     </ion-item>
@@ -9,16 +9,17 @@
 
 <ion-content>
   <div class="texto" *ngIf="inscritos.length <= 0">
-    <ion-note class="texto" color="dark">Sem Inscritos até o momento</ion-note>
+    <ion-note class="texto" color="dark">Sem inscritos até o momento!</ion-note>
   </div>
   <ion-item *ngIf="inscritos.length > 0">
     <ion-grid>
       <ion-row>
-        <ion-col>Inscrito</ion-col>
+        <ion-col>Nome</ion-col>
         <ion-col>CPF</ion-col>
         <ion-col>RA</ion-col>
         <ion-col>Telefone</ion-col>
         <ion-col>E-mail</ion-col>
+        <ion-col>Validar Presença</ion-col> <!-- Validar Frequência  -->
       </ion-row>
       <div *ngFor="let ins of inscritos">
         <ion-row>

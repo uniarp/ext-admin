@@ -1,8 +1,8 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Cadastro de Participante</ion-title>
+    <ion-title>{{editando?'Editar ': 'Cadastro de '}}Participante</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-back-button defaultHref="participante-pesquisa"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -14,13 +14,13 @@
     <ion-item>
       <ion-input placeholder="*Nome:" type="text" [(ngModel)]="participante.nome" #nome="ngModel" name="nome" required
         minlength="10"></ion-input>
-      <div class="validaCamp" *ngIf="nome.hasError('required') && nome.touched">*Informe um nome válido</div>
-      <div class="validaCamp" *ngIf="nome.hasError('minlength')">*O nome precisa ser completo</div>
+      <div class="validaCamp" *ngIf="nome.hasError('required') && nome.touched">*Informe um nome válido!</div>
+      <div class="validaCamp" *ngIf="nome.hasError('minlength')">*O nome precisa ser completo!</div>
     </ion-item>
     <ion-item>
       <ion-input placeholder="*E-mail:" type="email" [(ngModel)]="participante.email" #email="ngModel" name="email" required
         email></ion-input>
-      <div class="validaCamp" *ngIf="email.hasError('email')">*Informe um e-mail valido</div>
+      <div class="validaCamp" *ngIf="email.hasError('email')">*Informe um e-mail válido!</div>
     </ion-item>
     <ion-item>
       <ion-input placeholder="CPF:" type="text" [(ngModel)]="participante.cpf" #cpf="ngModel" name="cpf"
@@ -29,12 +29,12 @@
     <ion-item>
       <ion-input [type]="password_type" placeholder="*Senha:" [(ngModel)]="confirSenha" #senhaC="ngModel" name="senhaC"
         required minlength="6"></ion-input>
-      <div class="validaCamp" *ngIf="senha.hasError('minlength')">*A senha precisa ter no minimo 6 digitos</div>
+      <div class="validaCamp" *ngIf="senha.hasError('minlength')">*A senha precisa ter no mínimo 6 dígitos!</div>
     </ion-item>
     <ion-item>
       <ion-input [type]="password_type" placeholder="*Confirme sua Senha:" [(ngModel)]="participante.senha" #senha="ngModel"
         name="senha" required></ion-input>
-      <div class="validaCamp" *ngIf="confirSenha != participante.senha && senha.dirty">Senhas não Coincide com a anterior
+      <div class="validaCamp" *ngIf="confirSenha != participante.senha && senha.dirty">Senha não coincide com a anterior!
       </div>
     </ion-item>
     <ion-item>

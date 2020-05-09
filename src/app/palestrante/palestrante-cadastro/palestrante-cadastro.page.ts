@@ -90,7 +90,7 @@ export class PalestranteCadastroPage implements OnInit {
 
   async mostarAreas() {
     const alert = await this.alertController.create({
-      header: 'Áreas',
+      header: 'Selecione Área(s)',
       inputs: this.areaSelec,
       buttons: [
         {

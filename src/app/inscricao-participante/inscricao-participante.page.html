@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Inscricao de Participante</ion-title>
+    <ion-title>Inscrever Participante</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="home"></ion-back-button>
     </ion-buttons>
@@ -10,41 +10,41 @@
 
 <ion-content>
 
-  <form autocomplete="off" #partiForm="ngForm" (ngSubmit)="gravar(partiForm)">
+  <form #partiForm="ngForm" autocomplete="off" (ngSubmit)="gravar(partiForm)">
+
     <ion-item>
-      <ion-item>Participante: </ion-item>
-      <ion-input  type="text" [(ngModel)]="participante.nome" #nome="ngModel" name="nome" required
-        minlength="10">
+      <ion-label position="floating">Nome</ion-label>
+      <ion-input type="text" [(ngModel)]="participante.nome" #nome="ngModel" name="nome" required minlength="10">
       </ion-input>
-      </ion-item>
+    </ion-item>
     <ion-item>
-      <ion-item>CPF: </ion-item>
-      <ion-input  type="text" [(ngModel)]="participante.cpf" #cpf="ngModel" name="cpf" required
+      <ion-label position="floating">CPF</ion-label>
+      <ion-input type="text" [(ngModel)]="participante.cpf" #cpf="ngModel" name="cpf" required
         [brmasker]="{person: true}" maxlength="14">
       </ion-input>
     </ion-item>
     <ion-item>
-      <ion-item>Evento: </ion-item>
+      <ion-label position="floating">Evento</ion-label>
       <ion-input placeholder="*Evento:" type="text" [(ngModel)]="evento.titulo" #titulo="ngModel" name="titulo">
       </ion-input>
     </ion-item>
     <ion-item>
       <ion-item>
-        <ion-label position="floating">Data e Hora de Inicio<ion-text color="danger">*</ion-text>
+        <ion-label position="floating">Data e Hora de Início<ion-text color="danger">*</ion-text>
         </ion-label>
         <ion-datetime displayFormat="DD/MM/YYYY HH:mm" doneText="OK" cancelText="Cancelar" [(ngModel)]="dataHoraInicio"
           name="dataHoraInicio" #dataHI="ngModel" required></ion-datetime>
       </ion-item>
       à
       <ion-item>
-        <ion-label position="floating">Data e Hora de Termino<ion-text color="danger">*</ion-text>
+        <ion-label position="floating">Data e Hora de Término<ion-text color="danger">*</ion-text>
         </ion-label>
         <ion-datetime displayFormat="DD/MM/YYYY HH:mm" doneText="OK" cancelText="Cancelar" [(ngModel)]="dataHoraInicio"
           name="dataHoraInicio" #dataHI="ngModel" required></ion-datetime>
       </ion-item>
     </ion-item>
     <ion-item>
-      <ion-item>Local: </ion-item>
+      <ion-label position="floating">Local</ion-label>
       <ion-input placeholder="*Local:" type="text" [(ngModel)]="evento.localizacao" #titulo="ngModel" name="local">
       </ion-input>
     </ion-item>

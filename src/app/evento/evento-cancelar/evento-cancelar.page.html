@@ -82,7 +82,7 @@
     </ion-grid>
 
     <ion-item value="Disabled" disabled>
-      <ion-label>Voluntário</ion-label>
+      <ion-label>Voluntário(s)</ion-label>
       <ion-select multiple="true" placeholder="Selecione..." ok-text="Ok" cancel-text="Cancelar"
         [(ngModel)]="evento.voluntario" name="voluntario" #volun="ngModel" required>
         <ion-select-option *ngFor="let v of voluntario" [value]="v">{{v.nome}}</ion-select-option>
@@ -90,7 +90,7 @@
     </ion-item>
 
     <ion-item value="Disabled" disabled>
-      <ion-label>Atividade</ion-label>
+      <ion-label>Atividade(s)</ion-label>
       <ion-button (click)="novaAtividade()">Adicionar</ion-button>
     </ion-item>
 

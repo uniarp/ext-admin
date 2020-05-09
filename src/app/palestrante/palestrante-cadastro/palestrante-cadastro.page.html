@@ -1,8 +1,8 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{ editando ? 'Edição de' : 'Novo' }} Palestrante</ion-title>
+    <ion-title>{{ editando ? 'Editar' : 'Novo' }} Palestrante</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-back-button defaultHref="palestrante-pesquisa"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -12,13 +12,13 @@
     <ion-item>
       <ion-input placeholder="*Nome:" type="text" [(ngModel)]="palestrante.nome" #nome="ngModel" name="nome" required
         minlength="10"></ion-input>
-      <div class="validaCamp" *ngIf="nome.hasError('required') && nome.touched">*Informe um nome válido</div>
-      <div class="validaCamp" *ngIf="nome.hasError('minlength')">*O nome precisa ser completo</div>
+      <div class="validaCamp" *ngIf="nome.hasError('required') && nome.touched">*Informe um nome válido!</div>
+      <div class="validaCamp" *ngIf="nome.hasError('minlength')">*O nome precisa ser completo!</div>
     </ion-item>
     <ion-item>
       <ion-input placeholder="*E-mail:" type="email" [(ngModel)]="palestrante.email" #email="ngModel" name="email"
         required email></ion-input>
-      <div class="validaCamp" *ngIf="email.hasError('email')">*Informe um e-mail valido</div>
+      <div class="validaCamp" *ngIf="email.hasError('email')">*Informe um e-mail válido!</div>
     </ion-item>
     <ion-item>
       <ion-input placeholder="CPF:" type="text" [(ngModel)]="palestrante.cpf" maxlength=14 #cpf="ngModel" name="cpf"
@@ -30,9 +30,9 @@
     </ion-item>
 
     <ion-item>
-      <ion-label>Area de Atuação</ion-label>
+      <ion-label>Área(s) de Atuação</ion-label>
       <ion-button (click)="mostarAreas()">
-        Adicionar Àrea
+        Adicionar Área
       </ion-button>
     </ion-item>
 
@@ -47,7 +47,7 @@
     <ion-item *ngIf="areaPalestrante.length > 0">
       <ion-grid>
         <ion-row>
-          <ion-col>codígo da Area</ion-col>
+          <ion-col>Código da Área</ion-col>
           <ion-col>Nome</ion-col>
           <ion-col size="1" size-sm>Opções</ion-col>
         </ion-row>
@@ -71,7 +71,7 @@
     </ion-item>
 
     <ion-item>
-      <ion-textarea type="text" placeholder="Bibliografia:" [(ngModel)]="palestrante.biografia" #informacoes="ngModel"
+      <ion-textarea type="text" placeholder="Biografia:" [(ngModel)]="palestrante.biografia" #informacoes="ngModel"
         name="biografia"></ion-textarea>
     </ion-item>
 

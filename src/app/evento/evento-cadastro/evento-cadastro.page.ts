@@ -172,7 +172,7 @@ export class EventoCadastroPage implements OnInit {
 
   async mostrarVoluntario() {
     const alert = await this.alertController.create({
-      header: 'Áreas',
+      header: 'Selecione Voluntário(s)',
       inputs: this.voluntariosSelec,
       buttons: [
         {

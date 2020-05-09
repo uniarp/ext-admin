@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title>Pesquisa de Participante</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -47,9 +47,9 @@
                 <ion-button (click)='alterar(participante.codParticipante)'>
                   <ion-icon name="pencil-outline"></ion-icon>
                 </ion-button>
-                <ion-button (click)='listarAtividade(participante.codAtividade)'>
+                <!--  <ion-button (click)='listarAtividade(participante.codAtividade)'>
                   Atividade
-                </ion-button>
+                </ion-button>      -->
               </ion-col>
             </ion-row>
           </ion-radio-group>
@@ -59,7 +59,7 @@
   </div>
 </ion-content>
 <ion-footer>
-  <ion-fab (click)= "novoCadastro()" vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab (click)="novoCadastro()" vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button>
       <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
