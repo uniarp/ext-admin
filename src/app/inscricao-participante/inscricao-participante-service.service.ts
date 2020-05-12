@@ -29,10 +29,9 @@ export class InscricaoParticipanteService implements OnInit{
       });
   }
 
-  cadastrar(participante: Participante): Promise<Participante> {
+  cadastrar(participante: Participante) {
     console.log(participante);
-    return this.http.post<Participante>(`${this.participanteUrl}/cadastrar`, participante)
-      .toPromise();
+    
   }
 
  

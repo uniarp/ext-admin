@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Participante, ParticipanteServiceService } from '../participante/participante-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ErrorHandlerService } from '../core/services/error-handler.service';
-import { ToastController } from '@ionic/angular';
+import { ToastController, NavParams, ModalController } from '@ionic/angular';
 import { Evento, EventosService } from '../evento/eventos.service';
+import { AlertsService } from '../core/services/alerts.service';
+import { AtividadeService } from '../atividade/atividade.service';
+import { TipoAtividadeService } from '../tipoAtividade/tipo-atividade.service';
 
 @Component({
   selector: 'app-escolher-participante',
@@ -15,6 +18,7 @@ export class EscolherParticipantePage implements OnInit {
 
   participante= new Participante();
   evento= new Evento();
+  @Input() codEvento: number;
 
   constructor(private http: HttpClient,
     private participanteService: ParticipanteServiceService,
@@ -22,34 +26,17 @@ export class EscolherParticipantePage implements OnInit {
     private route: ActivatedRoute,
     private eventosService: EventosService,
     public handler: ErrorHandlerService,
-    public toast: ToastController
+    public toast: ToastController,
+    public modalController: ModalController,
+    public navParams: NavParams
   ) { }
 
   ngOnInit() {
+
     const codEvento = this.route.snapshot.params.codEvento;
-    if (codEvento) {
+    if (codEvento) {        
       console.log(codEvento);
-      this.carregarEvento(codEvento);
     }
-    this.listar();
-  }
-
-  get editando() {
-    console.log('Teste');
-    if (this.evento.codEvento) {
-      return true;
-    }
-    return false;
-  }
-
-  carregarEvento(codEvento: number) {
-    console.log(codEvento);
-    this.eventosService.listaEvento(codEvento)
-      .then(data => {
-        console.log(data);
-        this.evento = data;
-      })
-      .catch(erro => this.handler.handleError(erro));
   }
 
   async listar() {
@@ -58,6 +45,6 @@ export class EscolherParticipantePage implements OnInit {
 
   async inscrever(codParticipante) {
     console.log(codParticipante);
-    this.router.navigate(['../inscricao-participante/', codParticipante]);
+    this.router.navigate(['../inscricao-participante', codParticipante,this.codEvento]);
   }
 }

@@ -70,7 +70,7 @@ const routes: Routes = [
     loadChildren: () => import('./evento/evento-pesquisa/evento.module').then(m => m.EventoPageModule)
   },
   {
-    path: 'inscricao-participante',
+    path: 'inscricao-participante/:codParticipante/:codEvento',
     loadChildren: () => import('./inscricao-participante/inscricao-participante.module').then(m => m.inscricaoParticipantePageModule)
   },
   {
@@ -90,9 +90,9 @@ const routes: Routes = [
     loadChildren: () => import('./evento/validar-frequencia/validar-frequencia.module').then(m => m.ValidarFrequenciaPageModule)
   },
   {
-    path: 'escolher-participante/:id',
+    path: 'escolher-participante/:codEvento',
     loadChildren: () => import('./escolher-participante/escolher-participante.module').then(m => m.EscolherParticipantePageModule)
-  },
+  }
 
 
 ];

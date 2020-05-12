@@ -30,37 +30,41 @@
     </ion-item>
     <ion-item>
       <ion-item>
-        <ion-label position="floating">Data e Hora de Início<ion-text color="danger">*</ion-text>
+        <ion-label position="floating">Data e Hora de Início
         </ion-label>
-        <ion-datetime displayFormat="DD/MM/YYYY HH:mm" doneText="OK" cancelText="Cancelar" [(ngModel)]="dataHoraInicio"
-          name="dataHoraInicio" #dataHI="ngModel" required></ion-datetime>
+        <ion-datetime displayFormat="DD/MM/YYYY HH:mm" doneText="OK" cancelText="Cancelar"
+          [(ngModel)]="evento.periodoInicial" name="dataInicio" #dataHI="ngModel" required></ion-datetime>
       </ion-item>
       à
       <ion-item>
-        <ion-label position="floating">Data e Hora de Término<ion-text color="danger">*</ion-text>
+        <ion-label position="floating">Data e Hora de Término
         </ion-label>
-        <ion-datetime displayFormat="DD/MM/YYYY HH:mm" doneText="OK" cancelText="Cancelar" [(ngModel)]="dataHoraInicio"
-          name="dataHoraInicio" #dataHI="ngModel" required></ion-datetime>
+        <ion-datetime displayFormat="DD/MM/YYYY HH:mm" doneText="OK" cancelText="Cancelar"
+          [(ngModel)]="evento.periodoFinal" name="dataFinal" #dataHI="ngModel" required></ion-datetime>
       </ion-item>
     </ion-item>
-    <ion-item>
-      <ion-label position="floating">Local</ion-label>
-      <ion-input placeholder="*Local:" type="text" [(ngModel)]="evento.localizacao" #titulo="ngModel" name="local">
-      </ion-input>
-    </ion-item>
 
-    <ion-item>
+    
       <ion-item>
         <b>Atividades </b>
       </ion-item>
-    </ion-item>
-    <ion-item>
+    
 
-      <ion-list>
-        <ion-item *ngFor="let atividade of evento.atividades">
-          {{atividade}}
-        </ion-item>
-      </ion-list>
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col><ion-label >Título</ion-label></ion-col>
+          <ion-col><ion-label >Local</ion-label></ion-col>
+        </ion-row>
+
+        <div *ngFor="let atividade of evento.atividades">
+          <ion-row>
+            <ion-col>{{atividade.titulo}}</ion-col>
+            <ion-col>{{atividade.localizacao}}</ion-col>
+          </ion-row>
+        </div>
+
+      </ion-grid>
     </ion-item>
   </form>
 

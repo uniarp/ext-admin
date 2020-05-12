@@ -4,6 +4,7 @@ import { RouterModule, Routes, Router } from '@angular/router';
 import { Evento, EventosService } from '../eventos.service';
 import { ModalController } from '@ionic/angular';
 import { EventoCancelarPage } from '../evento-cancelar/evento-cancelar.page';
+import { EscolherParticipantePage } from 'src/app/escolher-participante/escolher-participante.page';
 
 @Component({
   selector: 'app-evento',
@@ -28,9 +29,18 @@ export class EventoPage implements OnInit {
     this.router.navigate(['/evento-cadastro']);
   }
 
-  inscreverParticipante(codEvento) {
-    this.router.navigate(['/escolher-participante', codEvento]);
-  }
+  async inscreverParticipante(codEvento) {
+
+    console.log();
+    const modal = await this.modalController.create({
+      component: EscolherParticipantePage,
+      componentProps: {
+        'codEvento': codEvento
+      }
+    });
+    modal.present();
+}
+
 
   editarCadastro(codEvento) {
     console.log(codEvento);
