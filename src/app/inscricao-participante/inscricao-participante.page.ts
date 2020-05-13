@@ -1,6 +1,6 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, NgForm } from '@angular/forms';
 import { InscricaoParticipanteService } from './inscricao-participante-service.service';
 import { ToastController } from '@ionic/angular';
 import {Participante, ParticipanteServiceService} from '../participante/participante-service.service'
@@ -17,7 +17,7 @@ import { AtividadeService } from '../atividade/atividade.service';
 export class InscricaoParticipantePage implements OnInit {
 
   atividadeService: AtividadeService;
-  evento = new Evento();  
+  evento = new Evento();
   participante = new Participante();
   confirSenha: string;
   password_type = 'password';
@@ -41,11 +41,11 @@ export class InscricaoParticipantePage implements OnInit {
     const codParticipante = this.route.snapshot.params.codParticipante;
     const codEvento = this.route.snapshot.params.codEvento;
 
-    if (codParticipante) {        
+    if (codParticipante) {
       console.log(codParticipante);
       this.carregarParticipante(codParticipante);
     }
-    if (codEvento) {        
+    if (codEvento) {
       console.log(codEvento);
       this.carregarEvento(codEvento);
     }
@@ -57,7 +57,6 @@ export class InscricaoParticipantePage implements OnInit {
         console.log(data);
         this.evento = data;
         this.atividades = this.evento.atividades;
-        console.log(this.evento.atividades);
       })
       .catch(erro => this.handler.handleError(erro));
   }
@@ -66,10 +65,29 @@ export class InscricaoParticipantePage implements OnInit {
     console.log(codParticipante);
     this.participanteService.listaParticipante(codParticipante)
       .then(data => {
-        console.log(data);
         this.participante = data;
       })
       .catch(erro => this.handler.handleError(erro));
   }
 
+  desmarcaAtvidade(codAtividade){
+    this.atividades = this.atividades.filter(data => {
+      return data.codAtividade !== codAtividade;
+    })
+  }
+
+  gravarInscricao(form: NgForm) {
+    console.log(this.atividades);
+    const inscricao = [{codEvento: 0, codParticipante:0, atividades:[]}];
+
+    inscricao.map(i => {
+      i.codEvento = this.evento.codEvento;
+      i.codParticipante = this.participante.codParticipante;
+      i.atividades = this.atividades;
+    });
+
+    this.inscricaoParticipanteService.cadastrar(inscricao)
+    .then(data => this.alert.alertaToast('Inscrição Finalizada', 'success'))
+    .catch(erro => this.handler.handleError(erro));
+  }
 }

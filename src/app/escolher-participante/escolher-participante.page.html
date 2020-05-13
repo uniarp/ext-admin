@@ -1,19 +1,23 @@
 <ion-content>
-
   <ion-item>
     <b>Selecionar Participante: </b>
   </ion-item>
   <ion-item>
-    <ion-list>
+    <ion-list *ngIf="participante.length > 0">
+      <ion-item>
+        <ion-col size="6">Particioante</ion-col>
+        <ion-col>Opções</ion-col>
+      </ion-item>
       <ion-item *ngFor="let participante of participante">
-        <ion-col>
+        <ion-col size="6">
           <ion-item>
             {{participante.nome}}
           </ion-item>
         </ion-col>
-        <ion-col>
+        <ion-col >
           <ion-item>
             <ion-button slot="end" (click)='inscrever(participante.codParticipante)'>
+              Inscrever
               <ion-icon name="pencil-outline"></ion-icon>
             </ion-button>
           </ion-item>
