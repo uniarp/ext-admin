@@ -9,6 +9,7 @@ import {Participante} from '../participante/participante-service.service'
 })
 export class InscricaoParticipanteService implements OnInit{
   participanteUrl = 'https://uniarpextensao.herokuapp.com/public/participantes';
+  inscricaoUrl = 'https://uniarpextensao.herokuapp.com/public/eventos';
 
   constructor(private http: HttpClient) { }
   ngOnInit(): void {
@@ -29,12 +30,13 @@ export class InscricaoParticipanteService implements OnInit{
       });
   }
 
-  cadastrar(participante: Participante) {
-    console.log(participante);
-    
+  cadastrar(inscricao: any): Promise<any> {
+    console.log(inscricao);
+    return this.http.post<any>(`${this.inscricaoUrl}/inscrever`, inscricao)
+    .toPromise()
+    .then();
   }
 
- 
 
 }
 

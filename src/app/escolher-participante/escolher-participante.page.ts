@@ -16,7 +16,7 @@ import { TipoAtividadeService } from '../tipoAtividade/tipo-atividade.service';
 })
 export class EscolherParticipantePage implements OnInit {
 
-  participante= new Participante();
+  participante = new Participante();
   evento= new Evento();
   @Input() codEvento: number;
 
@@ -32,19 +32,22 @@ export class EscolherParticipantePage implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    this.listar();
     const codEvento = this.route.snapshot.params.codEvento;
-    if (codEvento) {        
+    if (codEvento) {
       console.log(codEvento);
     }
   }
 
-  async listar() {
-    this.participante = await this.participanteService.listar();
+  listar() {
+    this.participanteService.listar()
+      .then(data => this.participante = data)
+      .catch(error => this.handler.handleError(error));
   }
 
   async inscrever(codParticipante) {
     console.log(codParticipante);
     this.router.navigate(['../inscricao-participante', codParticipante,this.codEvento]);
+    this.modalController.dismiss();
   }
 }
