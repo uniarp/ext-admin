@@ -52,6 +52,10 @@ export class EventosService {
       .toPromise();
   }
 
+  atualizarPagina(){
+    window.location.assign('/evento-pesquisa');
+  }
+
   cancelar(codEvento: number) {
   }
 }
