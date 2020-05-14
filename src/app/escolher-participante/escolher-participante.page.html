@@ -4,17 +4,13 @@
   </ion-item>
   <ion-item>
     <ion-list *ngIf="participante.length > 0">
-      <ion-item>
-        <ion-col size="6">Particioante</ion-col>
-        <ion-col>Opções</ion-col>
-      </ion-item>
       <ion-item *ngFor="let participante of participante">
-        <ion-col size="6">
-          <ion-item>
+        <ion-item>
+          <ion-col>
             {{participante.nome}}
-          </ion-item>
-        </ion-col>
-        <ion-col >
+          </ion-col>
+        </ion-item>
+        <ion-col>
           <ion-item>
             <ion-button slot="end" (click)='inscrever(participante.codParticipante)'>
               Inscrever

@@ -13,22 +13,29 @@
   <form #partiForm="ngForm" autocomplete="off" (ngSubmit)="gravarInscricao(partiForm)">
 
     <ion-item>
-      <ion-label position="floating">Nome</ion-label>
-      <ion-input type="text" [(ngModel)]="participante.nome" #nome="ngModel" name="nome" disabled>
-      </ion-input>
+      <ion-item>
+        <ion-label position="floating">Nome</ion-label>
+        <ion-input type="text" [(ngModel)]="participante.nome" #nome="ngModel" name="nome" disabled>
+        </ion-input>
+      </ion-item>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">CPF</ion-label>
-      <ion-input type="text" [(ngModel)]="participante.cpf" #cpf="ngModel" name="cpf" disabled
-        [brmasker]="{person: true}">
-      </ion-input>
+      <ion-item>
+        <ion-label position="floating">CPF</ion-label>
+        <ion-input type="text" [(ngModel)]="participante.cpf" #cpf="ngModel" name="cpf" disabled
+          [brmasker]="{person: true}">
+        </ion-input>
+      </ion-item>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Evento</ion-label>
-      <ion-input placeholder="*Evento:" type="text" [(ngModel)]="evento.titulo" #titulo="ngModel" name="titulo"
-        disabled>
-      </ion-input>
+      <ion-item>
+        <ion-label position="floating">Evento</ion-label>
+        <ion-input placeholder="*Evento:" type="text" [(ngModel)]="evento.titulo" #titulo="ngModel" name="titulo"
+          disabled>
+        </ion-input>
+      </ion-item>
     </ion-item>
+
     <ion-item>
       <ion-item>
         <ion-label position="floating">Data e Hora de Início
@@ -36,7 +43,6 @@
         <ion-datetime displayFormat="DD/MM/YYYY HH:mm" doneText="OK" cancelText="Cancelar"
           [(ngModel)]="evento.periodoInicial" name="dataInicio" #dataHI="ngModel" disabled></ion-datetime>
       </ion-item>
-      à
       <ion-item>
         <ion-label position="floating">Data e Hora de Término
         </ion-label>
@@ -50,24 +56,43 @@
     </ion-item>
 
     <ion-item>
-      <ion-list>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>Nome</ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>Localização</ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>Inscrever</ion-item>
+          </ion-col>
+        </ion-row>
+
+        <div *ngFor="let atividade of evento.atividades">
+          <ion-row>
+            <ion-col>
+              <ion-item>{{atividade.titulo}}</ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>{{atividade.localizacao}}</ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-checkbox checked (ionChange)="desmarcaAtvidade(atividade.codAtividade)"></ion-checkbox>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-grid>
+    </ion-item>
+      <div style="display: flex; justify-content: center;">
         <ion-item>
-          <ion-col size="5.3">Nome</ion-col>
-          <ion-col>Localização</ion-col>
-          <ion-col></ion-col>
-        </ion-item>
-        <ion-item *ngFor="let atividade of evento.atividades">
-          <ion-col>{{atividade.titulo}}</ion-col>
-          <ion-col>{{atividade.localizacao}}</ion-col>
-          <ion-checkbox slot="end" checked (ionChange)="desmarcaAtvidade(atividade.codAtividade)"></ion-checkbox>
-        </ion-item>
-      </ion-list>
-    </ion-item>
-    <ion-item>
-      <ion-button type="submit">
-        Finalizar Inscrição
-      </ion-button>
-    </ion-item>
+        <ion-button type="submit">
+          Finalizar Inscrição
+        </ion-button>
+      </ion-item>
+      </div>
   </form>
 
 </ion-content>
