@@ -1,18 +1,20 @@
 import { ListaInscritosPage } from './../lista-inscritos/lista-inscritos.page';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RouterModule, Routes, Router } from '@angular/router';
 import { Evento, EventosService } from '../eventos.service';
 import { ModalController } from '@ionic/angular';
 import { EventoCancelarPage } from '../evento-cancelar/evento-cancelar.page';
 import { EscolherParticipantePage } from 'src/app/escolher-participante/escolher-participante.page';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-evento',
   templateUrl: './evento.page.html',
   styleUrls: ['./evento.page.scss'],
 })
-export class EventoPage implements OnInit {
+export class EventoPage implements OnInit, OnDestroy {
 
+  _sub: Subscription;
   evento: Evento;
 
   constructor(
@@ -23,8 +25,17 @@ export class EventoPage implements OnInit {
 
   ngOnInit() {
     this.listar();
+    this._sub = EventosService.emitirEventReconsultar.subscribe(() => {
+      console.log('Listou');
+      this.listar();
+    });
   }
-  ionViewWillEnter(){
+
+  ngOnDestroy() {
+    this._sub.unsubscribe();
+  }
+
+  ionViewWillEnter() {
     this.listar();
   }
 
@@ -42,7 +53,7 @@ export class EventoPage implements OnInit {
       }
     });
     modal.present();
-}
+  }
 
 
   editarCadastro(codEvento) {
