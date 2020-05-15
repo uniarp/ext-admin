@@ -3,10 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, NgForm } from '@angular/forms';
 import { InscricaoParticipanteService } from './inscricao-participante-service.service';
 import { ToastController } from '@ionic/angular';
-import {Participante, ParticipanteServiceService} from '../participante/participante-service.service'
+import { Participante, ParticipanteServiceService } from '../participante/participante-service.service'
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { AlertsService } from 'src/app/core/services/alerts.service';
-import {Evento, EventosService} from '../evento/eventos.service';
+import { Evento, EventosService } from '../evento/eventos.service';
 import { AtividadeService } from '../atividade/atividade.service';
 
 @Component({
@@ -19,9 +19,6 @@ export class InscricaoParticipantePage implements OnInit {
   atividadeService: AtividadeService;
   evento = new Evento();
   participante = new Participante();
-  confirSenha: string;
-  password_type = 'password';
-  titulo = 'Novo ';
   atividades: any[] = [];
 
   constructor(
@@ -33,7 +30,7 @@ export class InscricaoParticipantePage implements OnInit {
     public handler: ErrorHandlerService,
     private alert: AlertsService,
     public eventoService: EventosService
-  ) { 
+  ) {
 
   }
 
@@ -70,16 +67,14 @@ export class InscricaoParticipantePage implements OnInit {
       .catch(erro => this.handler.handleError(erro));
   }
 
-  desmarcaAtvidade(codAtividade){
+  desmarcaAtvidade(codAtividade) {
     this.atividades = this.atividades.filter(data => {
       return data.codAtividade !== codAtividade;
     })
   }
 
   gravarInscricao(form: NgForm) {
-    console.log(this.atividades);
-    const inscricao = [{codEvento: 0, codParticipante:0, atividades:[]}];
-
+    const inscricao = [{ codEvento: 0, codParticipante: 0, atividades: [] }];
     inscricao.map(i => {
       i.codEvento = this.evento.codEvento;
       i.codParticipante = this.participante.codParticipante;
@@ -87,7 +82,10 @@ export class InscricaoParticipantePage implements OnInit {
     });
 
     this.inscricaoParticipanteService.cadastrar(inscricao)
-    .then(data => this.alert.alertaToast('Inscrição Finalizada', 'success'))
-    .catch(erro => this.handler.handleError(erro));
+      .then(data => {
+        this.alert.alertaToast('Inscrição Finalizada', 'success');
+        this.router.navigate(['/evento-pesquisa']);
+      })
+      .catch(erro => this.handler.handleError(erro));
   }
 }
