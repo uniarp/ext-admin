@@ -24,6 +24,9 @@ export class EventoPage implements OnInit {
   ngOnInit() {
     this.listar();
   }
+  ionViewWillEnter(){
+    this.listar();
+  }
 
   public adicionar() {
     this.router.navigate(['/evento-cadastro']);

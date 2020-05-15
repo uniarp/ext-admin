@@ -8,6 +8,7 @@ import { Evento, EventosService } from '../evento/eventos.service';
 import { AlertsService } from '../core/services/alerts.service';
 import { AtividadeService } from '../atividade/atividade.service';
 import { TipoAtividadeService } from '../tipoAtividade/tipo-atividade.service';
+import { EscolherParticipanteService } from './escolher-participante.service';
 
 @Component({
   selector: 'app-escolher-participante',
@@ -16,12 +17,13 @@ import { TipoAtividadeService } from '../tipoAtividade/tipo-atividade.service';
 })
 export class EscolherParticipantePage implements OnInit {
 
-  participante = new Participante();
-  evento= new Evento();
+  participante = [];
+  evento = new Evento();
+  filtro: String;
   @Input() codEvento: number;
 
   constructor(private http: HttpClient,
-    private participanteService: ParticipanteServiceService,
+    private escocolherParticipanteService: EscolherParticipanteService,
     public router: Router,
     private route: ActivatedRoute,
     private eventosService: EventosService,
@@ -32,22 +34,45 @@ export class EscolherParticipantePage implements OnInit {
   ) { }
 
   ngOnInit() {
+    // this.codEvento = this.route.snapshot.params.codEvento;
+    // if (this.codEvento) {
+    //   console.log(this.codEvento);
+    // }
     this.listar();
-    const codEvento = this.route.snapshot.params.codEvento;
-    if (codEvento) {
-      console.log(codEvento);
-    }
+  }
+
+  buscarAcademico() {
+    this.participante = this.participante.filter(p => {
+      if (p.nome.indexOf(this.filtro) > -1) {
+        return p;
+      } else if (p.email.indexOf(this.filtro) > -1) {
+        return p;
+      } else if (p.ra.toString().indexOf(this.filtro) > -1) {
+        return p;
+      } else if (p.cpf.indexOf(this.filtro) > -1) {
+        return p;
+      }
+
+    });
   }
 
   listar() {
-    this.participanteService.listar()
-      .then(data => this.participante = data)
+    this.escocolherParticipanteService.listar(this.codEvento)
+      .then(data => {
+        this.participante = data;
+        console.log(this.participante);
+        this.filtro = '';
+      })
       .catch(error => this.handler.handleError(error));
+  }
+
+  voltar() {
+    this.modalController.dismiss();
   }
 
   async inscrever(codParticipante) {
     console.log(codParticipante);
-    this.router.navigate(['../inscricao-participante', codParticipante,this.codEvento]);
+    this.router.navigate(['../inscricao-participante', codParticipante, this.codEvento]);
     this.modalController.dismiss();
   }
 }
