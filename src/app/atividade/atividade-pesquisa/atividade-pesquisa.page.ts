@@ -49,5 +49,8 @@ export class AtividadePesquisaPage implements OnInit {
       this.evento = this.atividade.evento;
     })
   }
+  ionViewWillEnter() {
+    this.listar();
+  }
 
 }

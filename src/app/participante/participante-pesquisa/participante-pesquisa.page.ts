@@ -57,4 +57,8 @@ export class ParticipantePesquisaPage implements OnInit {
     console.log(codParticipante);
     this.router.navigate(['/participante-cadastro/', codParticipante]);
   }
+
+  ionViewWillEnter() {
+    this.listar();
+  }
 }
