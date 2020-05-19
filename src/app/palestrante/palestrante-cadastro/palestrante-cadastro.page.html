@@ -9,26 +9,32 @@
 
 <ion-content>
   <form autocomplete="off" #palesForm="ngForm" (ngSubmit)="gravar(palesForm)">
+
     <ion-item>
-      <ion-input placeholder="*Nome:" type="text" [(ngModel)]="palestrante.nome" #nome="ngModel" name="nome" required
-        minlength="10"></ion-input>
+      <ion-label position="floating">Nome<ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input [(ngModel)]="palestrante.nome" #nome="ngModel" name="nome" required
+      minlength="5"></ion-input>
       <div class="validaCamp" *ngIf="nome.hasError('required') && nome.touched">*Informe um nome válido!</div>
       <div class="validaCamp" *ngIf="nome.hasError('minlength')">*O nome precisa ser completo!</div>
     </ion-item>
     <ion-item>
-      <ion-input placeholder="*E-mail:" type="email" [(ngModel)]="palestrante.email" #email="ngModel" name="email"
-        required email></ion-input>
+      <ion-label position="floating">E-mail<ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input [(ngModel)]="palestrante.email" #email="ngModel" name="email"
+      required email></ion-input>
       <div class="validaCamp" *ngIf="email.hasError('email')">*Informe um e-mail válido!</div>
     </ion-item>
     <ion-item>
-      <ion-input placeholder="CPF:" type="text" [(ngModel)]="palestrante.cpf" maxlength=14 #cpf="ngModel" name="cpf"
-        [brmasker]="{person: true}"></ion-input>
+      <ion-label position="floating">CPF</ion-label>
+      <ion-input [(ngModel)]="palestrante.cpf" maxlength=14 #cpf="ngModel" name="cpf"
+      [brmasker]="{person: true}"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input placeholder="Telefone:" type="text" [(ngModel)]="palestrante.telefone" #telefone="ngModel"
-        name="telefone" [brmasker]="{phone: true}"></ion-input>
+      <ion-label position="floating">Telefone</ion-label>
+      <ion-input [(ngModel)]="palestrante.telefone" #telefone="ngModel"
+      name="telefone" [brmasker]="{phone: true}"></ion-input>
     </ion-item>
-
     <ion-item>
       <ion-label>Área(s) de Atuação</ion-label>
       <ion-button (click)="mostarAreas()">
@@ -71,8 +77,8 @@
     </ion-item>
 
     <ion-item>
-      <ion-textarea type="text" placeholder="Biografia:" [(ngModel)]="palestrante.biografia" #informacoes="ngModel"
-        name="biografia"></ion-textarea>
+      <ion-label position="floating">Currículo</ion-label>
+      <ion-textarea [(ngModel)]="palestrante.biografia" #informacoes="ngModel" name="biografia"></ion-textarea>
     </ion-item>
 
     <div class="validaCamp" *ngIf="palesForm.invalid">Campos com * São obrigatórios</div>

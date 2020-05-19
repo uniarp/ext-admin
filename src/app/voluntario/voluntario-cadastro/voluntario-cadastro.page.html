@@ -8,36 +8,42 @@
 </ion-header>
 
 <ion-content>
-    <form autocomplete="off" #volunForm="ngForm" (ngSubmit)="gravar(volunForm)">
-      <ion-item>
-        <ion-input placeholder="*Nome:" type="text" [(ngModel)]="voluntario.nome" #nome="ngModel" name="nome" required
-          minlength="10"></ion-input>
-        <div class="validaCamp" *ngIf="nome.hasError('required') && nome.touched">*Informe um nome válido!</div>
-        <div class="validaCamp" *ngIf="nome.hasError('minlength')">*O nome precisa ser completo</div>
-      </ion-item>
-      <ion-item>
-        <ion-input placeholder="*E-mail:" type="email" [(ngModel)]="voluntario.email" #email="ngModel" name="email" required
-          email></ion-input>
-        <div class="validaCamp" *ngIf="email.hasError('email')">*Informe um e-mail válido!</div>
-      </ion-item>
-      <ion-item>
-        <ion-input placeholder="CPF:" type="text" [(ngModel)]="voluntario.cpf" #cpf="ngModel" name="cpf"
-          [brmasker]="{person: true}" maxlength="14"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input placeholder="Telefone:" type="text" [(ngModel)]="voluntario.telefone" #telefone="ngModel" name="telefone"
-          [brmasker]="{phone: true}" maxlength="15"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input placeholder="R.A:" type="text" [(ngModel)]="voluntario.ra" #ra="ngModel" name="ra" 
-        [brmasker]="{mask:'000000', type:'num'}" maxlength="6"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input placeholder="Curso:" type="text" [(ngModel)]="voluntario.curso" #curso="ngModel" name="curso" ></ion-input>
-      </ion-item>
+  <form autocomplete="off" #volunForm="ngForm" (ngSubmit)="gravar(volunForm)">
+    <ion-item>
+      <ion-label position="floating">Nome<ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input [(ngModel)]="voluntario.nome" #nome="ngModel" name="nome" required minlength="5"></ion-input>
+      <div class="validaCamp" *ngIf="nome.hasError('required') && nome.touched">*Informe um nome válido!</div>
+      <div class="validaCamp" *ngIf="nome.hasError('minlength')">*O nome precisa ser completo!</div>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">E-mail<ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input [(ngModel)]="voluntario.email" #email="ngModel" name="email" required email></ion-input>
+      <div class="validaCamp" *ngIf="email.hasError('email')">*Informe um e-mail válido!</div>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">CPF</ion-label>
+      <ion-input [(ngModel)]="voluntario.cpf" #cpf="ngModel" name="cpf" [brmasker]="{person: true}" maxlength="14">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Telefone</ion-label>
+      <ion-input [(ngModel)]="voluntario.telefone" #telefone="ngModel" name="telefone" [brmasker]="{phone: true}"
+        maxlength="15"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">R.A</ion-label>
+      <ion-input [(ngModel)]="voluntario.ra" #ra="ngModel" name="ra" [brmasker]="{mask:'000000', type:'num'}"
+        maxlength="6"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Curso</ion-label>
+      <ion-input [(ngModel)]="voluntario.curso" #curso="ngModel" name="curso"></ion-input>
+    </ion-item>
 
-      <div class="validaCamp" *ngIf="volunForm.invalid">Campos com * São obrigatórios!</div>
-      <br>
-      <ion-button type="submit" [disabled]="volunForm.invalid">Gravar</ion-button>
-    </form>
-  </ion-content>
+    <div class="validaCamp" *ngIf="volunForm.invalid">Campos com * São obrigatórios!</div>
+    <br>
+    <ion-button type="submit" [disabled]="volunForm.invalid">Gravar</ion-button>
+  </form>
+</ion-content>
