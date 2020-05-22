@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Lista de Inscritos</ion-title>
+    <ion-title id='1'>Lista de Inscritos</ion-title>
     <ion-item slot="start" (click)="voltar()">
       <ion-icon name="arrow-back-outline" large></ion-icon>
     </ion-item>
@@ -14,37 +14,33 @@
   <ion-item *ngIf="inscritos.length > 0">
     <ion-grid>
       <ion-row>
-        <ion-col>Nome</ion-col>
-        <ion-col>CPF</ion-col>
-        <ion-col>RA</ion-col>
-        <ion-col>Telefone</ion-col>
-        <ion-col>E-mail</ion-col>
-        <ion-col>Validar Presença</ion-col> <!-- Validar Frequência  -->
+        <ion-col size='3'>Nome</ion-col>
+        <ion-col size='2'>CPF</ion-col>
+        <ion-col size='2'>Telefone</ion-col>
+        <ion-col size='3'>E-mail</ion-col>
+        <ion-col size='2'>Validar Presença</ion-col> <!-- Validar Frequência  -->
       </ion-row>
-      <div *ngFor="let ins of inscritos">
-        <ion-row>
-          <ion-col>
-            {{ins.nome}}
-          </ion-col>
-          <ion-col>
-            {{ins.cpf}}
-          </ion-col>
-          <ion-col>
-            {{ins.ra}}
-          </ion-col>
-          <ion-col>
-            {{ins.telefone}}
-          </ion-col>
-          <ion-col>
-            {{ins.email}}
-          </ion-col>
-          <ion-list>
-            <ion-item>
-              <ion-checkbox [(ngModel)]="ins.presente" type="boolean" name="validar" #presenca="ngModel" (ionChange)="validarFrequencia()"></ion-checkbox>
-            </ion-item>
-          </ion-list>
-        </ion-row>
-      </div>
+      <ion-row *ngFor="let ins of inscritos">
+        <ion-col size='3'>
+          {{ins.nome}}
+        </ion-col>
+        <ion-col size='2'>
+          {{ins.cpf}}
+        </ion-col>
+        <ion-col size='2'>
+          {{ins.telefone}}
+        </ion-col>
+        <ion-col size='3'>
+          {{ins.email}}
+        </ion-col>
+        <ion-col size='2'>
+          <ion-checkbox [(ngModel)]="ins.presente" type="boolean" name="validar" #presenca="ngModel"
+            (ionChange)="validarFrequencia()"></ion-checkbox>
+        </ion-col>
+      </ion-row>
     </ion-grid>
   </ion-item>
+  <div style="display: flex; justify-content: center;">
+    <ion-button (click)='imprimir()'>Imprimir</ion-button>
+  </div>
 </ion-content>

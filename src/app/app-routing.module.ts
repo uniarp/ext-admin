@@ -92,7 +92,12 @@ const routes: Routes = [
   {
     path: 'escolher-participante/:codEvento',
     loadChildren: () => import('./escolher-participante/escolher-participante.module').then(m => m.EscolherParticipantePageModule)
+  },
+  {
+    path: 'imprimir-inscritos/:codEvento',
+    loadChildren: () => import('./imprimir-inscritos/imprimir-inscritos.module').then( m => m.ImprimirInscritosPageModule)
   }
+
 
 
 ];

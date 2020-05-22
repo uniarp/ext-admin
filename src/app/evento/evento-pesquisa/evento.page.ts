@@ -72,7 +72,7 @@ export class EventoPage implements OnInit, OnDestroy {
     console.log(this.evento);
   }
 
-  async listarInscritos(codEvento: number) {
+  public async listarInscritos(codEvento: number) {
     const modal = await this.modalController.create({
       component: ListaInscritosPage,
       componentProps: {
