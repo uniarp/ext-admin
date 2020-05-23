@@ -47,4 +47,8 @@ export class UsuarioPesquisaPage {
     console.log(codUsuario)
     this.router.navigate(['usuario-cadastro', codUsuario]);
   }
+
+  ionViewWillEnter() {
+    this.listarUsuario();
+  }
 }

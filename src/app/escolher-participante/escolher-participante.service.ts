@@ -21,4 +21,5 @@ export class EscolherParticipanteService {
     return this.http.get<any>(this.participanteUrl + `/participantesevento/${codEvento}`, this.httpOptions)
       .toPromise();
   }
+  
 }
