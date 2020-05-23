@@ -4,6 +4,7 @@ import { RouterModule, Routes, Router } from '@angular/router';
 import { Evento, EventosService } from '../eventos.service';
 import { ModalController } from '@ionic/angular';
 import { EventoCancelarPage } from '../evento-cancelar/evento-cancelar.page';
+import { ResourceLoader } from '@angular/compiler';
 import { EscolherParticipantePage } from 'src/app/escolher-participante/escolher-participante.page';
 import { Subscription } from 'rxjs';
 
@@ -16,6 +17,7 @@ export class EventoPage implements OnInit, OnDestroy {
 
   _sub: Subscription;
   evento: Evento;
+  location: Location;
 
   constructor(
     private router: Router,
@@ -41,6 +43,8 @@ export class EventoPage implements OnInit, OnDestroy {
 
   public adicionar() {
     this.router.navigate(['/evento-cadastro']);
+    
+    
   }
 
   async inscreverParticipante(codEvento) {
@@ -59,6 +63,7 @@ export class EventoPage implements OnInit, OnDestroy {
   editarCadastro(codEvento) {
     console.log(codEvento);
     this.router.navigate(['/evento-cadastro', codEvento]);
+
   }
 
   public async excluir(codEvento: number) {
@@ -70,7 +75,9 @@ export class EventoPage implements OnInit, OnDestroy {
   public async listar() {
     this.evento = await this.eventosService.listar();
     console.log(this.evento);
+    
   }
+  
 
   public async listarInscritos(codEvento: number) {
     const modal = await this.modalController.create({
@@ -78,8 +85,11 @@ export class EventoPage implements OnInit, OnDestroy {
       componentProps: {
         'codEvento': codEvento
       }
+      
     });
     await modal.present();
+    window.location.reload();
+    return false;
   }
 
   async cancelar(codEvento) {
