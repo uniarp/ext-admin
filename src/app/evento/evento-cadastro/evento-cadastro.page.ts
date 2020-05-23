@@ -109,7 +109,7 @@ export class EventoCadastroPage implements OnInit {
         console.log(data);
         this.router.navigate(['/evento-pesquisa']);
         this.eventoService.atualizarPagina();
-        //EventosService.emitirEventReconsultar.emit();
+        EventosService.emitirEventReconsultar.emit();
       })
       .catch(erro => this.handler.handleError(erro));
       
@@ -128,7 +128,8 @@ export class EventoCadastroPage implements OnInit {
 
   async novaAtividade() {
     const modal = await this.modalController.create({
-      component: AtividadeCadastroPage
+      component: AtividadeCadastroPage,
+      cssClass:"TamanhoModal",
     });
     await modal.present();
     const { data } = await modal.onWillDismiss();
@@ -140,6 +141,7 @@ export class EventoCadastroPage implements OnInit {
   async alterar(codAtividade: number) {
     const modal = await this.modalController.create({
       component: AtividadeCadastroPage,
+      cssClass:"TamanhoModal",
       componentProps: {
         'codAtividade': codAtividade
       }
@@ -175,6 +177,7 @@ export class EventoCadastroPage implements OnInit {
 
   async mostrarVoluntario() {
     const alert = await this.alertController.create({
+      cssClass: 'tamanhoAlert',
       header: 'Selecione Voluntário(s)',
       inputs: this.voluntariosSelec,
       buttons: [

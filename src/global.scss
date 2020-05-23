@@ -29,3 +29,19 @@
     color: red;
     padding-left: 10pt;
 }
+
+.TamanhoModal {
+    .modal-wrapper {
+        height: 85%;
+        width: 85%;
+        top: 10%;
+        position: absolute; 
+        display: block;  
+    }
+}
+
+.tamanhoAlert {
+    .alert-wrapper {
+        min-width: 40%;
+   }
+}

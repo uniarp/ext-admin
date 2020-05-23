@@ -82,20 +82,22 @@ export class EventoPage implements OnInit, OnDestroy {
   public async listarInscritos(codEvento: number) {
     const modal = await this.modalController.create({
       component: ListaInscritosPage,
+      cssClass:"TamanhoModal",
       componentProps: {
         'codEvento': codEvento
       }
       
     });
     await modal.present();
-    window.location.reload();
-    return false;
+    //window.location.reload();
+    //return false;
   }
 
   async cancelar(codEvento) {
     console.log();
     const modal = await this.modalController.create({
       component: EventoCancelarPage,
+      cssClass:"TamanhoModal",
       componentProps: {
         'codEvento': codEvento
       }

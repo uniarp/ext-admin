@@ -88,8 +88,9 @@ export class PalestranteCadastroPage implements OnInit {
     });
   }
 
-  async mostarAreas() {
+  async mostrarAreas() {
     const alert = await this.alertController.create({
+      cssClass: 'tamanhoAlert',
       header: 'Selecione Área(s)',
       inputs: this.areaSelec,
       buttons: [
