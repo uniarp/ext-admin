@@ -5,6 +5,7 @@ import { NavParams, ModalController } from '@ionic/angular';
 import { AlertsService } from 'src/app/core/services/alerts.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { ImprimirInscritosPage } from 'src/app/imprimir-inscritos/imprimir-inscritos.page';
 
 @Component({
   selector: 'app-lista-inscritos',
@@ -12,7 +13,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./lista-inscritos.page.scss'],
 })
 export class ListaInscritosPage implements OnInit {
-
+  codEvento:number;
   inscritos: any[] = [];
   evento: any[];
   validar: any[] = [];
@@ -30,11 +31,18 @@ export class ListaInscritosPage implements OnInit {
 
   ngOnInit() {
     let codEvento: number = this.navParams.get('codEvento');
+    this.codEvento=codEvento;
     if (codEvento) {
       this.listarInscritos(codEvento);
     } else {
       this.modalCtrl.dismiss();
     }
+  }
+
+  async imprimir(){
+    console.log(['Imprimindo...']);
+    this.router.navigate(['/imprimir-inscritos', this.codEvento]); 
+    this.modalCtrl.dismiss();
   }
 
   listarInscritos(codEvento: number) {

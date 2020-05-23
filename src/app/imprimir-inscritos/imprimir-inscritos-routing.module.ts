@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { EscolherParticipantePage } from './escolher-participante.page';
+import { ImprimirInscritosPage } from './imprimir-inscritos.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: EscolherParticipantePage
+    component: ImprimirInscritosPage
   },
   {
     path: ':codEvento',
-      component: EscolherParticipantePage
+      component: ImprimirInscritosPage
     }
 ];
 
@@ -18,4 +18,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class EscolherParticipantePageRoutingModule {}
+export class ImprimirInscritosPageRoutingModule {}

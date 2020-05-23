@@ -1,19 +1,33 @@
-<ion-content>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Lista de Participantes</ion-title>
+    <ion-item slot="start" (click)="voltar()">
+      <ion-icon name="arrow-back-outline" large></ion-icon>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
 
+<ion-content>
   <ion-item>
-    <b>Selecionar Participante: </b>
+    <ion-input placeholder="Busca por Nome, RA, CPF ou E-mail" name="filtro" [(ngModel)]="filtro"></ion-input>
+    <ion-button (click)="buscarAcademico()"><ion-icon name="search-outline"></ion-icon></ion-button>
+    <ion-button *ngIf="filtro" (click)="listar()"><ion-icon name="close-circle-outline"></ion-icon></ion-button>
   </ion-item>
   <ion-item>
-    <ion-list>
+    <b>Selecione o participante desejado: </b>
+  </ion-item>
+  <ion-item>
+    <ion-list *ngIf="participante.length > 0">
       <ion-item *ngFor="let participante of participante">
-        <ion-col>
-          <ion-item>
+        <ion-item>
+          <ion-col>
             {{participante.nome}}
-          </ion-item>
-        </ion-col>
+          </ion-col>
+        </ion-item>
         <ion-col>
           <ion-item>
-            <ion-button slot="end" (click)='inscrever(participante.codParticipante)'>
+            <ion-button slot="end" (click)='inscrever(participante.codParticipante)' [disabled]="participante.relacionado">
+              Inscrever
               <ion-icon name="pencil-outline"></ion-icon>
             </ion-button>
           </ion-item>

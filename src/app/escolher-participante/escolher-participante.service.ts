@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Participante } from '../participante/participante-service.service';
+
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class EscolherParticipanteService {
 
-  participanteUrl = 'https://uniarpextensao.herokuapp.com/public/participantes';
+  participanteUrl = 'https://uniarpextensao.herokuapp.com/public/eventos';
 
   constructor(private http: HttpClient) { }
 
@@ -17,8 +17,9 @@ export class EscolherParticipanteService {
     })
   };
 
-  listar(): Promise<Participante> {
-    return this.http.get<Participante>(this.participanteUrl + `/listar`, this.httpOptions)
+  listar(codEvento: Number): Promise<any> {
+    return this.http.get<any>(this.participanteUrl + `/participantesevento/${codEvento}`, this.httpOptions)
       .toPromise();
   }
+  
 }

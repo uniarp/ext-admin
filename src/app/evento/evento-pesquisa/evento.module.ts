@@ -9,15 +9,18 @@ import { EventoPageRoutingModule } from './evento-routing.module';
 
 import { EventoPage } from './evento.page';
 import { EventoCancelarPage } from '../evento-cancelar/evento-cancelar.page';
+import { EscolherParticipantePage } from 'src/app/escolher-participante/escolher-participante.page';
+import { EscolherParticipantePageModule } from 'src/app/escolher-participante/escolher-participante.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    EventoPageRoutingModule
+    EventoPageRoutingModule,
+    EscolherParticipantePageModule
   ],
   declarations: [EventoPage, EventoCancelarPage, ListaInscritosPage],
-  entryComponents: [EventoCancelarPage, ListaInscritosPage]
+  entryComponents: [EventoCancelarPage, ListaInscritosPage,EscolherParticipantePage]
 })
 export class EventoPageModule {}

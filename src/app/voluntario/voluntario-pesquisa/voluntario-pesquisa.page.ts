@@ -47,4 +47,8 @@ export class VoluntarioPesquisaPage implements OnInit {
     console.log();
     this.router.navigate(['/voluntario-cadastro/', codVoluntario]);
   }
+
+  ionViewWillEnter() {
+    this.listar();
+  }
 }

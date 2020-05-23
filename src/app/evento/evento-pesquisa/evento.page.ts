@@ -1,18 +1,21 @@
 import { ListaInscritosPage } from './../lista-inscritos/lista-inscritos.page';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RouterModule, Routes, Router } from '@angular/router';
 import { Evento, EventosService } from '../eventos.service';
 import { ModalController } from '@ionic/angular';
 import { EventoCancelarPage } from '../evento-cancelar/evento-cancelar.page';
 import { ResourceLoader } from '@angular/compiler';
+import { EscolherParticipantePage } from 'src/app/escolher-participante/escolher-participante.page';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-evento',
   templateUrl: './evento.page.html',
   styleUrls: ['./evento.page.scss'],
 })
-export class EventoPage implements OnInit {
+export class EventoPage implements OnInit, OnDestroy {
 
+  _sub: Subscription;
   evento: Evento;
   location: Location;
 
@@ -24,6 +27,18 @@ export class EventoPage implements OnInit {
 
   ngOnInit() {
     this.listar();
+    this._sub = EventosService.emitirEventReconsultar.subscribe(() => {
+      console.log('Listou');
+      this.listar();
+    });
+  }
+
+  ngOnDestroy() {
+    this._sub.unsubscribe();
+  }
+
+  ionViewWillEnter() {
+    this.listar();
   }
 
   public adicionar() {
@@ -32,9 +47,18 @@ export class EventoPage implements OnInit {
     
   }
 
-  inscreverParticipante(codEvento) {
-    this.router.navigate(['/escolher-participante', codEvento]);
+  async inscreverParticipante(codEvento) {
+
+    console.log();
+    const modal = await this.modalController.create({
+      component: EscolherParticipantePage,
+      componentProps: {
+        'codEvento': codEvento
+      }
+    });
+    modal.present();
   }
+
 
   editarCadastro(codEvento) {
     console.log(codEvento);
@@ -55,7 +79,7 @@ export class EventoPage implements OnInit {
   }
   
 
-  async listarInscritos(codEvento: number) {
+  public async listarInscritos(codEvento: number) {
     const modal = await this.modalController.create({
       component: ListaInscritosPage,
       componentProps: {

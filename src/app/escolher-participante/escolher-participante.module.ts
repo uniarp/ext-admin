@@ -8,12 +8,13 @@ import { EscolherParticipantePageRoutingModule } from './escolher-participante-r
 
 import { EscolherParticipantePage } from './escolher-participante.page';
 
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    EscolherParticipantePageRoutingModule,
+    EscolherParticipantePageRoutingModule
   ],
   declarations: [EscolherParticipantePage]
 })

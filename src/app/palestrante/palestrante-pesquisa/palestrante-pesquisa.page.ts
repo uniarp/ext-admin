@@ -48,4 +48,7 @@ export class PalestrantePesquisaPage implements OnInit {
   public async alterar(codPalestrante: number){
     this.router.navigate(['/palestrante-cadastro']);
   }
+  ionViewWillEnter() {
+    this.listar();
+  }
 }

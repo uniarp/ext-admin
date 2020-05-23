@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Participante, ParticipanteServiceService } from '../participante/participante-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ErrorHandlerService } from '../core/services/error-handler.service';
-import { ToastController } from '@ionic/angular';
+import { ToastController, NavParams, ModalController } from '@ionic/angular';
 import { Evento, EventosService } from '../evento/eventos.service';
+import { AlertsService } from '../core/services/alerts.service';
+import { AtividadeService } from '../atividade/atividade.service';
+import { TipoAtividadeService } from '../tipoAtividade/tipo-atividade.service';
+import { EscolherParticipanteService } from './escolher-participante.service';
 
 @Component({
   selector: 'app-escolher-participante',
@@ -13,51 +17,62 @@ import { Evento, EventosService } from '../evento/eventos.service';
 })
 export class EscolherParticipantePage implements OnInit {
 
-  participante= new Participante();
-  evento= new Evento();
+  participante = [];
+  evento = new Evento();
+  filtro: String;
+  @Input() codEvento: number;
 
   constructor(private http: HttpClient,
-    private participanteService: ParticipanteServiceService,
+    private escocolherParticipanteService: EscolherParticipanteService,
     public router: Router,
     private route: ActivatedRoute,
     private eventosService: EventosService,
     public handler: ErrorHandlerService,
-    public toast: ToastController
+    public toast: ToastController,
+    public modalController: ModalController,
+    public navParams: NavParams
   ) { }
 
   ngOnInit() {
-    const codEvento = this.route.snapshot.params.codEvento;
-    if (codEvento) {
-      console.log(codEvento);
-      this.carregarEvento(codEvento);
-    }
+    // this.codEvento = this.route.snapshot.params.codEvento;
+    // if (this.codEvento) {
+    //   console.log(this.codEvento);
+    // }
     this.listar();
   }
 
-  get editando() {
-    console.log('Teste');
-    if (this.evento.codEvento) {
-      return true;
-    }
-    return false;
+  buscarAcademico() {
+    this.participante = this.participante.filter(p => {
+      if (p.nome.indexOf(this.filtro) > -1) {
+        return p;
+      } else if (p.email.indexOf(this.filtro) > -1) {
+        return p;
+      } else if (p.ra.toString().indexOf(this.filtro) > -1) {
+        return p;
+      } else if (p.cpf.indexOf(this.filtro) > -1) {
+        return p;
+      }
+
+    });
   }
 
-  carregarEvento(codEvento: number) {
-    console.log(codEvento);
-    this.eventosService.listaEvento(codEvento)
+  listar() {
+    this.escocolherParticipanteService.listar(this.codEvento)
       .then(data => {
-        console.log(data);
-        this.evento = data;
+        this.participante = data;
+        console.log(this.participante);
+        this.filtro = '';
       })
-      .catch(erro => this.handler.handleError(erro));
+      .catch(error => this.handler.handleError(error));
   }
 
-  async listar() {
-    this.participante = await this.participanteService.listar();
+  voltar() {
+    this.modalController.dismiss();
   }
 
   async inscrever(codParticipante) {
     console.log(codParticipante);
-    this.router.navigate(['../inscricao-participante/', codParticipante]);
+    this.router.navigate(['../inscricao-participante', codParticipante, this.codEvento]);
+    this.modalController.dismiss();
   }
 }

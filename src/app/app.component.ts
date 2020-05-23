@@ -62,6 +62,10 @@ export class AppComponent {
     this.router.navigate(['/voluntario-pesquisa']);
   }
 
+  participante() {
+    this.router.navigate(['/participante-pesquisa']);
+  }
+
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();

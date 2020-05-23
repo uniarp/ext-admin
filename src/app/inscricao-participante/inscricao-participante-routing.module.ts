@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: ':codParticipante',
     component: InscricaoParticipantePage
+  },
+  {
+  path: ':codEvento',
+    component: InscricaoParticipantePage
   }
 ];
 

@@ -109,6 +109,7 @@ export class EventoCadastroPage implements OnInit {
         console.log(data);
         this.router.navigate(['/evento-pesquisa']);
         this.eventoService.atualizarPagina();
+        //EventosService.emitirEventReconsultar.emit();
       })
       .catch(erro => this.handler.handleError(erro));
       

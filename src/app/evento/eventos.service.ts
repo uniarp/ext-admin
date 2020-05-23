@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Participante } from '../participante/participante-service.service';
 
@@ -8,7 +8,8 @@ import { Participante } from '../participante/participante-service.service';
 export class EventosService {
 
   eventoUrl = "https://uniarpextensao.herokuapp.com/public/eventos";
-
+  static emitirEventReconsultar = new EventEmitter();
+  
   constructor(private http: HttpClient) { }
 
   httpOptions = {
