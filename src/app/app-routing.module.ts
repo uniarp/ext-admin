@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 const routes: Routes = [
   //{ path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: '', redirectTo: 'evento-pesquisa', pathMatch: 'full' },
+  { path: '', redirectTo: 'login-admin', pathMatch: 'full' },
 
   { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomePageModule) 
   },
@@ -96,7 +96,12 @@ const routes: Routes = [
   {
     path: 'imprimir-inscritos/:codEvento',
     loadChildren: () => import('./imprimir-inscritos/imprimir-inscritos.module').then( m => m.ImprimirInscritosPageModule)
+  },
+  {
+    path: 'login-admin',
+    loadChildren: () => import('./login-admin/login-admin.module').then( m => m.LoginAdminPageModule)
   }
+
 
 
 
