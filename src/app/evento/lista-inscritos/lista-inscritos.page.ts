@@ -1,11 +1,10 @@
-import { ErrorHandlerService } from './../../core/services/error-handler.service';
-import { EventosService, Evento } from './../eventos.service';
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
-import { AlertsService } from 'src/app/core/services/alerts.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NgForm } from '@angular/forms';
-import { ImprimirInscritosPage } from 'src/app/imprimir-inscritos/imprimir-inscritos.page';
+
+import { AlertsService } from 'src/app/core/services/alerts.service';
+import { ErrorHandlerService } from './../../core/services/error-handler.service';
+import { EventosService, Evento } from './../eventos.service';
 
 @Component({
   selector: 'app-lista-inscritos',
@@ -13,7 +12,7 @@ import { ImprimirInscritosPage } from 'src/app/imprimir-inscritos/imprimir-inscr
   styleUrls: ['./lista-inscritos.page.scss'],
 })
 export class ListaInscritosPage implements OnInit {
-  codEvento:number;
+  codEvento: number;
   inscritos: any[] = [];
   evento: any[];
   validar: any[] = [];
@@ -31,7 +30,7 @@ export class ListaInscritosPage implements OnInit {
 
   ngOnInit() {
     let codEvento: number = this.navParams.get('codEvento');
-    this.codEvento=codEvento;
+    this.codEvento = codEvento;
     if (codEvento) {
       this.listarInscritos(codEvento);
     } else {
@@ -39,9 +38,8 @@ export class ListaInscritosPage implements OnInit {
     }
   }
 
-  async imprimir(){
-    console.log(['Imprimindo...']);
-    this.router.navigate(['/imprimir-inscritos', this.codEvento]); 
+  async imprimir() {
+    this.router.navigate(['/imprimir-inscritos', this.codEvento]);
     this.modalCtrl.dismiss();
   }
 
@@ -49,7 +47,6 @@ export class ListaInscritosPage implements OnInit {
     this.eventoService.listarInscritos(codEvento)
       .then(data => {
         this.inscritos = data;
-        console.log(data);
       })
       .catch(erro => this.erroHandler.handleError(erro));
   }
@@ -59,6 +56,12 @@ export class ListaInscritosPage implements OnInit {
       .then(() => {
         this.alert.alertaToast('Presença validada', 'success');
       })
+      .catch(erro => this.handler.handleError(erro));
+  }
+
+  removerParticipante(codParticipanteEvt: number) {
+    this.eventoService.removerInscriEvento(codParticipanteEvt)
+      .then(() => this.listarInscritos(this.codEvento))
       .catch(erro => this.handler.handleError(erro));
   }
 

@@ -40,6 +40,15 @@
     }
 }
 
+.modal-tela-cheia {
+    .modal-wrapper {
+        height: 100%;
+        width: 100%;
+        position: absolute; 
+        display: block;  
+    }
+}
+
 .tamanhoAlert {
     .alert-wrapper {
         min-width: 40%;

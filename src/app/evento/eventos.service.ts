@@ -7,9 +7,9 @@ import { Participante } from '../participante/participante-service.service';
 })
 export class EventosService {
 
-  eventoUrl = "https://uniarpextensao.herokuapp.com/public/eventos";
   static emitirEventReconsultar = new EventEmitter();
-  
+  eventoUrl = "https://uniarpextensao.herokuapp.com/public/eventos";
+
   constructor(private http: HttpClient) { }
 
   httpOptions = {
@@ -53,11 +53,9 @@ export class EventosService {
       .toPromise();
   }
 
-  atualizarPagina(){
-    window.location.assign('/evento-pesquisa');
-  }
-
-  cancelar(codEvento: number) {
+  removerInscriEvento(codParticipanteEvt: number) {
+    return this.http.delete<Evento>(`${this.eventoUrl}/removerInscrito/${codParticipanteEvt}`)
+      .toPromise();
   }
 }
 
@@ -75,7 +73,6 @@ export class Evento {
   voluntario: any[];
   atividades: any[];
   validar: any[];
-  motivo: string;
 
 
   constructor() {
