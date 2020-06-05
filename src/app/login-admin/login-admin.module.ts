@@ -1,3 +1,4 @@
+import { AngularFireAuth } from '@angular/fire/auth/auth';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,7 +14,7 @@ import { LoginAdminPage } from './login-admin.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    LoginAdminPageRoutingModule
+    LoginAdminPageRoutingModule,
   ],
   declarations: [LoginAdminPage]
 })

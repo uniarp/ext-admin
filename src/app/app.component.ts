@@ -4,6 +4,7 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router, RouterEvent } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-root',
@@ -12,38 +13,39 @@ import { Router, RouterEvent } from '@angular/router';
 })
 export class AppComponent {
 
-/*  pages = [
-    {
-      titulo: 'Gestão de Eventos',
-      url: '/evento-pesquisa'
-    },
-    {
-      titulo: 'Gestão de Usuários',
-      url: '/usuario-pesquisa'
-    },
-    {
-      titulo: 'Gestão de Palestrantes',
-      url: '/palestrante-pesquisa'
-    },
-    {
-      titulo: 'Gestão de Voluntários',
-      url: '/voluntario-pesquisa'
-    }
-  ];
-
-  selectedPath = '';
-  menu: any;
-*/
+  /*  pages = [
+      {
+        titulo: 'Gestão de Eventos',
+        url: '/evento-pesquisa'
+      },
+      {
+        titulo: 'Gestão de Usuários',
+        url: '/usuario-pesquisa'
+      },
+      {
+        titulo: 'Gestão de Palestrantes',
+        url: '/palestrante-pesquisa'
+      },
+      {
+        titulo: 'Gestão de Voluntários',
+        url: '/voluntario-pesquisa'
+      }
+    ];
+  
+    selectedPath = '';
+    menu: any;
+  */
   constructor(
     private platform: Platform,
+    public auth: AngularFireAuth,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private router: Router
   ) {
     this.initializeApp();
-  /*  this.router.events.subscribe((event: RouterEvent) => {
-      this.selectedPath = event.url;
-    }); */
+    /*  this.router.events.subscribe((event: RouterEvent) => {
+        this.selectedPath = event.url;
+      }); */
   }
 
   public eventos() {
@@ -70,6 +72,15 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+    });
+  }
+
+  logout() {
+    this.auth.signOut().then(data => {
+      console.log(data);
+      this.router.navigate(['/login-admin']);
+    }).catch(error => {
+      console.log("Deu erro:" + error);
     });
   }
 }
