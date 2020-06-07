@@ -54,6 +54,10 @@ export class AppComponent {
     this.router.navigate(['/usuario-pesquisa']);
   }
 
+  public scanner() {
+    this.router.navigate(['/scanner-qr']);
+  }
+
   public palestrantes() {
     this.router.navigate(['/palestrante-pesquisa']);
   }

@@ -100,7 +100,11 @@ const routes: Routes = [
   {
     path: 'login-admin',
     loadChildren: () => import('./login-admin/login-admin.module').then( m => m.LoginAdminPageModule)
+  },  {
+    path: 'scanner-qr',
+    loadChildren: () => import('./scanner-qr/scanner-qr.module').then( m => m.ScannerQrPageModule)
   }
+
 
 
 
