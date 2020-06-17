@@ -1,8 +1,8 @@
+import { LoginService } from './../../login-admin/login.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
-import { getLocaleDayPeriods } from '@angular/common';
+
 
 import { UsuarioService, Usuario } from '../usuario.service';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
@@ -27,7 +27,8 @@ export class UsuarioCadastroPage implements OnInit {
     private route: ActivatedRoute,
     public toast: ToastController,
     public handler: ErrorHandlerService,
-    private alert: AlertsService
+    private alert: AlertsService,
+    private loginService: LoginService
   ) { }
 
   ngOnInit() {
@@ -42,7 +43,6 @@ export class UsuarioCadastroPage implements OnInit {
 
 
   get editando() {
-    console.log('TEste');
     if (this.usuario.codUsuario) {
       return true;
     }
@@ -70,6 +70,7 @@ export class UsuarioCadastroPage implements OnInit {
 
   gravar() {
     this.usuario.codUsuario = this.usuario.codUsuario ? this.usuario.codUsuario : null;
+    this.loginService.cadastrarUser(this.usuario.email, this.usuario.senha);
     this.usuarioServie.cadastrar(this.usuario)
       .then(() => {
         this.alert.alertaToast(this.usuario.codUsuario ? 'Usuário Alterado com Sucesso' : 'Usuário Cadastrado com Sucesso',

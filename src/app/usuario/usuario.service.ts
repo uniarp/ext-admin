@@ -48,4 +48,9 @@ export class Usuario {
   email: string;
   cpf: string;
   senha: string;
+
+  constructor () {
+    this.codUsuario = null;
+    this.cpf = '';
+  }
 }

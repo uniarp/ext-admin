@@ -1,3 +1,4 @@
+import { LoginService } from './login-admin/login.service';
 import { Component } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
@@ -40,7 +41,8 @@ export class AppComponent {
     public auth: AngularFireAuth,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private router: Router
+    private router: Router,
+    private loginService: LoginService,
   ) {
     this.initializeApp();
     /*  this.router.events.subscribe((event: RouterEvent) => {
@@ -74,13 +76,8 @@ export class AppComponent {
       this.splashScreen.hide();
     });
   }
-
   logout() {
-    this.auth.signOut().then(data => {
-      console.log(data);
-      this.router.navigate(['/login-admin']);
-    }).catch(error => {
-      console.log("Deu erro:" + error);
-    });
+    this.loginService.logout();
   }
+
 }
