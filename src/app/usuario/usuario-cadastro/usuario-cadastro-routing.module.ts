@@ -3,14 +3,15 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { UsuarioCadastroPage } from './usuario-cadastro.page';
 
+
 const routes: Routes = [
   {
     path: '',
-    component: UsuarioCadastroPage
+    component: UsuarioCadastroPage,
   },
   {
     path: ':codUsuario',
-    component: UsuarioCadastroPage
+    component: UsuarioCadastroPage,
   }
 ];
 
@@ -18,4 +19,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class UsuarioCadastroPageRoutingModule {}
+export class UsuarioCadastroPageRoutingModule { }
