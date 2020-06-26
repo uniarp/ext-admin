@@ -7,6 +7,7 @@ import { EventoCancelarPage } from '../evento-cancelar/evento-cancelar.page';
 import { ResourceLoader } from '@angular/compiler';
 import { EscolherParticipantePage } from 'src/app/escolher-participante/escolher-participante.page';
 import { Subscription } from 'rxjs';
+import { ScannerPage } from 'src/app/scanner/scanner.page';
 
 @Component({
   selector: 'app-evento',
@@ -41,10 +42,20 @@ export class EventoPage implements OnInit, OnDestroy {
     this.listar();
   }
 
+  async scanner(codEvento: number) {
+    console.log(codEvento);
+    const modal = await this.modalController.create({
+      component: ScannerPage,
+      cssClass:"TamanhoModal",      
+      componentProps: {
+        'codEvento': codEvento
+      }        
+    });
+    modal.present();
+  }
+
   public adicionar() {
-    this.router.navigate(['/evento-cadastro']);
-    
-    
+    this.router.navigate(['/evento-cadastro']);    
   }
 
   async inscreverParticipante(codEvento) {

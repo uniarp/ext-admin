@@ -28,6 +28,7 @@
     "angular-alert-module": "^2.0.3",
     "br-mask": "0.0.8",
     "cordova-android": "8.1.0",
+    "cordova-plugin-qrscanner": "^3.0.1",
     "core-js": "^2.5.4",
     "form-control": "^1.0.0",
     "moment": "^2.24.0",
@@ -74,7 +75,8 @@
       "cordova-plugin-ionic-webview": {
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
-      "cordova-plugin-ionic-keyboard": {}
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-plugin-qrscanner": {}
     },
     "platforms": [
       "android"
