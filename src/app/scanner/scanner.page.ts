@@ -17,7 +17,7 @@ export class ScannerPage implements OnInit {
   evento = new Evento();
   @ViewChild('scannerQr', { static: false })
   scannerQr: ZXingScannerComponent;
-
+  qrResultString: string;
   constructor(
     public eventoService: EventosService,
     public erroHandler: ErrorHandlerService,
@@ -35,9 +35,13 @@ export class ScannerPage implements OnInit {
     console.log(this.codEvento);
     if(this.codEvento){
       this.carregarEvento(this.codEvento);
-      console.log(this.codEvento);
+
     }
     
+  }
+
+  leu() {
+    this.alert.alertaToast('Inscrição Finalizada', 'success');
   }
 
   carregarEvento(codEvento: number) {

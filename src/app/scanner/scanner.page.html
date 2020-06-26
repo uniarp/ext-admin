@@ -1,14 +1,16 @@
 <ion-item>
   <ion-title>
     <h1>
-      {{evento.titulo}} Validar Presença
+      {{evento.titulo}} 
       <img src="./assets/img/logo.jpg" style="float:right;width:150px;height:50px;">
     </h1>
+    <h2>Validar Presença</h2>
   </ion-title>
 </ion-item>
 <ion-content>
   <div style="display: flex; justify-content: center;">
-    <zxing-scanner style=" max-height: 70vh; width: 100vw; object-fit: contain;"
-    (scanSuccess)="scanSuccessHandler('lol')"></zxing-scanner>
+    <zxing-scanner [enable]='true' style=" max-height: 70vh; width: 100vw; object-fit: contain;"
+    (scanSuccess)="leu()"></zxing-scanner>
   </div>
+  <ion-item>{{resultString}}</ion-item>
 </ion-content>
