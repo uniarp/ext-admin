@@ -41,7 +41,7 @@ export class ScannerPage implements OnInit {
   }
 
   leu() {
-    this.alert.alertaToast('Inscrição Finalizada', 'success');
+    this.alert.alertaToast('Executou A Leitura', 'success');
   }
 
   carregarEvento(codEvento: number) {
