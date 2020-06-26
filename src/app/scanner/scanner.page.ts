@@ -15,7 +15,7 @@ export class ScannerPage implements OnInit {
   inscritos: any[] = [];
   @Input() codEvento: number;
   evento = new Evento();
-  @ViewChild('scanner', { static: false })
+  @ViewChild('scannerQr', { static: false })
   scannerQr: ZXingScannerComponent;
 
   constructor(
