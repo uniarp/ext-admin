@@ -1,16 +1,23 @@
-<ion-item>
-  <ion-title>
-    <h1>
-      {{evento.titulo}} 
-      <img src="./assets/img/logo.jpg" style="float:right;width:150px;height:50px;">
-    </h1>
-    <h2>Validar Presença</h2>
-  </ion-title>
-</ion-item>
+<ion-header>
+  <ion-item>
+    <ion-icon size="large" slot="start" (click)="voltar()" 
+    name="arrow-back-outline" style="width: 05%;"></ion-icon>
+    
+    <img src="./assets/img/logo.jpg" style="margin-top: 10px;margin-bottom: 10px;margin-left: 40%; width:50%;height:auto">
+  </ion-item>
+</ion-header>
+<div style="display: flex; justify-content: center;">
+  <ion-item>
+    <ion-label style="font-size: medium;"><strong>{{evento.titulo}}</strong></ion-label>
+  </ion-item>
+</div>
 <ion-content>
   <div style="display: flex; justify-content: center;">
-    <zxing-scanner [enable]='true' style=" max-height: 70vh; width: 100vw; object-fit: contain;"
-    (scanSuccess)="leu()"></zxing-scanner>
+    Validar Presença
   </div>
-  <ion-item>{{resultString}}</ion-item>
+  <div style="display: flex; justify-content: center;">
+    <zxing-scanner #scannerQr [enable]='true' style=" max-height: 55vh; width: 80vw; object-fit: contain;"
+      (scanSuccess)="handleQrCodeResult($event)"></zxing-scanner>
+  </div>
+  <ion-item>{{qrResultString}}</ion-item>
 </ion-content>

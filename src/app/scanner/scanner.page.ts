@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ModalController, ToastController, NavParams } from '@ionic/angular';
 import { AlertsService } from '../core/services/alerts.service';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
+import { Result } from '@zxing/library';
 
 @Component({
   selector: 'app-scanner',
@@ -35,14 +36,16 @@ export class ScannerPage implements OnInit {
     console.log(this.codEvento);
     if(this.codEvento){
       this.carregarEvento(this.codEvento);
-
-    }
-    
+      this.listarInscritos(codEvento);
+    }    
   }
 
-  leu() {
-    this.alert.alertaToast('Executou A Leitura', 'success');
-  }
+  handleQrCodeResult(resultString: string) {
+    this.qrResultString = "Presença validada para "+resultString+" !";
+    this.alert.alertaToast(this.qrResultString, 'success');
+    console.log('Result: ', resultString);
+    this.validarFrequencia();
+}
 
   carregarEvento(codEvento: number) {
     this.eventoService.listaEvento(codEvento)
@@ -53,10 +56,19 @@ export class ScannerPage implements OnInit {
       .catch(erro => this.handler.handleError(erro));
   }
 
+  listarInscritos(codEvento: number) {
+    this.eventoService.listarInscritos(codEvento)
+      .then(data => {
+        this.inscritos = data;
+        console.log(data);
+      })
+      .catch(erro => this.erroHandler.handleError(erro));
+  }
+
+
   validarFrequencia() {
     this.eventoService.validar(this.inscritos)
       .then(() => {
-        this.alert.alertaToast('Presença validada', 'success');
       })
       .catch(erro => this.handler.handleError(erro));
   }
