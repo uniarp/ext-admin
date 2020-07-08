@@ -145,7 +145,12 @@ const routes: Routes = [
   {
     path: 'login-admin',
     loadChildren: () => import('./login-admin/login-admin.module').then(m => m.LoginAdminPageModule),
+  },
+  {
+    path: 'documento-gerar/:codInscricao/:codEvento',
+    loadChildren: () => import('./Certificado-Declaração/documento-gerar/documento-gerar.module').then( m => m.DocumentoGerarPageModule)
   }
+
 
 
 

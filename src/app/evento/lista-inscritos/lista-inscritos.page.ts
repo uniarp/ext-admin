@@ -68,4 +68,9 @@ export class ListaInscritosPage implements OnInit {
   voltar() {
     this.modalCtrl.dismiss();
   }
+
+  async gerarDocumento(codInscricao) {
+    this.router.navigate(['/documento-gerar', codInscricao, this.codEvento]);
+    this.modalCtrl.dismiss();
+  }
 }

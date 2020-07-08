@@ -15,32 +15,38 @@
     <ion-grid>
       <ion-row>
         <ion-col size='3'>Nome</ion-col>
-        <ion-col size='1'>CPF</ion-col>
-        <ion-col size='1'>Telefone</ion-col>
+        <ion-col size='1.5'>CPF</ion-col>
+        <ion-col size='1.5'>Telefone</ion-col>
         <ion-col size='3'>E-mail</ion-col>
-        <ion-col size='2'>Validar Presença</ion-col>
-        <ion-col size='2'>Cancelar Inscrição</ion-col>
+        <ion-col style="text-align: center;" size='1'>Validar Presença</ion-col>
+        <ion-col size='1'>Cancelar Inscrição</ion-col>
+        <ion-col size='1'>Certificado/ Declaração</ion-col>
       </ion-row>
       <ion-row *ngFor="let ins of inscritos">
         <ion-col size='3'>
           {{ins.nome}}
         </ion-col>
-        <ion-col size='1'>
+        <ion-col size='1.5'>
           {{ins.cpf}}
         </ion-col>
-        <ion-col size='1'>
+        <ion-col size='1.5'>
           {{ins.telefone}}
         </ion-col>
         <ion-col size='3'>
           {{ins.email}}
         </ion-col>
-        <ion-col size='2'>
+        <ion-col style="display: flex; justify-content: center;" size='1'>
           <ion-checkbox [(ngModel)]="ins.presente" type="boolean" name="validar" #presenca="ngModel"
             (ionChange)="validarFrequencia()"></ion-checkbox>
         </ion-col>
-        <ion-col size='2'>
+        <ion-col style="text-align: center;" size='1'>
           <ion-button (click)='removerParticipante(ins.codParticipanteEvento)'>
             <ion-icon name="close-circle-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col style="text-align: center;" size='1'>
+          <ion-button (click)='gerarDocumento(ins.codParticipanteEvento)'>
+            <ion-icon name="school-outline"></ion-icon>
           </ion-button>
         </ion-col>
       </ion-row>
