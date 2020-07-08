@@ -22,9 +22,16 @@ export class DocumentosService {
       .toPromise();
   }
 
-  gerarDocumento(codInscricao: number): Promise<any> {
+/*  dadosParaDo(): Promise<any> {
+    return this.http.get<any>(`${this.participanteUrl}/inscricao/`)
+      .toPromise()
+      .then(res => res);
+  }*/
+
+  gerarDocumento(codInscricao: number) {
     console.log(codInscricao);
     return this.http.post<any>(`${this.documentoUrl}/gerarcertificado/` + codInscricao, {})
       .toPromise();
   }
 }
+

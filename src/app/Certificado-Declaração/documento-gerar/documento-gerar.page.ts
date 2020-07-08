@@ -21,6 +21,7 @@ export class DocumentoGerarPage implements OnInit {
   @Input() codEvento: number;
   @Input() codInscricao: number;
   inscricao: any[] = [];
+  @Input() cpf: number;
 
   constructor(
     public inscricaoParticipanteService: InscricaoParticipanteService,
@@ -53,10 +54,18 @@ export class DocumentoGerarPage implements OnInit {
   delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
+   
 
-  get tipoDocumento() {
-    return Boolean(this.codInscricao>=90); //O correto aqui é colocar o SOMA_HORAS_EVENTO
-  }
+  //get tipoDocumento() {
+/*    this.documentosService.dadosParaDo()
+      .then(data => {
+        this.inscritos = data.map(a => ({ nome: a.nomeParticipante }));
+        console.log(data);
+      })
+      .catch(erro => this.erroHandler.handleError(erro)); */
+   // return Boolean(this.codInscricao>=90);
+   // return Boolean (this.inscritos.totalHoras>=4); //O correto aqui é colocar o SOMA_HORAS_EVENTO if this. incritos.cargahora = 
+ // }
 
   listarInscritos(codInscricao: number) {
     this.documentosService.dadosParaDoc(codInscricao)

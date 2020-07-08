@@ -80,15 +80,15 @@ export class EventoCancelarPage implements OnInit {
   }
 
   async cancelar(codEvento: number) {
-    // this.eventoService.cancelar(codEvento)
+    this.eventoService.cancelar(codEvento)
     console.log('Status Cancelado');
     // console.log(this.evento.motivo);
     this.dismiss();
     const modal = await this.modalController.create({
       component: ListaInscritosPage,
-    /*  componentProps: {
+      componentProps: {
         'codEvento': codEvento
-      } */
+      } 
     });
     await modal.present();
     this.alert.alertaToast('Evento cancelado com sucesso', 'success');

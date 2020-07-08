@@ -26,7 +26,6 @@ export class EventosService {
       });
   }
 
-
   cadastrar(evento: Evento): Promise<Evento> {
     console.log(evento);
     return this.http.post<Evento>(`${this.eventoUrl}/cadastrar`, evento)
@@ -56,6 +55,10 @@ export class EventosService {
   removerInscriEvento(codParticipanteEvt: number) {
     return this.http.delete<Evento>(`${this.eventoUrl}/removerInscrito/${codParticipanteEvt}`)
       .toPromise();
+  }
+  cancelar(codEvento: number): Promise<Evento> {
+    return this.http.get<Evento>(`${this.eventoUrl}/cancelar/${codEvento}`)   //Por hora somente o status esta mudando para cancelado de 1 para "6"
+    .toPromise()
   }
 }
 
