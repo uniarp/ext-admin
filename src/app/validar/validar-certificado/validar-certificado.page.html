@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Validação de Certificado</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Insira o número de validação:<ion-text color="danger">*</ion-text>
+    </ion-label>
+    <ion-input type="text" [(ngModel)]="token" #nome="ngModel" name="token" required minlength="40">
+    </ion-input>
+    <ion-button (click)='validar(token)'>Validar</ion-button>
+  </ion-item>
+  <ion-col *ngIf="passarToken"> Nome :{{passarToken.nome}}</ion-col><br>
+  <ion-col *ngIf="passarToken"> CPF :{{passarToken.cpf}}</ion-col><br>
+  <ion-col *ngIf="passarToken"> E-mail :{{passarToken.email}}</ion-col><br>
+  <ion-col *ngIf="passarToken"> RA :{{passarToken.ra}}</ion-col><br>
+  <ion-col *ngIf="passarToken"> Evento :{{passarToken.titulo}}</ion-col><br>
+</ion-content>

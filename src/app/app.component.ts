@@ -70,6 +70,10 @@ export class AppComponent {
     this.router.navigate(['/participante-pesquisa']);
   }
 
+  validar() {
+    this.router.navigate(['/validar-certificado']);
+  }
+
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();

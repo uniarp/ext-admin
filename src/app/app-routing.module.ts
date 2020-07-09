@@ -145,7 +145,11 @@ const routes: Routes = [
   {
     path: 'login-admin',
     loadChildren: () => import('./login-admin/login-admin.module').then(m => m.LoginAdminPageModule),
+  },  {
+    path: 'validar-certificado',
+    loadChildren: () => import('./validar/validar-certificado/validar-certificado.module').then( m => m.ValidarCertificadoPageModule)
   }
+
 
 
 
